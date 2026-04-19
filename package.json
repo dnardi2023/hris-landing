@@ -1,0 +1,9 @@
+{
+  "name": "hr-influence-strategy",
+  "version": "1.0.0",
+  "description": "Landing page y Brief Builder con IA para HR Influence Strategy",
+  "private": true,
+  "engines": {
+    "node": "20.x"
+  }
+}
