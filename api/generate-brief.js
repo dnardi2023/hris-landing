@@ -69,7 +69,7 @@ Seniority objetivo: ${seniorityLabel}
 Qué queremos comunicar del rol y de la cultura: ${culture}
 ${context ? 'Contexto o desafío adicional: ' + context : ''}
 
-PASO 1 — MATCH. Elegí, de nuestra red de creadores, EXACTAMENTE UNO cuyo nicho y audiencia comuniquen mejor esta búsqueda. Tenés que elegir uno de estos tres y devolver su "id" tal cual:
+PASO 1 — MATCH. Revisá nuestra red de creadores y decidí si alguno comunica bien esta búsqueda:
 ${roster}
 
 PASO 2 — BRIEF. Generá un brief estructurado y accionable alrededor de ese creador.
@@ -78,7 +78,8 @@ RESPONDÉ SOLO EN JSON VÁLIDO, sin texto previo ni markdown ni backticks, con e
 
 {
   "influencerMatch": {
-    "id": "farma | tecnico | generalista (elegí uno)",
+    "id": "farma | tecnico | generalista | a_curar",
+    "lead": "Si elegiste un creador de la red: 'El creador que seleccionamos para comunicar esto es'. Si el id es a_curar: 'Esta búsqueda pide una voz que todavía no está en nuestra red. Este es el perfil que saldríamos a curar'",
     "name": "nombre y apellido del creador elegido, tal como figura en la red",
     "handle": "@handle tal como figura en la red",
     "platform": "plataforma tal como figura en la red",
@@ -102,13 +103,20 @@ RESPONDÉ SOLO EN JSON VÁLIDO, sin texto previo ni markdown ni backticks, con e
   }
 }
 
-Reglas críticas:
-- Elegí SIEMPRE uno de los tres ids del roster. No inventes creadores nuevos ni combines dos. Copiá name, handle, platform y followers exactamente como figuran.
-- Si la búsqueda no encaja de manera obvia con ninguno, elegí el más cercano por tipo de audiencia y explicá el criterio en "whyMatch" con honestidad.
+Reglas críticas sobre el match:
+- Si un creador de la red encaja bien, elegí ESE y copiá name, handle, platform y followers EXACTAMENTE como figuran. No inventes ni combines dos.
+- Si la búsqueda encaja solo parcialmente pero la audiencia es la correcta, elegilo igual y explicá el matiz con honestidad en "whyMatch".
+- Si NINGUNO encaja de verdad (por ejemplo, un perfil directivo, un nicho profesional muy distinto o una audiencia que ninguno alcanza), usá el id "a_curar". En ese caso:
+  * NUNCA inventes un nombre propio, un arroba ni una cantidad de seguidores. Poné name: "Perfil a curar", handle: "", followers: "A definir en la curaduría".
+  * En "platform", "niche" y "audience" describí el perfil que habría que buscar: en qué plataforma vive esa comunidad, qué nicho profesional cubre y a quién llega.
+  * En "whyMatch" explicá con qué criterios lo curaríamos: qué credibilidad tiene que tener, qué tipo de contenido debería producir y por qué un creador genérico o de gran alcance no serviría.
+- Nunca presentes un perfil inventado como si ya fuera parte de nuestra red.
 - Evitá lenguaje de marketing (impresiones, CPM, alcance, interacción). Usá los indicadores de gestión de la casa: calidad del flujo de candidatos, conversión de interés a postulación, percepción de marca empleadora, costo por contratación y tiempo de cobertura de la búsqueda.
 - Las ideas de contenido deben ser concretas, observables y distintas entre sí, no genéricas.
 - Tomá el mensaje que el equipo quiere comunicar como el ángulo narrativo central; no lo repitas textual en las ideas: traducilo a formatos nativos que generen confianza en la audiencia joven.
-- Español rioplatense neutro.`;
+- Español rioplatense neutro.
+- Sé conciso: cada campo de texto, como máximo 2 o 3 frases. El JSON completo tiene que cerrar correctamente.
+- No agregues ningún texto fuera del JSON.`;
 
   try {
     const anthropicResponse = await fetch('https://api.anthropic.com/v1/messages', {
@@ -120,7 +128,7 @@ Reglas críticas:
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
-        max_tokens: 1500,
+        max_tokens: 4000,
         messages: [{ role: 'user', content: prompt }]
       })
     });
@@ -138,14 +146,30 @@ Reglas críticas:
       .join('')
       .trim();
 
-    const cleaned = text.replace(/^```json\s*|\s*```$/g, '').trim();
+    // Limpieza tolerante: saca cercos de markdown y se queda con el bloque
+    // que va desde la primera llave hasta la última, por si el modelo
+    // agregó texto antes o después.
+    let cleaned = text.replace(/```json/gi, '').replace(/```/g, '').trim();
+    const ini = cleaned.indexOf('{');
+    const fin = cleaned.lastIndexOf('}');
+    if (ini !== -1 && fin !== -1 && fin > ini) {
+      cleaned = cleaned.slice(ini, fin + 1);
+    }
 
     let brief;
     try {
       brief = JSON.parse(cleaned);
     } catch (parseErr) {
-      console.error('Error parseando JSON:', parseErr, 'Texto recibido:', cleaned);
-      return res.status(502).json({ success: false, error: 'La respuesta del modelo no fue un JSON válido' });
+      console.error('Error parseando JSON:', parseErr);
+      console.error('Motivo de fin de respuesta:', data.stop_reason);
+      console.error('Texto recibido (primeros 800):', cleaned.slice(0, 800));
+      const truncado = data.stop_reason === 'max_tokens';
+      return res.status(502).json({
+        success: false,
+        error: truncado
+          ? 'La respuesta quedó incompleta. Probá de nuevo con una descripción más breve.'
+          : 'La respuesta del modelo no fue un JSON válido'
+      });
     }
 
     console.log('Brief generado para:', role, '| Seniority:', seniority, '| Match:', brief.influencerMatch && brief.influencerMatch.id);
