@@ -1013,17 +1013,17 @@ a { color: inherit; }
 
     const matchBlock = m.name ? [
       '<div class="pn-match">',
-        '<span class="pn-match-badge">Match encontrado</span>',
-        '<div class="pn-match-lead">El creador que seleccionamos para comunicar esto es</div>',
+        '<span class="pn-match-badge">' + (m.id === 'a_curar' ? 'Curaduría a medida' : 'Match encontrado') + '</span>',
+        '<div class="pn-match-lead">' + esc(m.lead || 'El creador que seleccionamos para comunicar esto es') + '</div>',
         '<div class="pn-match-name">' + esc(m.name) + '</div>',
-        '<div class="pn-match-handle">' + esc(m.handle || '') + '</div>',
+        (m.handle ? '<div class="pn-match-handle">' + esc(m.handle) + '</div>' : '<div style="height:10px"></div>'),
         '<div class="pn-match-meta">',
           '<div class="pn-match-cell"><div class="pn-match-k">Plataforma</div><div class="pn-match-v">' + esc(m.platform || '—') + '</div></div>',
           '<div class="pn-match-cell"><div class="pn-match-k">Seguidores</div><div class="pn-match-v">' + esc(m.followers || '—') + '</div></div>',
           '<div class="pn-match-cell"><div class="pn-match-k">Nicho</div><div class="pn-match-v">' + esc(m.niche || '—') + '</div></div>',
           '<div class="pn-match-cell"><div class="pn-match-k">A quién llega</div><div class="pn-match-v">' + esc(m.audience || '—') + '</div></div>',
         '</div>',
-        '<div class="pn-match-why"><div class="pn-match-why-label">Por qué este perfil</div>' + esc(m.whyMatch || '') + '</div>',
+        '<div class="pn-match-why"><div class="pn-match-why-label">' + (m.id === 'a_curar' ? 'Cómo lo curaríamos' : 'Por qué este perfil') + '</div>' + esc(m.whyMatch || '') + '</div>',
       '</div>'
     ].join('') : '';
 
