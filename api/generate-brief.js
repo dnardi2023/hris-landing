@@ -49,9 +49,9 @@ Ideal para: búsquedas técnicas e industriales, mantenimiento, mecánica, produ
 PERFIL C — id "generalista"
 Nombre: Melina "Meli" Sosa (@meli.primertrabajo)
 Plataforma: Instagram + TikTok · ~26.000 seguidores
-Nicho: primer empleo y vida de oficina — roles administrativos y analista junior, entrevistas, onboarding y cómo es trabajar en una PyME.
-Audiencia: Gen Z buscando su primer trabajo formal, perfiles administrativos y analistas junior, recién recibidos.
-Ideal para: búsquedas administrativas, analista junior, atención al cliente, primer empleo y PyMEs.
+Nicho: primer empleo formal y mundo del trabajo joven — roles administrativos, analista junior, atención al cliente, retail y gestión de local (cajero, vendedor, encargado de sucursal), y cómo son los primeros pasos y el crecimiento dentro una PyME o una cadena.
+Audiencia: Gen Z buscando su primer trabajo formal, o su primer puesto con gente a cargo (perfiles administrativos, analistas junior, atención al cliente, comercios y sucursales, recién recibidos).
+Ideal para: búsquedas administrativas, búsquedas de primero empleo y roles de entrada o mando medio joven, analista junior, atención al cliente, retail, comercios y sucursales, primer empleo y PyMEs.
 `;
 
   const audienceNote = audience === 'agency'
