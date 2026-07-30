@@ -533,8 +533,6 @@
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M1 7.5h12M8.5 3l4.5 4.5L8.5 12" stroke="#0A0A0C" stroke-width="1.5"/></svg>
               </a>
             </div>
-
-            <div class="note"><span class="b">↳</span><span>Esta señal alimenta el <b style="color:var(--ink);font-weight:500">Experimento&nbsp;1</b>: mide la disposición en el punto de máxima intención, entre <code>match</code> y <code>contacto</code>.</span></div>
           </div>
         </div>
       </div>
@@ -679,6 +677,7 @@
   const panelTitle=document.getElementById('panelTitle');
   const esc=s=>(s==null?'':String(s)).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const seniorityValue=()=>{const b=document.querySelector('[data-seg="seniority"] button[aria-pressed="true"]');return b?b.dataset.value:'';};
+  let lastRole=''; let lastBrief=null;
 
   // Brief de ejemplo (Meli / Grido) — se usa solo si la API no responde (preview local).
   const DEMO_BRIEF={
@@ -695,6 +694,7 @@
     pilotTimeline:{week1:"Brief con RRHH y traducción de la cultura Grido a hipótesis de contenido.",week2:"Aprobación del ángulo y guion junto a Meli.",week3:"Grabación, revisión y publicación en formato nativo.",week4:"Lectura de resultados en indicadores de talento y decisión sobre continuidad."}};
 
   function renderBrief(brief,isDemo){
+    lastBrief=brief;
     const m=brief.influencerMatch||{};
     const acurar=m.id==='a_curar';
     const initial=acurar?'◆':((m.name||'?').trim().charAt(0)||'?');
@@ -746,6 +746,7 @@
     const err=document.getElementById('formErr');
     if(!role||!seniority||!culture){err.textContent='Completá el rol, el seniority y qué querés comunicar.';err.style.display='block';return;}
     err.style.display='none';
+    lastRole=role;
     track('brief_generado',{rol:role});
     panel.classList.remove('hidden');
     dispBlock.style.display='none';
@@ -793,8 +794,30 @@
     document.getElementById('thanks').classList.add('show');
   });
 
-  document.getElementById('agendar').addEventListener('click',()=>track('cta_agendar_llamada',{origen:'cierre'}));
-  var tcta=document.getElementById('thanksCta'); if(tcta) tcta.addEventListener('click',()=>track('cta_agendar_llamada',{origen:'gracias'}));
+  /* Agendar llamada -> abre un mail pre-cargado con los datos del brief */
+  const CONTACT_EMAIL='contacto@hrinfluencestrategy.com.ar';
+  function openContactMail(origen){
+    track('cta_agendar_llamada',{origen:origen});
+    let subject, body;
+    if(lastBrief && lastRole){
+      const m=lastBrief.influencerMatch||{};
+      const creador = m.name ? (m.name + (m.handle?' ('+m.handle+')':'')) : '—';
+      subject = 'Quiero ejecutar este piloto — ' + lastRole;
+      body =
+        'Hola, vengo de HR Influence Strategy y me generé un brief para la búsqueda: ' + lastRole + '.\n\n' +
+        'Creador que nos matcheó: ' + creador + '.\n\n' +
+        (lastBrief.narrativeAngle ? 'Ángulo narrativo sugerido: ' + lastBrief.narrativeAngle + '\n\n' : '') +
+        'Quisiera una reunión para evaluar ejecutar este piloto de 30 días.\n\n' +
+        'Contactame por este mail o devolveme una llamada.\n\n' +
+        '¡Gracias!';
+    } else {
+      subject = 'Quiero conocer HR Influence Strategy';
+      body = 'Hola, me interesa conocer más sobre HR Influence Strategy y coordinar una llamada de 20 minutos.\n\n¡Gracias!';
+    }
+    window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
+  document.getElementById('agendar').addEventListener('click',e=>{e.preventDefault();openContactMail('cierre');});
+  var tcta=document.getElementById('thanksCta'); if(tcta) tcta.addEventListener('click',e=>{e.preventDefault();openContactMail('gracias');});
   var vph=document.getElementById('videoPh'); if(vph) vph.addEventListener('click',()=>track('video_mvp_play',{}));
 
   /* ambient particle field (subtle) */
