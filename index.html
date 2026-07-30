@@ -211,6 +211,10 @@
   .thanks .ico{width:52px;height:52px;border-radius:50%;background:var(--rose);display:grid;place-items:center;margin:0 auto 1rem}
   .thanks h4{font-family:var(--sans);font-weight:600;font-size:1.4rem;letter-spacing:-.02em;margin-bottom:.5rem}
   .thanks p{color:var(--ink-dim);font-size:.95rem;max-width:38ch;margin:0 auto}
+  .thanks-cta{display:inline-flex;align-items:center;gap:.7rem;margin-top:1.5rem;background:var(--rose);color:#0A0A0C;font-family:var(--sans);font-weight:600;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;padding:.95rem 1.9rem;border-radius:2px;transition:background .25s,transform .2s,box-shadow .3s;box-shadow:0 10px 34px rgba(236,106,124,.24)}
+  .thanks-cta:hover{background:#f47f8f;transform:translateY(-2px);box-shadow:0 16px 44px rgba(236,106,124,.34)}
+  .thanks-cta svg{transition:transform .25s}
+  .thanks-cta:hover svg{transform:translateX(4px)}
   .note{display:flex;gap:.7rem;align-items:flex-start;padding:1.05rem 1.4rem;background:var(--bg-2);color:var(--ink-dim);font-size:.83rem;line-height:1.5}
   .note .b{color:var(--rose);font-family:var(--sans);font-weight:600}
   .note code{color:var(--ink);background:rgba(243,239,233,.06);padding:.1rem .4rem;border-radius:5px;font-size:.8rem}
@@ -523,8 +527,11 @@
 
             <div class="thanks" id="thanks">
               <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#0A0A0C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <h4>¡Gracias! Anotamos tu interés.</h4>
-              <p>Es exactamente el tipo de señal que usamos para priorizar. Si dejaste ganas de avanzar, el siguiente paso es una llamada de 20 minutos.</p>
+              <h4>¡Gracias por tu respuesta!</h4>
+              <p>El siguiente paso es una llamada de 20 minutos.</p>
+              <a href="#contacto" class="thanks-cta" id="thanksCta">Agendar llamada
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M1 7.5h12M8.5 3l4.5 4.5L8.5 12" stroke="#0A0A0C" stroke-width="1.5"/></svg>
+              </a>
             </div>
 
             <div class="note"><span class="b">↳</span><span>Esta señal alimenta el <b style="color:var(--ink);font-weight:500">Experimento&nbsp;1</b>: mide la disposición en el punto de máxima intención, entre <code>match</code> y <code>contacto</code>.</span></div>
@@ -786,7 +793,8 @@
     document.getElementById('thanks').classList.add('show');
   });
 
-  document.getElementById('agendar').addEventListener('click',()=>track('cta_agendar_llamada',{}));
+  document.getElementById('agendar').addEventListener('click',()=>track('cta_agendar_llamada',{origen:'cierre'}));
+  var tcta=document.getElementById('thanksCta'); if(tcta) tcta.addEventListener('click',()=>track('cta_agendar_llamada',{origen:'gracias'}));
   var vph=document.getElementById('videoPh'); if(vph) vph.addEventListener('click',()=>track('video_mvp_play',{}));
 
   /* ambient particle field (subtle) */
