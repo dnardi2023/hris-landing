@@ -169,9 +169,11 @@
   .btn:active{transform:scale(.99)}
   /* video del MVP (placeholder) */
   .video-wrap{margin:clamp(2rem,4vw,3rem) 0 0;border-radius:20px;overflow:hidden;border:1px solid var(--line)}
-  .video-ph{position:relative;width:100%;aspect-ratio:16/9;border:none;cursor:pointer;display:grid;place-items:center;background:radial-gradient(120% 120% at 50% 32%,#1c1c22,#0c0c0f);overflow:hidden}
-  .video-ph::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 44%,var(--rose-soft),transparent 60%);opacity:.75}
-  .video-ph .play{position:relative;width:74px;height:74px;border-radius:50%;background:var(--rose);display:grid;place-items:center;transition:transform .3s,background .3s;box-shadow:0 12px 44px rgba(236,106,124,.32)}
+  .video-ph{position:relative;width:100%;aspect-ratio:16/9;border:none;cursor:pointer;display:grid;place-items:center;background:#000;overflow:hidden}
+  .video-ph .ythumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .video-ph::before{content:"";position:absolute;inset:0;background:rgba(10,10,12,.38);transition:background .3s;z-index:1}
+  .video-ph:hover::before{background:rgba(10,10,12,.18)}
+  .video-ph .play{position:relative;z-index:2;width:74px;height:74px;border-radius:50%;background:var(--rose);display:grid;place-items:center;transition:transform .3s,background .3s;box-shadow:0 12px 44px rgba(236,106,124,.4)}
   .video-ph:hover .play{transform:scale(1.08);background:#f47f8f}
   .video-ph .vlabel{position:relative;margin-top:1.1rem;font-family:var(--sans);font-weight:500;font-size:clamp(1rem,1.8vw,1.15rem);color:var(--ink);letter-spacing:-.01em}
   .video-ph .vsub{position:relative;margin-top:.35rem;font-size:.82rem;color:var(--ink-dim)}
@@ -451,15 +453,13 @@
     <p class="sec-label reveal-up"><span class="rule"></span>Atracción con Influencia · Demo con IA</p>
     <h2 class="sec-title reveal-up">Cargá tu brief y encontrá tu <em>match</em>.</h2>
 
-    <!-- ▶ VIDEO DEL MVP — cuando lo tengas grabado, reemplazá TODO el <button class="video-ph"> por:
-         <video src="mvp.mp4" controls poster="portada.jpg" style="width:100%;display:block"></video>
-         o el <iframe> de YouTube (width:100%, aspect-ratio 16/9). El contenedor .video-wrap ya está listo. -->
+    <!-- ▶ VIDEO DEL MVP — embebido de YouTube (ID: 4kIUCTLbSas). La portada usa el thumbnail
+         de YouTube; al hacer clic se carga el reproductor. Para cambiar el video, reemplazá
+         el ID en el <img class="ythumb"> y en el iframe del script (buscá 4kIUCTLbSas). -->
     <div class="video-wrap reveal-up">
       <button class="video-ph" id="videoPh" aria-label="Reproducir el video del MVP">
-        <span class="badge-demo">El servicio ocurriendo</span>
-        <span class="play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#0A0A0C"><path d="M8 5v14l11-7z"/></svg></span>
-        <span class="vlabel">El servicio, en 90 segundos</span>
-        <span class="vsub">Carolina y Franco · el MVP explicado</span>
+        <img class="ythumb" src="https://img.youtube.com/vi/4kIUCTLbSas/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/4kIUCTLbSas/hqdefault.jpg'" alt="Portada del video del MVP">
+        <span class="play"><svg width="26" height="26" viewBox="0 0 24 24" fill="#0A0A0C"><path d="M8 5v14l11-7z"/></svg></span>
       </button>
     </div>
 
@@ -818,7 +818,12 @@
   }
   document.getElementById('agendar').addEventListener('click',e=>{e.preventDefault();openContactMail('cierre');});
   var tcta=document.getElementById('thanksCta'); if(tcta) tcta.addEventListener('click',e=>{e.preventDefault();openContactMail('gracias');});
-  var vph=document.getElementById('videoPh'); if(vph) vph.addEventListener('click',()=>track('video_mvp_play',{}));
+  var vph=document.getElementById('videoPh');
+  if(vph) vph.addEventListener('click',()=>{
+    track('video_mvp_play',{});
+    var wrap=vph.parentElement;
+    wrap.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/4kIUCTLbSas?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="HR Influence Strategy — MVP" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="width:100%;aspect-ratio:16/9;display:block;border:0"></iframe>';
+  });
 
   /* ambient particle field (subtle) */
   const cv=document.getElementById('ambient'),ctx=cv.getContext('2d');
