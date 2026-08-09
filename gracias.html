@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>¡Gracias! · HR Influence Strategy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0A0A0C;
+      --cream:#EFE9DC;
+      --cream-soft:#B7B2A7;
+      --rose:#EC6A7C;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      background:var(--bg);
+      color:var(--cream);
+      font-family:"Bricolage Grotesque",system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      padding:32px;
+      text-align:center;
+    }
+    .wrap{max-width:560px}
+    .kicker{
+      color:var(--rose);
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:.72rem;
+      font-weight:600;
+      margin-bottom:24px;
+    }
+    h1{
+      font-size:clamp(2.2rem,6vw,3.4rem);
+      line-height:1.05;
+      font-weight:600;
+      letter-spacing:-.02em;
+      margin-bottom:20px;
+    }
+    h1 em{
+      font-family:"Instrument Serif",Georgia,serif;
+      font-style:italic;
+      font-weight:400;
+    }
+    p{
+      color:var(--cream-soft);
+      font-size:1.05rem;
+      line-height:1.6;
+      margin-bottom:36px;
+    }
+    .btn{
+      display:inline-block;
+      background:var(--cream);
+      color:var(--bg);
+      text-decoration:none;
+      padding:15px 30px;
+      font-weight:600;
+      font-size:.95rem;
+      border:1px solid var(--cream);
+      transition:background .18s ease,color .18s ease;
+    }
+    .btn:hover{background:transparent;color:var(--cream)}
+    .btn.secondary{
+      background:transparent;
+      color:var(--cream);
+      margin-left:10px;
+    }
+    .btn.secondary:hover{background:var(--cream);color:var(--bg)}
+    .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="kicker">Mensaje recibido</p>
+    <h1>Gracias por escribirnos.<br />Te respondemos <em>pronto</em>.</h1>
+    <p>Recibimos tus datos y en breve nos ponemos en contacto desde hola@hrinfluencestrategy.com.ar. Mientras tanto, podés seguir explorando el proyecto.</p>
+    <div class="actions">
+      <a class="btn" href="/">Volver al inicio</a>
+      <a class="btn secondary" href="/blog.html">Leer el blog</a>
+    </div>
+  </main>
+</body>
+</html>

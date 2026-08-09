@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog · HR Influence Strategy</title>
+  <meta name="description" content="Ideas sobre generaciones, legitimidad e influencia aplicadas al mundo del trabajo y la marca empleadora." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0A0A0C;
+      --cream:#EFE9DC;
+      --cream-soft:#B7B2A7;
+      --line:rgba(239,233,220,.14);
+      --rose:#EC6A7C;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      background:var(--bg);
+      color:var(--cream);
+      font-family:"Bricolage Grotesque",system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      line-height:1.5;
+    }
+    a{color:inherit}
+    #nav{
+      position:sticky;top:0;z-index:50;
+      display:flex;justify-content:space-between;align-items:center;gap:20px;
+      padding:15px 32px;
+      background:rgba(10,10,12,.82);
+      backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    #nav .brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--cream);font-weight:600;font-size:.95rem;letter-spacing:-.01em}
+    #nav .brand small{color:var(--cream-soft);font-weight:400;font-size:.72rem;letter-spacing:0}
+    #nav .dot{width:8px;height:8px;border-radius:50%;background:var(--rose);flex:none}
+    #nav .navlinks{display:flex;align-items:center;gap:22px}
+    #nav .navlinks a{text-decoration:none;color:var(--cream-soft);font-size:.88rem;transition:color .18s}
+    #nav .navlinks a:hover{color:var(--cream)}
+    #nav .nav-cta{background:var(--cream);color:var(--bg)!important;padding:9px 18px;font-weight:600;border:1px solid var(--cream);transition:background .18s,color .18s}
+    #nav .nav-cta:hover{background:transparent;color:var(--cream)!important}
+    @media (max-width:720px){#nav .brand small{display:none}}
+    @media (max-width:560px){#nav .navlinks a:not(.nav-cta){display:none}#nav{padding:14px 20px}}
+    .head{max-width:1080px;margin:0 auto;padding:72px 32px 40px}
+    .head .kicker{color:var(--rose);text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:600;margin-bottom:18px}
+    .head h1{font-size:clamp(2.4rem,6vw,3.6rem);line-height:1.04;font-weight:600;letter-spacing:-.02em;max-width:760px}
+    .head h1 em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400}
+    .head p{color:var(--cream-soft);font-size:1.1rem;margin-top:20px;max-width:560px}
+    .posts{max-width:1080px;margin:0 auto;padding:24px 32px 96px}
+    .post-card{
+      display:block;text-decoration:none;
+      border-top:1px solid var(--line);
+      padding:36px 0;
+      transition:opacity .18s;
+    }
+    .post-card:hover{opacity:.72}
+    .post-card__meta{color:var(--cream-soft);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px}
+    .post-card__meta span{color:var(--rose)}
+    .post-card__title{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:600;line-height:1.12;letter-spacing:-.015em;margin-bottom:12px;max-width:820px}
+    .post-card__excerpt{color:var(--cream-soft);font-size:1.02rem;max-width:680px}
+    .post-card__more{display:inline-block;margin-top:18px;color:var(--rose);font-size:.9rem;font-weight:500}
+    .foot{border-top:1px solid var(--line);max-width:1080px;margin:0 auto;padding:32px;color:var(--cream-soft);font-size:.85rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    @media (max-width:640px){
+      .nav{padding:22px 20px}
+      .nav__links a{margin-left:16px}
+      .head{padding:56px 20px 28px}
+      .posts{padding:8px 20px 72px}
+    }
+  </style>
+</head>
+<body>
+  <nav id="nav">
+    <a class="brand" href="/#top"><span class="dot"></span>HR Influence Strategy <small>· studio de comunicación con talento joven</small></a>
+    <div class="navlinks">
+      <a href="/#servicios">Servicios</a>
+      <a href="/#brief">Cómo funciona</a>
+      <a href="/#medimos">Qué medimos</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/#contacto" class="nav-cta">Hablemos</a>
+    </div>
+  </nav>
+
+  <header class="head">
+    <p class="kicker">Blog</p>
+    <h1>Cómo se le habla al talento que <em>todavía no</em> confía en vos.</h1>
+    <p>Ideas sobre generaciones, legitimidad e influencia, aplicadas al mundo del trabajo, la marca empleadora y la atracción de talento joven.</p>
+  </header>
+
+  <main class="posts">
+    <!-- POST 1 -->
+    <a class="post-card" href="/legitimidad-prestada.html">
+      <p class="post-card__meta"><span>Generaciones</span> · Lectura de 4 min</p>
+      <h2 class="post-card__title">Legitimidad prestada: por qué las nuevas generaciones creen en personas y no en logos</h2>
+      <p class="post-card__excerpt">Tu empresa es una institución, y las nuevas generaciones desconfían de las instituciones. Qué hacer con esa incomodidad cuando querés atraer talento joven.</p>
+      <span class="post-card__more">Leer nota →</span>
+    </a>
+
+    <!-- Para sumar más posts, duplicá el bloque <a class="post-card"> de arriba
+         y cambiá el enlace, la categoría, el título y el resumen. -->
+
+    <!-- POST 2 -->
+    <a class="post-card" href="/alcance-vs-confianza.html">
+      <p class="post-card__meta"><span>Estrategia</span> · Lectura de 4 min</p>
+      <h2 class="post-card__title">Alcance no es confianza (y confundirlos te sale caro)</h2>
+      <p class="post-card__excerpt">Llegar a mucha gente y lograr que esa gente te crea son cosas distintas. Por qué para atraer talento importa más la confianza que el alcance.</p>
+      <span class="post-card__more">Leer nota →</span>
+    </a>
+
+    <!-- POST 3 -->
+    <a class="post-card" href="/no-es-la-voz-es-el-guion.html">
+      <p class="post-card__meta"><span>Comunicación</span> · Lectura de 4 min</p>
+      <h2 class="post-card__title">No es la voz, es el guion</h2>
+      <p class="post-card__excerpt">Cuando una colaboración con un creador suena forzada, el problema no es su voz: es el guion corporativo que le piden recitar. Cómo evitarlo.</p>
+      <span class="post-card__more">Leer nota →</span>
+    </a>
+  </main>
+
+  <footer class="foot">
+    <span>© <span id="y"></span> HR Influence Strategy</span>
+    <span>hola@hrinfluencestrategy.com.ar</span>
+  </footer>
+  <script>document.getElementById("y").textContent=new Date().getFullYear();</script>
+</body>
+</html>

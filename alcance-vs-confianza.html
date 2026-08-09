@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alcance no es confianza · HR Influence Strategy</title>
+  <meta name="description" content="La diferencia entre llegar a mucha gente y que esa gente te crea, y por qué para atraer talento importa más la confianza que el alcance." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#0A0A0C;--cream:#EFE9DC;--cream-soft:#B7B2A7;--line:rgba(239,233,220,.14);--rose:#EC6A7C}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--cream);font-family:"Bricolage Grotesque",system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+    a{color:inherit}
+    #nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:15px 32px;background:rgba(10,10,12,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    #nav .brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--cream);font-weight:600;font-size:.95rem;letter-spacing:-.01em}
+    #nav .brand small{color:var(--cream-soft);font-weight:400;font-size:.72rem;letter-spacing:0}
+    #nav .dot{width:8px;height:8px;border-radius:50%;background:var(--rose);flex:none}
+    #nav .navlinks{display:flex;align-items:center;gap:22px}
+    #nav .navlinks a{text-decoration:none;color:var(--cream-soft);font-size:.88rem;transition:color .18s}
+    #nav .navlinks a:hover{color:var(--cream)}
+    #nav .nav-cta{background:var(--cream);color:var(--bg)!important;padding:9px 18px;font-weight:600;border:1px solid var(--cream);transition:background .18s,color .18s}
+    #nav .nav-cta:hover{background:transparent;color:var(--cream)!important}
+    @media (max-width:720px){#nav .brand small{display:none}}
+    @media (max-width:560px){#nav .navlinks a:not(.nav-cta){display:none}#nav{padding:14px 20px}}
+    .article{max-width:680px;margin:0 auto;padding:64px 32px 40px}
+    .article__meta{color:var(--cream-soft);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:20px}
+    .article__meta span{color:var(--rose)}
+    .article__title{font-size:clamp(2rem,5vw,3rem);line-height:1.06;font-weight:600;letter-spacing:-.02em;margin-bottom:24px}
+    .article__title em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400}
+    .article__lead{font-size:1.2rem;color:var(--cream);line-height:1.55;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+    .article__body p{font-size:1.08rem;line-height:1.72;color:#DAD4C6;margin-bottom:24px}
+    .article__body h2{font-size:1.5rem;font-weight:600;letter-spacing:-.01em;margin:44px 0 16px;color:var(--cream)}
+    .article__body em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:1.12em}
+    .article__body strong{color:var(--cream);font-weight:600}
+    .pullquote{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:1.5rem;line-height:1.4;color:var(--cream);border-left:2px solid var(--rose);padding:6px 0 6px 24px;margin:36px 0}
+    .refs{margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
+    .refs h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.14em;color:var(--cream-soft);margin-bottom:14px}
+    .refs p{font-size:.9rem;color:var(--cream-soft);line-height:1.6;margin-bottom:8px}
+    .cta{max-width:680px;margin:24px auto 0;padding:40px 32px 88px}
+    .cta__box{border:1px solid var(--line);padding:36px}
+    .cta__box p{color:var(--cream-soft);margin-bottom:20px;font-size:1.05rem}
+    .cta__box em{font-family:"Instrument Serif",Georgia,serif;font-style:italic}
+    .btn{display:inline-block;background:var(--cream);color:var(--bg);text-decoration:none;padding:14px 30px;font-weight:600;font-size:.92rem;border:1px solid var(--cream);transition:background .18s,color .18s}
+    .btn:hover{background:transparent;color:var(--cream)}
+    .backlink{display:inline-block;margin-top:8px;color:var(--rose);font-size:.9rem;text-decoration:none}
+    .foot{border-top:1px solid var(--line);max-width:1080px;margin:0 auto;padding:32px;color:var(--cream-soft);font-size:.85rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    @media (max-width:640px){.article{padding:48px 20px 28px}.cta{padding:24px 20px 64px}}
+  </style>
+</head>
+<body>
+  <nav id="nav">
+    <a class="brand" href="/#top"><span class="dot"></span>HR Influence Strategy <small>· studio de comunicación con talento joven</small></a>
+    <div class="navlinks">
+      <a href="/#servicios">Servicios</a>
+      <a href="/#brief">Cómo funciona</a>
+      <a href="/#medimos">Qué medimos</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/#contacto" class="nav-cta">Hablemos</a>
+    </div>
+  </nav>
+
+  <article class="article">
+    <p class="article__meta"><span>Estrategia</span> · Lectura de 4 min</p>
+    <h1 class="article__title">Alcance no es confianza (y confundirlos te sale <em>caro</em>)</h1>
+    <p class="article__lead">Llegar a mucha gente y lograr que esa gente te crea son dos cosas distintas. La mayoría de las estrategias de comunicación con talento joven optimizan la primera y descuidan la segunda, que es justo la que define si alguien decide trabajar con vos.</p>
+
+    <div class="article__body">
+      <p>El alcance es fácil de contar: cuántas personas vieron una publicación. Por eso enamora. Queda bien en un reporte, se muestra en una reunión, da la sensación de que algo grande está pasando. La confianza, en cambio, es invisible y lenta: es la probabilidad de que alguien, después de verte, te crea lo suficiente como para actuar. No aparece en un número redondo, pero es la única que mueve decisiones.</p>
+
+      <p>El problema es que solemos tratarlas como si fueran lo mismo. Contratamos a la cuenta más grande, celebramos las impresiones y damos por hecho que más ojos equivale a más credibilidad. Los datos dicen lo contrario.</p>
+
+      <h2>Los números que casi nadie mira</h2>
+
+      <p>Según el Benchmark global de Influencer Marketing Hub, los creadores más chicos —los que tienen menos de diez mil seguidores— logran tasas de interacción muchísimo más altas que las grandes cuentas: hablamos de una diferencia de varias veces, no de un par de puntos. Las cuentas enormes tienen alcance, pero su audiencia participa poco. Las cuentas chicas tienen menos alcance, pero una comunidad que responde, comenta y confía.</p>
+
+      <p>Y cuando se mide confianza directamente, el patrón se repite. Distintos estudios de comportamiento de las nuevas generaciones muestran que la gente joven confía más en los creadores que en las celebridades, e incluso los ubica por encima de la publicidad tradicional a la hora de decidir. No es la fama lo que genera credibilidad: es la cercanía, el nicho y la sensación de estar hablando con alguien parecido a uno.</p>
+
+      <p class="pullquote">El alcance te pone frente a mucha gente. La confianza hace que esa gente te crea. Solo una de las dos contrata.</p>
+
+      <h2>Por qué esto importa (más) en talento</h2>
+
+      <p>En marketing de producto, a veces el alcance alcanza: si un millón de personas ven algo, un porcentaje mínimo que compre ya justifica la campaña. Pero atraer talento no funciona con lógica de volumen. No necesitás que un millón de personas vean tu propuesta; necesitás que <strong>las pocas personas correctas</strong> —las que tienen el perfil, en el momento indicado— te crean lo suficiente como para postularse o quedarse.</p>
+
+      <p>Ahí el alcance masivo es casi ruido. Una cuenta gigante que le habla a todo el mundo difícilmente le hable, de verdad, a tu técnico de datos de 24 años o a tu futura analista de sistemas. Un creador de nicho que ya tiene la confianza de esa comunidad específica, sí. Menos alcance, muchísima más precisión.</p>
+
+      <h2>Qué medir en vez de impresiones</h2>
+
+      <p>Si trabajás en talento y querés saber si tu comunicación está funcionando, cambiá la pregunta. En lugar de "¿a cuántas personas llegamos?", preguntá: <strong>¿cuántas de las personas correctas hicieron algo después de vernos?</strong> Se anotaron, escribieron, compartieron, preguntaron. Esas señales valen más que cualquier número de impresiones, porque son confianza en acción.</p>
+
+      <p>En HR Influence Strategy trabajamos con creadores de nicho justamente por esto: no buscamos el número más grande, buscamos la voz que esa audiencia ya eligió creer. El alcance es una consecuencia agradable. La confianza es el punto.</p>
+
+      <div class="refs">
+        <h3>Referencias y lecturas</h3>
+        <p>Influencer Marketing Hub — <em>Global Influencer Marketing Benchmark Report</em>. Datos de interacción por tamaño de creador.</p>
+        <p>Estudios sobre confianza y comportamiento de la Generación Z frente a creadores y publicidad tradicional (Morning Consult; investigación académica sobre autenticidad y marca).</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="cta">
+    <div class="cta__box">
+      <p>¿Querés dejar de perseguir alcance y empezar a construir <em>confianza</em> con el talento que buscás?</p>
+      <a class="btn" href="/#contacto">Hablemos</a>
+      <br /><a class="backlink" href="/blog.html">← Volver al blog</a>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>© <span id="y"></span> HR Influence Strategy</span>
+    <span>hola@hrinfluencestrategy.com.ar</span>
+  </footer>
+  <script>document.getElementById("y").textContent=new Date().getFullYear();</script>
+</body>
+</html>

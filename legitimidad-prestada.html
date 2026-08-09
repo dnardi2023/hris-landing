@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legitimidad prestada · HR Influence Strategy</title>
+  <meta name="description" content="Por qué las nuevas generaciones creen en personas y no en logos, y qué significa esto para la marca empleadora y la atracción de talento joven." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0A0A0C;
+      --cream:#EFE9DC;
+      --cream-soft:#B7B2A7;
+      --line:rgba(239,233,220,.14);
+      --rose:#EC6A7C;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      background:var(--bg);
+      color:var(--cream);
+      font-family:"Bricolage Grotesque",system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      line-height:1.5;
+    }
+    a{color:inherit}
+    #nav{
+      position:sticky;top:0;z-index:50;
+      display:flex;justify-content:space-between;align-items:center;gap:20px;
+      padding:15px 32px;
+      background:rgba(10,10,12,.82);
+      backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    #nav .brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--cream);font-weight:600;font-size:.95rem;letter-spacing:-.01em}
+    #nav .brand small{color:var(--cream-soft);font-weight:400;font-size:.72rem;letter-spacing:0}
+    #nav .dot{width:8px;height:8px;border-radius:50%;background:var(--rose);flex:none}
+    #nav .navlinks{display:flex;align-items:center;gap:22px}
+    #nav .navlinks a{text-decoration:none;color:var(--cream-soft);font-size:.88rem;transition:color .18s}
+    #nav .navlinks a:hover{color:var(--cream)}
+    #nav .nav-cta{background:var(--cream);color:var(--bg)!important;padding:9px 18px;font-weight:600;border:1px solid var(--cream);transition:background .18s,color .18s}
+    #nav .nav-cta:hover{background:transparent;color:var(--cream)!important}
+    @media (max-width:720px){#nav .brand small{display:none}}
+    @media (max-width:560px){#nav .navlinks a:not(.nav-cta){display:none}#nav{padding:14px 20px}}
+    .article{max-width:680px;margin:0 auto;padding:64px 32px 40px}
+    .article__meta{color:var(--cream-soft);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:20px}
+    .article__meta span{color:var(--rose)}
+    .article__title{font-size:clamp(2rem,5vw,3rem);line-height:1.06;font-weight:600;letter-spacing:-.02em;margin-bottom:24px}
+    .article__title em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400}
+    .article__lead{font-size:1.2rem;color:var(--cream);line-height:1.55;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+    .article__body p{font-size:1.08rem;line-height:1.72;color:#DAD4C6;margin-bottom:24px}
+    .article__body h2{font-size:1.5rem;font-weight:600;letter-spacing:-.01em;margin:44px 0 16px;color:var(--cream)}
+    .article__body em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:1.12em}
+    .article__body strong{color:var(--cream);font-weight:600}
+    .pullquote{
+      font-family:"Instrument Serif",Georgia,serif;
+      font-style:italic;
+      font-size:1.5rem;
+      line-height:1.4;
+      color:var(--cream);
+      border-left:2px solid var(--rose);
+      padding:6px 0 6px 24px;
+      margin:36px 0;
+    }
+    .refs{margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
+    .refs h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.14em;color:var(--cream-soft);margin-bottom:14px}
+    .refs p{font-size:.9rem;color:var(--cream-soft);line-height:1.6;margin-bottom:8px}
+    .cta{
+      max-width:680px;margin:24px auto 0;padding:40px 32px 88px;
+    }
+    .cta__box{border:1px solid var(--line);padding:36px}
+    .cta__box p{color:var(--cream-soft);margin-bottom:20px;font-size:1.05rem}
+    .cta__box em{font-family:"Instrument Serif",Georgia,serif;font-style:italic}
+    .btn{
+      display:inline-block;background:var(--cream);color:var(--bg);text-decoration:none;
+      padding:14px 30px;font-weight:600;font-size:.92rem;border:1px solid var(--cream);
+      transition:background .18s,color .18s;
+    }
+    .btn:hover{background:transparent;color:var(--cream)}
+    .backlink{display:inline-block;margin-top:8px;color:var(--rose);font-size:.9rem;text-decoration:none}
+    .foot{border-top:1px solid var(--line);max-width:1080px;margin:0 auto;padding:32px;color:var(--cream-soft);font-size:.85rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    @media (max-width:640px){
+      .nav{padding:22px 20px}.nav__links a{margin-left:16px}
+      .article{padding:48px 20px 28px}.cta{padding:24px 20px 64px}
+    }
+  </style>
+</head>
+<body>
+  <nav id="nav">
+    <a class="brand" href="/#top"><span class="dot"></span>HR Influence Strategy <small>· studio de comunicación con talento joven</small></a>
+    <div class="navlinks">
+      <a href="/#servicios">Servicios</a>
+      <a href="/#brief">Cómo funciona</a>
+      <a href="/#medimos">Qué medimos</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/#contacto" class="nav-cta">Hablemos</a>
+    </div>
+  </nav>
+
+  <article class="article">
+    <p class="article__meta"><span>Generaciones</span> · Lectura de 4 min</p>
+    <h1 class="article__title">Legitimidad prestada: por qué las nuevas generaciones creen en personas y no en <em>logos</em></h1>
+    <p class="article__lead">Hay un dato incómodo para cualquier área de Recursos Humanos que quiera hablarle al talento joven: no confía en las instituciones. Y tu empresa, por más buena que sea, es una institución.</p>
+
+    <div class="article__body">
+      <p>No se trata de un capricho generacional ni de falta de compromiso. Es un cambio de época que se venía gestando y que hoy define cómo se construye la confianza. Las personas más jóvenes crecieron viendo cómo las instituciones que antes ordenaban el mundo —los medios, las marcas, la política— perdían credibilidad. Y aprendieron a buscar en otro lado eso que esas instituciones ya no les daban.</p>
+
+      <p>En <em>Cultura de la influencia</em>, Tomás Balmaceda, Miriam De Paoli y Juan Marenco describen con precisión ese desplazamiento. En medio de una crisis de confianza frente a la prensa, las marcas y los poderes políticos, aparecieron nuevos actores a quienes la gente sí elige creer: los creadores de contenido. La clave, según los autores, es que quienes desconfían de lo tradicional están en realidad buscando autenticidad, y la encuentran en personas desconocidas a las que perciben como semejantes.</p>
+
+      <p>Traducido al mundo del trabajo, el problema se vuelve nítido. Cuando tu empresa publica <strong>"somos un gran lugar para trabajar"</strong>, alguien de veintipocos lo lee como publicidad. Cuando una persona que se le parece cuenta cómo es realmente trabajar ahí, en su propio lenguaje, lo lee como una recomendación. El mensaje puede ser idéntico. Lo que cambia es quién lo dice.</p>
+
+      <p class="pullquote">La legitimidad, para las nuevas generaciones, no se declara. Se pide prestada a quien ya la tiene.</p>
+
+      <h2>La influencia como "fuerza suave"</h2>
+
+      <p>Los autores describen la influencia como una <em>fuerza suave</em>: el arte de lograr que las cosas sucedan sin obligar, sin presionar y sin tener que convencer con argumentos. No es coerción ni es un aviso publicitario; es una forma de credibilidad que se construye en el vínculo. Balmaceda lo plantea con una idea que a nosotros nos ordena todo el trabajo: la influencia no es una fórmula, no depende de ser joven ni de acumular seguidores. Es, sobre todo, un diálogo.</p>
+
+      <p>Esa distinción importa para RRHH más de lo que parece. Muchas áreas de talento, cuando deciden "hablarle a la Gen Z", contratan a alguien con muchos seguidores y le piden que repita el mensaje corporativo. El resultado suele sonar exactamente a lo que es: un aviso disfrazado. La influencia real no funciona así. Funciona cuando una voz creíble se apropia del mensaje y lo cuenta desde su propia experiencia, con la libertad de decirlo a su manera.</p>
+
+      <h2>Traducir, no traducir literal</h2>
+
+      <p>Patricia Jebsen, una de las voces que más viene pensando el cruce entre generaciones y trabajo en la Argentina, se define como <em>traductora del mundo del trabajo entre generaciones</em>. La imagen es exacta. Entre lo que una empresa quiere decir y lo que una generación está dispuesta a escuchar hay una brecha de lenguaje, de códigos y de confianza. No alcanza con traducir palabra por palabra: hay que traducir el sentido, y hacerlo con alguien que esa generación ya reconozca como propio.</p>
+
+      <p>Ahí está el corazón de lo que hacemos en HR Influence Strategy. No creemos que la solución sea que las empresas "suenen más jóvenes" —eso casi siempre sale mal y se nota—. Creemos que la solución es <strong>construir puentes con voces legítimas</strong>: creadores de nicho que ya le hablan a esa audiencia, que ya tienen su confianza, y que pueden contar tu propuesta de valor sin que suene a folleto.</p>
+
+      <h2>Qué hacer con esto si trabajás en talento</h2>
+
+      <p>La conclusión práctica no es "abrí una cuenta de TikTok corporativa". Es más incómoda y más útil: <strong>tu marca empleadora ya no se construye solo desde adentro.</strong> Se construye, en buena parte, en el terreno donde tu talento futuro ya está prestando atención, y de la mano de las personas a las que ya eligió creer.</p>
+
+      <p>Eso no significa perder el control del mensaje. Significa cambiar la pregunta. En vez de "¿cómo digo que somos un buen lugar para trabajar?", empezar por "¿quién puede decirlo de un modo que a esta generación le resulte creíble?". La respuesta, casi siempre, no es tu logo. Es una persona.</p>
+
+      <div class="refs">
+        <h3>Referencias y lecturas</h3>
+        <p>Balmaceda, T., De Paoli, M. y Marenco, J. <em>Cultura de la influencia. La fuerza suave que está moldeando una nueva sociedad</em>. Marea Editorial.</p>
+        <p>Patricia Jebsen — referente en generaciones y mundo del trabajo. <a href="https://www.linkedin.com/in/patriciajebsen/" style="color:var(--rose)">LinkedIn</a></p>
+        <p>Tomás Balmaceda (@capitanintriga) — doctor en Filosofía (UBA), docente y periodista.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="cta">
+    <div class="cta__box">
+      <p>¿Querés que tu empresa hable el <em>lenguaje</em> de las generaciones que van a trabajar en ella?</p>
+      <a class="btn" href="/#contacto">Hablemos</a>
+      <br /><a class="backlink" href="/blog.html">← Volver al blog</a>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>© <span id="y"></span> HR Influence Strategy</span>
+    <span>hola@hrinfluencestrategy.com.ar</span>
+  </footer>
+  <script>document.getElementById("y").textContent=new Date().getFullYear();</script>
+</body>
+</html>
