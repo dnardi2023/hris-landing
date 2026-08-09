@@ -333,13 +333,32 @@
   .phase p{color:var(--ink-dim);font-size:.92rem;line-height:1.5}
   .phase.now{border-color:var(--rose-soft)}
 
-  /* ---------- CIERRE / CONTACTO ---------- */
+  /* ---------- CIERRE ---------- */
   .close{text-align:center;padding:clamp(5rem,11vw,9rem) var(--pad)}
   .close h2{font-family:var(--sans);font-weight:600;font-size:clamp(2.2rem,6vw,4.6rem);letter-spacing:-.035em;line-height:1;max-width:16ch;margin:0 auto}
   .close h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--rose)}
   .close p{color:var(--ink-dim);font-size:1.08rem;margin:1.6rem auto 2.4rem;max-width:44ch;line-height:1.55}
   .close .cta{display:inline-flex;align-items:center;gap:.85rem;background:var(--rose);color:#0A0A0C;font-family:var(--sans);font-weight:600;font-size:clamp(.82rem,1.05vw,.95rem);letter-spacing:.14em;text-transform:uppercase;padding:1.15rem 2.4rem;border-radius:2px;transition:background .25s,transform .2s,box-shadow .3s;box-shadow:0 12px 42px rgba(236,106,124,.24)}
   .close .cta:hover{background:#f47f8f;transform:translateY(-2px);box-shadow:0 18px 54px rgba(236,106,124,.36)}
+
+  /* ---------- CONTACTO (formulario -> Google Sheet) ---------- */
+  .contacto{border-top:1px solid var(--line);background:linear-gradient(180deg,var(--bg-1),var(--bg))}
+  .contacto .inner{max-width:720px;margin:0 auto}
+  .contacto .lead{color:var(--ink-dim);font-size:1.05rem;line-height:1.6;max-width:52ch;margin-top:1rem}
+  .cform{margin-top:clamp(2rem,4vw,3rem);background:var(--bg-2);border:1px solid var(--line);border-radius:20px;padding:clamp(1.6rem,3vw,2.4rem)}
+  .cform .row{display:flex;gap:1.1rem}
+  @media(max-width:600px){.cform .row{flex-direction:column;gap:0}}
+  .cfield{display:flex;flex-direction:column;flex:1;margin-bottom:1.1rem}
+  .cfield>span{font-size:.82rem;color:var(--ink-dim);margin-bottom:.5rem;letter-spacing:.01em}
+  .cfield input,.cfield textarea{background:var(--bg);border:1px solid var(--line-strong);border-radius:11px;padding:.8rem .95rem;color:var(--ink);font-family:var(--ui);font-size:.95rem;transition:border-color .25s}
+  .cfield input:focus,.cfield textarea:focus{outline:none;border-color:var(--rose)}
+  .cfield textarea{resize:vertical;min-height:100px}
+  .c-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+  .cfoot{display:flex;align-items:center;gap:1.2rem;margin-top:.4rem;flex-wrap:wrap}
+  .cbtn{background:var(--rose);color:#0A0A0C;border:none;border-radius:11px;padding:.95rem 2rem;font-family:var(--sans);font-weight:600;font-size:.98rem;cursor:pointer;transition:background .25s,opacity .25s}
+  .cbtn:hover{background:#f47f8f}
+  .cbtn:disabled{opacity:.5;cursor:default}
+  .cerror{color:var(--rose);font-size:.88rem;margin:0}
 
   footer{border-top:1px solid var(--line);padding:2.4rem var(--pad);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
   footer p{color:var(--ink-faint);font-size:.8rem;max-width:46ch}
@@ -631,12 +650,56 @@
   </div>
 </section>
 
-<!-- CIERRE -->
-<section class="close" id="contacto">
+<!-- CIERRE (mantiene el mail) -->
+<section class="close" id="cierre">
   <div class="wrap">
     <h2 class="reveal-up">Atraé con credibilidad. Mostrá tu cultura. <em>Medilo en tu idioma.</em></h2>
     <p class="reveal-up">30 días. USD 1.200. Una hipótesis de cultura puesta a prueba con un creador curado por nicho.</p>
-    <a href="#" class="cta reveal-up" id="agendar">Agendar llamada <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M1 7.5h12M8.5 3l4.5 4.5L8.5 12" stroke="#0A0A0C" stroke-width="1.5"/></svg></a>
+    <a href="#contacto" class="cta reveal-up" id="agendar">Agendar llamada <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M1 7.5h12M8.5 3l4.5 4.5L8.5 12" stroke="#0A0A0C" stroke-width="1.5"/></svg></a>
+  </div>
+</section>
+
+<!-- CONTACTO (formulario que guarda en Google Sheet) -->
+<section class="contacto" id="contacto">
+  <div class="inner">
+    <p class="sec-label reveal-up"><span class="rule"></span>Contacto</p>
+    <h2 class="sec-title reveal-up">Hablemos en el <em>lenguaje</em> de tu próxima generación.</h2>
+    <p class="lead reveal-up">Contanos sobre tu equipo y qué necesitás comunicar. Te escribimos para coordinar una primera charla, sin compromiso.</p>
+
+    <form class="cform reveal-up" id="hris-form" novalidate>
+      <div class="row">
+        <label class="cfield">
+          <span>Nombre y apellido *</span>
+          <input type="text" name="nombre" required autocomplete="name">
+        </label>
+        <label class="cfield">
+          <span>Email *</span>
+          <input type="email" name="email" required autocomplete="email">
+        </label>
+      </div>
+      <div class="row">
+        <label class="cfield">
+          <span>Empresa *</span>
+          <input type="text" name="empresa" required autocomplete="organization">
+        </label>
+        <label class="cfield">
+          <span>Tu rol</span>
+          <input type="text" name="rol" autocomplete="organization-title" placeholder="Ej: Generalista de RRHH">
+        </label>
+      </div>
+      <label class="cfield">
+        <span>¿Qué te gustaría lograr?</span>
+        <textarea name="mensaje" rows="4" placeholder="Contanos un poco sobre tu equipo y tu objetivo…"></textarea>
+      </label>
+
+      <input type="hidden" name="origen" value="landing-contacto">
+      <input type="text" name="website" class="c-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="cfoot">
+        <button type="submit" class="cbtn" id="hris-submit">Enviar mensaje</button>
+        <p class="cerror" id="hris-error" role="alert"></p>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -794,36 +857,65 @@
     document.getElementById('thanks').classList.add('show');
   });
 
-  /* Agendar llamada -> abre un mail pre-cargado con los datos del brief */
-  const CONTACT_EMAIL='contacto@hrinfluencestrategy.com.ar';
-  function openContactMail(origen){
+  /* Agendar llamada -> lleva al formulario y precarga el mensaje con el contexto del brief */
+  function goToContact(origen){
     track('cta_agendar_llamada',{origen:origen});
-    let subject, body;
-    if(lastBrief && lastRole){
+    const msgField=document.querySelector('#hris-form [name="mensaje"]');
+    // Si la persona generó un brief, precargamos el contexto en el mensaje (si el campo está vacío)
+    if(msgField && lastBrief && lastRole && !msgField.value.trim()){
       const m=lastBrief.influencerMatch||{};
-      const creador = m.name ? (m.name + (m.handle?' ('+m.handle+')':'')) : '—';
-      subject = 'Quiero ejecutar este piloto — ' + lastRole;
-      body =
-        'Hola, vengo de HR Influence Strategy y me generé un brief para la búsqueda: ' + lastRole + '.\n\n' +
-        'Creador que nos matcheó: ' + creador + '.\n\n' +
-        (lastBrief.narrativeAngle ? 'Ángulo narrativo sugerido: ' + lastBrief.narrativeAngle + '\n\n' : '') +
-        'Quisiera una reunión para evaluar ejecutar este piloto de 30 días.\n\n' +
-        'Contactame por este mail o devolveme una llamada.\n\n' +
-        '¡Gracias!';
-    } else {
-      subject = 'Quiero conocer HR Influence Strategy';
-      body = 'Hola, me interesa conocer más sobre HR Influence Strategy y coordinar una llamada de 20 minutos.\n\n¡Gracias!';
+      const creador = m.name ? (m.name + (m.handle?' ('+m.handle+')':'')) : '';
+      let pre = 'Generé un brief para la búsqueda: ' + lastRole + '.';
+      if(creador) pre += ' Nos matcheó: ' + creador + '.';
+      if(lastBrief.narrativeAngle) pre += ' Ángulo sugerido: ' + lastBrief.narrativeAngle;
+      pre += ' Me gustaría coordinar una llamada para evaluar el piloto.';
+      msgField.value = pre;
     }
-    window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    const contacto=document.getElementById('contacto');
+    if(contacto) contacto.scrollIntoView({behavior:'smooth',block:'start'});
+    // foco en el primer campo para invitar a completar
+    const first=document.querySelector('#hris-form [name="nombre"]');
+    if(first) setTimeout(()=>first.focus({preventScroll:true}),600);
   }
-  document.getElementById('agendar').addEventListener('click',e=>{e.preventDefault();openContactMail('cierre');});
-  var tcta=document.getElementById('thanksCta'); if(tcta) tcta.addEventListener('click',e=>{e.preventDefault();openContactMail('gracias');});
+  document.getElementById('agendar').addEventListener('click',e=>{e.preventDefault();goToContact('cierre');});
+  var tcta=document.getElementById('thanksCta'); if(tcta) tcta.addEventListener('click',e=>{e.preventDefault();goToContact('brief');});
   var vph=document.getElementById('videoPh');
   if(vph) vph.addEventListener('click',()=>{
     track('video_mvp_play',{});
     var wrap=vph.parentElement;
     wrap.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/4kIUCTLbSas?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="HR Influence Strategy — MVP" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="width:100%;aspect-ratio:16/9;display:block;border:0"></iframe>';
   });
+
+  /* ===== CONTACTO -> Google Sheet (Apps Script) + redirect a gracias.html ===== */
+  (function(){
+    const ENDPOINT="https://script.google.com/macros/s/AKfycbzkAULvf5inVfdNN0CENg_QGqYUy2j9TDOAmaciqvyoyavAMF1aDxEDgK8VyToefq6vgw/exec";
+    const form=document.getElementById('hris-form');
+    if(!form) return;
+    const btn=document.getElementById('hris-submit');
+    const errorBox=document.getElementById('hris-error');
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      errorBox.textContent='';
+      if(form.website.value.trim()!=='') return; // honeypot anti-spam
+      const nombre=form.nombre.value.trim();
+      const email=form.email.value.trim();
+      const empresa=form.empresa.value.trim();
+      if(!nombre||!email||!empresa){errorBox.textContent='Completá nombre, email y empresa para continuar.';return;}
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){errorBox.textContent='Revisá el email, parece incompleto.';return;}
+      btn.disabled=true;btn.textContent='Enviando…';
+      track('lead_contacto_enviado',{empresa:empresa});
+      const data=new URLSearchParams();
+      data.append('nombre',nombre);
+      data.append('email',email);
+      data.append('empresa',empresa);
+      data.append('rol',form.rol.value.trim());
+      data.append('mensaje',form.mensaje.value.trim());
+      data.append('origen',form.origen.value);
+      fetch(ENDPOINT,{method:'POST',mode:'no-cors',body:data})
+        .then(function(){window.location.href='/gracias.html';})
+        .catch(function(){window.location.href='/gracias.html';});
+    });
+  })();
 
   /* ambient particle field (subtle) */
   const cv=document.getElementById('ambient'),ctx=cv.getContext('2d');
