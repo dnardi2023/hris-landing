@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comunicar como siempre te sale el doble de caro · HR Influence Strategy</title>
+  <meta name="description" content="Seguir comunicando la marca empleadora por los canales tradicionales parece la opción gratis. Los datos dicen que es la más cara: una marca empleadora débil paga casi el doble por contratación." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#0A0A0C;--cream:#EFE9DC;--cream-soft:#B7B2A7;--line:rgba(239,233,220,.14);--rose:#EC6A7C}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--cream);font-family:"Bricolage Grotesque",system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+    a{color:inherit}
+    #nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:15px 32px;background:rgba(10,10,12,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    #nav .brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--cream);font-weight:600;font-size:.95rem;letter-spacing:-.01em}
+    #nav .brand small{color:var(--cream-soft);font-weight:400;font-size:.72rem;letter-spacing:0}
+    #nav .dot{width:8px;height:8px;border-radius:50%;background:var(--rose);flex:none}
+    #nav .navlinks{display:flex;align-items:center;gap:22px}
+    #nav .navlinks a{text-decoration:none;color:var(--cream-soft);font-size:.88rem;transition:color .18s}
+    #nav .navlinks a:hover{color:var(--cream)}
+    #nav .nav-cta{background:var(--cream);color:var(--bg)!important;padding:9px 18px;font-weight:600;border:1px solid var(--cream);transition:background .18s,color .18s}
+    #nav .nav-cta:hover{background:transparent;color:var(--cream)!important}
+    @media (max-width:720px){#nav .brand small{display:none}}
+    @media (max-width:560px){#nav .navlinks a:not(.nav-cta){display:none}#nav{padding:14px 20px}}
+    .article{max-width:680px;margin:0 auto;padding:64px 32px 40px}
+    .article__meta{color:var(--cream-soft);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:20px}
+    .article__meta span{color:var(--rose)}
+    .article__title{font-size:clamp(2rem,5vw,3rem);line-height:1.06;font-weight:600;letter-spacing:-.02em;margin-bottom:24px}
+    .article__title em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400}
+    .article__lead{font-size:1.2rem;color:var(--cream);line-height:1.55;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+    .article__body p{font-size:1.08rem;line-height:1.72;color:#DAD4C6;margin-bottom:24px}
+    .article__body h2{font-size:1.5rem;font-weight:600;letter-spacing:-.01em;margin:44px 0 16px;color:var(--cream)}
+    .article__body em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:1.12em}
+    .article__body strong{color:var(--cream);font-weight:600}
+    .pullquote{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:1.5rem;line-height:1.4;color:var(--cream);border-left:2px solid var(--rose);padding:6px 0 6px 24px;margin:36px 0}
+    .statline{display:flex;gap:20px;flex-wrap:wrap;margin:32px 0;padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .statline .s{flex:1;min-width:150px}
+    .statline .s b{display:block;font-size:2rem;font-weight:600;color:var(--rose);letter-spacing:-.02em;line-height:1}
+    .statline .s span{display:block;margin-top:8px;font-size:.85rem;color:var(--cream-soft);line-height:1.4}
+    .refs{margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
+    .refs h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.14em;color:var(--cream-soft);margin-bottom:14px}
+    .refs p{font-size:.9rem;color:var(--cream-soft);line-height:1.6;margin-bottom:8px}
+    .cta{max-width:680px;margin:24px auto 0;padding:40px 32px 88px}
+    .cta__box{border:1px solid var(--line);padding:36px}
+    .cta__box p{color:var(--cream-soft);margin-bottom:20px;font-size:1.05rem}
+    .cta__box em{font-family:"Instrument Serif",Georgia,serif;font-style:italic}
+    .btn{display:inline-block;background:var(--cream);color:var(--bg);text-decoration:none;padding:14px 30px;font-weight:600;font-size:.92rem;border:1px solid var(--cream);transition:background .18s,color .18s}
+    .btn:hover{background:transparent;color:var(--cream)}
+    .backlink{display:inline-block;margin-top:8px;color:var(--rose);font-size:.9rem;text-decoration:none}
+    .foot{border-top:1px solid var(--line);max-width:1080px;margin:0 auto;padding:32px;color:var(--cream-soft);font-size:.85rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    @media (max-width:640px){.article{padding:48px 20px 28px}.cta{padding:24px 20px 64px}}
+  </style>
+</head>
+<body>
+  <nav id="nav">
+    <a class="brand" href="/#top"><span class="dot"></span>HR Influence Strategy <small>· studio de comunicación con talento joven</small></a>
+    <div class="navlinks">
+      <a href="/#servicios">Servicios</a>
+      <a href="/#brief">Cómo funciona</a>
+      <a href="/#medimos">Qué medimos</a>
+      <a href="/blog.html">Nuestro blog</a>
+      <a href="/#contacto" class="nav-cta">Hablemos</a>
+    </div>
+  </nav>
+
+  <article class="article">
+    <p class="article__meta"><span>Marca empleadora</span> · Lectura de 5 min</p>
+    <h1 class="article__title">Comunicar como siempre te sale el <em>doble</em> de caro</h1>
+    <p class="article__lead">Seguir comunicando la marca empleadora por los canales de siempre parece la opción gratis: no tiene una línea en el presupuesto, así que no cuesta. Los datos dicen lo contrario. Comunicar como siempre es, en realidad, la opción más cara. Solo que el costo está escondido.</p>
+
+    <div class="article__body">
+      <p>Cuando una empresa necesita cubrir una búsqueda, hace lo de siempre: publica el aviso, lo sube al LinkedIn corporativo, quizás lo empuja con algo de pauta. Si no llegan buenos candidatos, publica en más lados, contrata a un reclutador externo, espera más tiempo. Nada de eso figura como "costo de comunicar mal". Figura como costo de reclutar, a secas. Pero es lo mismo.</p>
+
+      <p>Porque el número que casi nadie mira es este: una marca empleadora débil paga un costo por contratación <strong>casi del doble</strong> que una fuerte. Y una marca empleadora sólida no es un lujo estético: reduce el costo por contratación hasta un 50%, baja la rotación cerca de un 28% y acelera los tiempos de cobertura. La forma en que te comunican como empleador no es una cuestión de imagen. Es una variable de costo, medible, que aparece en cada búsqueda.</p>
+
+      <div class="statline">
+        <div class="s"><b>~50%</b><span>menos costo por contratación con una marca empleadora fuerte</span></div>
+        <div class="s"><b>~28%</b><span>menos rotación de personal</span></div>
+        <div class="s"><b>x2</b><span>lo que paga por contratación una marca empleadora débil</span></div>
+      </div>
+
+      <p>La pregunta, entonces, no es si podés permitirte invertir en cómo comunicás. Es si podés permitirte seguir pagando el sobrecosto de no hacerlo.</p>
+
+      <h2>El problema es con quién estás hablando</h2>
+
+      <p>Ese sobrecosto no es abstracto: tiene que ver con una audiencia muy concreta. Según la encuesta global de Deloitte, para 2030 la Generación Z y los Millennials serán el 74% de la fuerza laboral mundial. Es decir, tres de cada cuatro personas a las que vas a querer contratar pertenecen a generaciones que crecieron desconfiando del mensaje institucional. Y hacen la tarea: la amplia mayoría investiga la reputación de una empresa antes de postularse.</p>
+
+      <p>Cuando esa audiencia se topa con el aviso corporativo de siempre —el mismo tono, el mismo canal, la misma promesa de "excelente clima laboral"—, no lo lee como información. Lo lee como publicidad. Y a la publicidad institucional, sencillamente, no le cree. El mensaje puede estar impecable. Si viene del logo de la empresa por el canal de siempre, para esta audiencia nace con la credibilidad en contra.</p>
+
+      <p class="pullquote">Comunicar como siempre no es gratis: se paga en cada búsqueda que tarda de más y cada aviso que nadie cree.</p>
+
+      <h2>Por qué la credibilidad baja el costo</h2>
+
+      <p>Acá aparece el dato que ordena todo: los candidatos confían tres veces más en los empleados actuales de una empresa que en su CEO. El contenido que producen voces reales convence más que el mensaje corporativo pulido. No es una preferencia estética; es cómo se construye la confianza hoy. En <em>Cultura de la influencia</em>, Balmaceda, De Paoli y Marenco lo explican bien: ante la crisis de confianza en las instituciones, la gente busca autenticidad en personas a las que percibe como semejantes.</p>
+
+      <p>Y la confianza, en términos de negocio, es lo que baja el costo. Cuando el talento cree en lo que ve, se postula más y mejor gente, la búsqueda se cubre antes y necesitás gastar menos en amplificar, en agencias y en tiempo. Cuando no cree, todo eso se encarece. La credibilidad no es el objetivo blando de la comunicación: es la palanca que mueve el costo por contratación.</p>
+
+      <h2>La alternativa no es gastar más. Es cambiar quién habla.</h2>
+
+      <p>La salida no es duplicar el presupuesto de pauta ni abrir un TikTok corporativo que suene forzado. Es más simple: mantener tu mensaje y ponerlo en la voz de un creador curado, elegido porque es creíble y profesional para esa audiencia. El mensaje sigue siendo tuyo; lo que cambia es que ahora lo cuenta alguien a quien ese talento ya eligió escuchar, en su terreno y en su lenguaje.</p>
+
+      <p>Eso es exactamente lo que hacemos en HR Influence Strategy, y lo medimos donde importa: en indicadores de talento como calidad del flujo de candidatos, tiempo de cobertura y costo por contratación. Porque una marca empleadora que se construye con voces creíbles no es un gasto de comunicación. Es lo que hace que cada búsqueda te salga más barata.</p>
+
+      <p>Comunicar como siempre parece la opción segura porque no tiene factura. Pero la factura llega igual, dividida en cada contratación que sale el doble. La diferencia es que, cuando decidís cambiar la voz, ese costo deja de estar escondido y empieza a bajar.</p>
+
+      <div class="refs">
+        <h3>Referencias y lecturas</h3>
+        <p>Deloitte (2025). <em>Global Gen Z and Millennial Survey</em> (23.482 encuestados, 44 países). Proyección: Gen Z + Millennials = 74% de la fuerza laboral global en 2030.</p>
+        <p>Datos de marca empleadora y costo por contratación: LinkedIn Global Talent Trends / Glassdoor; recopilaciones de estadísticas de employer branding 2025–2026 (reducción de hasta 50% en costo por contratación, ~28% en rotación; marca débil ≈ doble costo).</p>
+        <p>HR.com (2025). <em>State of Employer Branding</em>. · Influencer Marketing Hub (2025). <em>Influencer Marketing Benchmark Report</em>.</p>
+        <p>Balmaceda, T., De Paoli, M. y Marenco, J. (2022). <em>Cultura de la influencia</em>. Marea Editorial.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="cta">
+    <div class="cta__box">
+      <p>¿Querés dejar de pagar el sobrecosto de comunicar como siempre y medirlo en el <em>lenguaje de RRHH</em>?</p>
+      <a class="btn" href="/#contacto">Hablemos</a>
+      <br /><a class="backlink" href="/blog.html">← Volver al blog</a>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>© <span id="y"></span> HR Influence Strategy</span>
+    <span>hola@hrinfluencestrategy.com.ar</span>
+  </footer>
+  <script>document.getElementById("y").textContent=new Date().getFullYear();</script>
+</body>
+</html>
