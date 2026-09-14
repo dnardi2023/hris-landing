@@ -7,74 +7,25 @@
   <title>¡Gracias! · HR Influence Strategy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Playfair+Display:ital@1&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    :root{
-      --bg:#0A0A0C;
-      --cream:#EFE9DC;
-      --cream-soft:#B7B2A7;
-      --rose:#EC6A7C;
-    }
+    :root{--bg:#E9E5DE;--ink:#0E0E10;--ink-dim:#6B6459;--fucsia:#EC6A7C;
+      --sans:'Archivo',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--ui:'Inter',system-ui,sans-serif;}
     *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      background:var(--bg);
-      color:var(--cream);
-      font-family:"Bricolage Grotesque",system-ui,sans-serif;
-      -webkit-font-smoothing:antialiased;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:100vh;
-      padding:32px;
-      text-align:center;
-    }
-    .wrap{max-width:560px}
-    .kicker{
-      color:var(--rose);
-      text-transform:uppercase;
-      letter-spacing:.18em;
-      font-size:.72rem;
-      font-weight:600;
-      margin-bottom:24px;
-    }
-    h1{
-      font-size:clamp(2.2rem,6vw,3.4rem);
-      line-height:1.05;
-      font-weight:600;
-      letter-spacing:-.02em;
-      margin-bottom:20px;
-    }
-    h1 em{
-      font-family:"Instrument Serif",Georgia,serif;
-      font-style:italic;
-      font-weight:400;
-    }
-    p{
-      color:var(--cream-soft);
-      font-size:1.05rem;
-      line-height:1.6;
-      margin-bottom:36px;
-    }
-    .btn{
-      display:inline-block;
-      background:var(--cream);
-      color:var(--bg);
-      text-decoration:none;
-      padding:15px 30px;
-      font-weight:600;
-      font-size:.95rem;
-      border:1px solid var(--cream);
-      transition:background .18s ease,color .18s ease;
-    }
-    .btn:hover{background:transparent;color:var(--cream)}
-    .btn.secondary{
-      background:transparent;
-      color:var(--cream);
-      margin-left:10px;
-    }
-    .btn.secondary:hover{background:var(--cream);color:var(--bg)}
+    body{background:var(--bg);color:var(--ink);font-family:var(--ui);-webkit-font-smoothing:antialiased;
+      min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:32px}
+    .wrap{max-width:600px;position:relative}
+    .wrap::before{content:"";position:absolute;inset:-40% -20%;z-index:-1;
+      background:radial-gradient(45% 45% at 50% 40%,rgba(236,106,124,.18),transparent 70%)}
+    .kicker{color:var(--fucsia);text-transform:uppercase;letter-spacing:.18em;font-family:var(--sans);font-weight:600;font-size:.74rem;margin-bottom:24px}
+    h1{font-family:var(--sans);font-weight:900;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1.02;letter-spacing:-.03em;text-transform:uppercase;margin-bottom:20px}
+    h1 em{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;color:var(--fucsia)}
+    p{color:var(--ink-dim);font-size:1.05rem;line-height:1.6;margin-bottom:36px;max-width:44ch;margin-left:auto;margin-right:auto}
     .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;padding:14px 30px;font-family:var(--sans);font-weight:600;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;transition:background .2s,transform .2s}
+    .btn:hover{background:var(--fucsia);transform:translateY(-2px)}
+    .btn.sec{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+    .btn.sec:hover{background:var(--ink);color:#fff}
   </style>
 </head>
 <body>
@@ -84,7 +35,7 @@
     <p>Recibimos tus datos y en breve nos ponemos en contacto desde hola@hrinfluencestrategy.com.ar. Mientras tanto, podés seguir explorando el proyecto.</p>
     <div class="actions">
       <a class="btn" href="/">Volver al inicio</a>
-      <a class="btn secondary" href="/blog.html">Leer el blog</a>
+      <a class="btn sec" href="/blog.html">Leer el blog</a>
     </div>
   </main>
 </body>

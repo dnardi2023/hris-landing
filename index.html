@@ -7,7 +7,7 @@
 <meta name="description" content="Studio de comunicación con el talento joven a través de creadores de nicho. Traducimos tu empresa al lenguaje de las generaciones que van a trabajar en ella.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <!-- ===== GA4 activado ===== -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YX24JKW8XF"></script>
@@ -28,17 +28,24 @@
   window.GA_READY = true; // GA4 activo
 </script>
 <style>
+  @font-face{font-family:'Whyte Inktrap';font-weight:400;src:url(fonts/WhyteInktrap-Regular.woff2) format('woff2');font-display:swap}
+  @font-face{font-family:'Whyte Inktrap';font-weight:500;src:url(fonts/WhyteInktrap-Regular.woff2) format('woff2');font-display:swap}
+  @font-face{font-family:'Whyte Inktrap';font-weight:600;src:url(fonts/WhyteInktrap-Heavy.woff2) format('woff2');font-display:swap}
+  @font-face{font-family:'Whyte Inktrap';font-weight:700;src:url(fonts/WhyteInktrap-Heavy.woff2) format('woff2');font-display:swap}
+  @font-face{font-family:'Whyte Inktrap';font-weight:800;src:url(fonts/WhyteInktrap-Heavy.woff2) format('woff2');font-display:swap}
+  @font-face{font-family:'Whyte Inktrap';font-weight:900;src:url(fonts/WhyteInktrap-Heavy.woff2) format('woff2');font-display:swap}
+
   :root{
-    --bg:#0A0A0C; --bg-1:#101013; --bg-2:#16161A; --bg-3:#1C1C21;
-    --ink:#F3EFE9; --ink-dim:#A29E97; --ink-faint:#6E6B66;
-    --line:rgba(243,239,233,.10); --line-strong:rgba(243,239,233,.20);
-    --rose:#EC6A7C; --rose-dim:#c9576a; --rose-soft:rgba(236,106,124,.13);
-    --pos:#8FD4A8; --neg:#6E6B66;
-    --sans:'Bricolage Grotesque',system-ui,sans-serif;
-    --serif:'Instrument Serif',Georgia,serif;
+    --bg:#E9E5DE; --bg-1:#F2EFE9; --bg-2:#EDE7DD; --bg-3:#E3DCCF;
+    --ink:#0E0E10; --ink-dim:#6B6459; --ink-faint:#9C9488;
+    --line:rgba(14,14,16,.12); --line-strong:rgba(14,14,16,.24);
+    --rose:#EC6A7C; --rose-dim:#d1556a; --rose-soft:rgba(236,106,124,.14);
+    --pos:#3a8f5c; --neg:#9C9488;
+    --sans:'Whyte Inktrap',system-ui,sans-serif;
+    --serif:'Playfair Display',Georgia,serif;
     --ui:'Inter',system-ui,sans-serif;
     --pad:clamp(1.25rem,5vw,4.5rem);
-    --maxw:1180px;
+    --maxw:1440px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;background:#0A0A0C}
@@ -362,37 +369,175 @@
 
   footer{border-top:1px solid var(--line);padding:2.4rem var(--pad);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
   footer p{color:var(--ink-faint);font-size:.8rem;max-width:46ch}
+
+  /* ==== RESKIN OVERRIDES (tema claro WildFi-inspired) ==== */
+  body::before{content:"";position:fixed;inset:0;z-index:200;pointer-events:none;opacity:.045;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
+  nav.scrolled{background:rgba(233,229,222,.82)!important;border-bottom:1px solid var(--line)!important;backdrop-filter:blur(12px)}
+  .nav-cta{background:var(--ink)!important;border:1px solid var(--ink)!important;color:#fff!important;border-radius:999px!important}
+  .nav-cta:hover{background:var(--rose)!important;border-color:var(--rose)!important;color:#0A0A0C!important}
+  .brand small{color:var(--ink-faint)}
+  ::selection{background:var(--rose);color:#fff}
+  /* HERO flashero */
+  .herox{position:relative;min-height:100svh;display:grid;grid-template-columns:1fr .82fr;align-items:center;gap:2rem;padding:8rem var(--pad) 4rem;max-width:var(--maxw);margin:0 auto}
+  @media(max-width:900px){.herox{grid-template-columns:1fr;gap:1.6rem;padding-top:7rem}}
+  .eyebrow2{display:flex;align-items:center;gap:.85rem;font-family:var(--sans);font-weight:500;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:1.6rem}
+  .eyebrow2 .rule2{width:56px;height:2px;background:var(--rose)}
+  .herox-title{font-family:var(--sans);font-weight:900;font-size:clamp(2.4rem,5.4vw,5rem);line-height:1.0;letter-spacing:-.04em;text-transform:uppercase}
+  .herox-title .l{display:block}
+  .herox-title em{font-family:var(--serif);font-weight:400;font-style:italic;text-transform:none;letter-spacing:0;color:var(--rose)}
+  .herox-cta{display:inline-flex;align-items:center;gap:.7rem;margin-top:2.2rem;background:var(--ink);color:#fff;font-family:var(--sans);font-weight:500;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;padding:1rem 2rem;border-radius:999px;transition:background .25s,transform .2s}
+  .herox-cta:hover{background:var(--rose);transform:translateY(-2px)}
+  .flash{position:relative;justify-self:center;width:100%;max-width:400px;aspect-ratio:4/5;transform:rotate(2deg);transition:transform .4s}
+  .flash:hover{transform:rotate(0)}
+  .flash video{width:100%;height:100%;object-fit:cover;border-radius:14px;display:block;box-shadow:0 30px 70px rgba(14,14,16,.18)}
+  .flash::after{content:"";position:absolute;inset:-10px;border:2px solid var(--rose);border-radius:18px;transform:rotate(-3deg);z-index:-1}
+  .flash-tag{position:absolute;top:-14px;left:-14px;z-index:2;background:var(--rose);color:#fff;font-family:var(--sans);font-weight:500;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem .8rem;border-radius:999px;transform:rotate(-2deg)}
+  /* botones fucsia: texto oscuro ok en claro; suavizo sombras */
+  .btn,.cbtn,.hero-cta,.close .cta,.send-btn,.thanks-cta{box-shadow:none!important}
+
+
+  /* nav: links centrados, CONTACTO a un costado */
+  #nav{display:grid!important;grid-template-columns:1fr auto 1fr!important;align-items:center;gap:1rem}
+  #nav .brand{justify-self:start}
+  #nav .navlinks{justify-self:center;gap:1.9rem}
+  #nav .nav-cta{justify-self:end}
+  @media(max-width:860px){#nav .navlinks{display:none}}
+  /* marquee conceptos en mayusculas */
+  .marquee span{text-transform:uppercase;letter-spacing:.03em}
+  .marquee .sep{opacity:.9}
+
+
+  /* ==== ANCHO / APROVECHAR ESPACIO ==== */
+  .herox{max-width:1440px;grid-template-columns:1.25fr .75fr;gap:3rem}
+  .herox-title{font-size:clamp(2.6rem,6.4vw,6.4rem)}   /* titulo mas grande */
+  .flash{max-width:460px}
+  /* padding lateral un poco menor en pantallas grandes para ganar ancho */
+  @media(min-width:1200px){:root{--pad:clamp(2rem,4vw,3.5rem)}}
+  /* que las secciones ocupen mas ancho */
+  .wrap{max-width:1440px}
+
+
+  /* ==== ESPACIADO + TITULOS ==== */
+  /* menos aire vertical entre secciones (antes 9vw -> huecos gigantes) */
+  section{padding:clamp(2.8rem,5vw,5rem) var(--pad)!important}
+  /* titulos: mas ancho para que NO se corte una palabra sola (ej: "dias") */
+  .sec-title{max-width:48ch!important}
+  /* tarjetas de "punto de partida" menos altas (antes 26vw) */
+  .card{min-height:clamp(190px,15vw,250px)!important}
+  /* un poco menos de aire arriba/abajo del marquee */
+  .marquee-track{padding:1.1rem 0}
+
+
+  /* ==== IMAGENES EN SECCIONES ==== */
+  .svc{overflow:hidden}
+  .svc-img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;margin-bottom:1.3rem;display:block;transition:transform .5s}
+  .svc:hover .svc-img{transform:scale(1.04)}
+  .close-img{width:100%;max-width:720px;aspect-ratio:16/9;object-fit:cover;border-radius:16px;margin:0 auto 2.4rem;display:block;box-shadow:0 24px 60px rgba(14,14,16,.14)}
+
+
+  /* P1: imagenes de servicios centradas y consistentes */
+  .svc-img{object-position:50% 28%!important}
+  .svc-grid{align-items:stretch}
+  /* P2: post IG en el hueco del brief */
+  .brief-igpost{display:block;margin-top:2rem;width:100%;max-width:300px;border-radius:14px;box-shadow:0 20px 50px rgba(14,14,16,.14)}
+  /* P3: cierre con imagen esfumada atras del texto (mas compacto) */
+  .close{position:relative;overflow:hidden;padding:clamp(4rem,7vw,7rem) var(--pad)!important}
+  .close .wrap{position:relative;z-index:2}
+  .close::before{content:"";position:absolute;inset:0;z-index:0;background-image:url(img/cierre.jpg);background-size:cover;background-position:center 30%;opacity:.45}
+  .close::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(233,229,222,.72),rgba(233,229,222,.9))}
+  /* P4: footer grande LET'S GET HRIS en negro */
+  .bigfoot{background:#0E0E10;color:#E9E5DE;padding:clamp(3.5rem,7vw,6rem) var(--pad) 3rem;border-top:none}
+  .bigfoot-title{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(3rem,10vw,8rem);line-height:.95;letter-spacing:-.02em;color:#E9E5DE;margin-bottom:2.5rem}
+  .bigfoot-title span{font-family:var(--sans);font-style:normal;font-weight:900;color:var(--rose);letter-spacing:-.03em}
+  .bigfoot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:820px;border-top:1px solid rgba(233,229,222,.18);padding-top:2.2rem}
+  @media(max-width:760px){.bigfoot-cols{grid-template-columns:1fr 1fr}}
+  .bfcol{display:flex;flex-direction:column;gap:.5rem}
+  .bfcol .bfk{font-family:var(--sans);font-weight:600;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rose);margin-bottom:.3rem}
+  .bfcol a{color:rgba(233,229,222,.85);font-size:.92rem;text-decoration:none;transition:color .2s}
+  .bfcol a:hover{color:#fff}
+  .bigfoot-legal{margin-top:2.6rem;color:rgba(233,229,222,.5);font-size:.8rem;max-width:52ch}
+
+
+  /* P1: post IG mas ancho, centrado y nitido */
+  .brief-igpost{display:block!important;margin:2rem auto 0!important;width:100%!important;max-width:360px!important;border-radius:14px}
+  /* P2: efecto especial en el abono destacado (glow + leve escala + badge que late) */
+  .tier.feat{transform:scale(1.045);box-shadow:0 22px 60px rgba(236,106,124,.22);animation:featglow 3.2s ease-in-out infinite;z-index:2}
+  @keyframes featglow{0%,100%{box-shadow:0 22px 60px rgba(236,106,124,.20)}50%{box-shadow:0 26px 78px rgba(236,106,124,.42)}}
+  .tier.feat .badge{animation:badgepulse 2s ease-in-out infinite}
+  @keyframes badgepulse{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
+  @media(max-width:900px){.tier.feat{transform:none}}
+  /* P3: mas vida — auras fucsia suaves de fondo en secciones clave */
+  .brief,.ladder{position:relative;overflow:hidden}
+  .brief::before,.ladder::before{content:"";position:absolute;z-index:0;width:min(60vw,640px);aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle,rgba(236,106,124,.16),transparent 62%);filter:blur(10px);pointer-events:none;
+    animation:auraFloat 14s ease-in-out infinite}
+  .brief::before{right:-8%;top:10%}
+  .ladder::before{left:-10%;bottom:-6%}
+  .brief .wrap,.ladder .wrap{position:relative;z-index:1}
+  @keyframes auraFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(3%,4%) scale(1.1)}}
+
+
+  /* P2: nav links en MAYUSCULA */
+  #nav .navlinks a{text-transform:uppercase!important}
+  /* P3: efecto en "punto de partida" — aura + tarjetas con glow al hover */
+  .start{position:relative;overflow:hidden}
+  .start::before{content:"";position:absolute;z-index:0;width:min(55vw,560px);aspect-ratio:1;right:-6%;top:0;border-radius:50%;
+    background:radial-gradient(circle,rgba(236,106,124,.14),transparent 62%);filter:blur(10px);pointer-events:none;animation:auraFloat 15s ease-in-out infinite}
+  .start .wrap{position:relative;z-index:1}
+  .card{transition:transform .35s,border-color .35s,box-shadow .35s}
+  .card:hover{box-shadow:0 22px 60px rgba(236,106,124,.18);border-color:var(--rose)}
+  /* P4: post IG contenido y centrado */
+  .brief-igpost{max-width:330px!important;margin:2rem auto 0!important}
+
+
+
+  /* efecto "escritura" SOLO en el cierre, al hacer scroll */
+  .close-type .tl{display:block;overflow:hidden;white-space:nowrap;max-width:100%;width:0}
+  .close-type.in .tl{animation:typeCierre 1.3s steps(24,end) forwards}
+  .close-type.in .tl:nth-child(1){animation-delay:.1s}
+  .close-type.in .tl:nth-child(2){animation-delay:1.3s}
+  .close-type.in .tl:nth-child(3){animation-delay:2.5s}
+  @keyframes typeCierre{to{width:100%}}
+  @media(prefers-reduced-motion:reduce){.close-type .tl{width:100%!important;animation:none}}
+
 </style>
 </head>
 <body>
 
 <nav id="nav">
-  <a class="brand" href="#top"><span class="dot"></span>HR Influence Strategy <small>· studio de comunicación con talento joven</small></a>
+  <a class="brand" href="#top"><span class="dot"></span>HR Influence Strategy</a>
   <div class="navlinks">
+    <a href="#top">Inicio</a>
     <a href="#servicios">Servicios</a>
     <a href="#brief">Cómo funciona</a>
     <a href="#medimos">Qué medimos</a>
     <a href="/blog.html">Nuestro blog</a>
-    <a href="#contacto" class="nav-cta">Hablemos</a>
   </div>
+  <a href="#contacto" class="nav-cta">Contacto</a>
 </nav>
 
 <!-- HERO -->
-<header class="hero" id="top">
-  <canvas id="ambient"></canvas>
-  <div class="glow"></div>
-  <div class="hero-inner">
-    <p class="eyebrow"><span class="rule"></span>No somos una agencia de marketing</p>
-    <h1 class="statement">
-      <span class="word" style="--d:.05s">Traducimos </span><span class="word" style="--d:.11s">tu </span><span class="word" style="--d:.17s">empresa </span><span class="word" style="--d:.23s">al </span><em class="word" style="--d:.42s">lenguaje </em><span class="word" style="--d:.55s">de </span><span class="word" style="--d:.61s">las </span><span class="word" style="--d:.67s">generaciones </span><span class="word" style="--d:.73s">que </span><span class="word" style="--d:.79s">van </span><span class="word" style="--d:.85s">a </span><span class="word" style="--d:.91s">trabajar </span><span class="word" style="--d:.97s">en </span><span class="word" style="--d:1.03s">ella.</span>
+<header class="herox" id="top">
+  <canvas id="ambient" style="display:none"></canvas>
+  <div class="herox-text">
+    <p class="eyebrow2"><span class="rule2"></span></p>
+    <h1 class="herox-title">
+      <span class="l">Influence is our <em>method</em>.</span>
+      <span class="l">Trust is our <em>metric</em>.</span>
     </h1>
+    <a href="#empezar" class="herox-cta">Elegí tu punto de partida →</a>
   </div>
-  <div class="hero-foot">
-    <a href="#empezar" class="hero-cta">Elegí tu punto de partida
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="#0A0A0C" stroke-width="1.6"/></svg>
-    </a>
+  <div class="flash">
+    <span class="flash-tag">● En vivo</span>
+    <video autoplay muted loop playsinline><source src="video/loop.mp4" type="video/mp4"></video>
   </div>
 </header>
+
+<!-- MARQUEE (conceptos, arriba de los numeros) -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track"><span>Talento joven</span><span class="sep">◆</span><span>Influencia medible</span><span class="sep">◆</span><span>Voces creíbles</span><span class="sep">◆</span><span>Credibilidad</span><span class="sep">◆</span><span>Talento joven</span><span class="sep">◆</span><span>Influencia medible</span><span class="sep">◆</span><span>Voces creíbles</span><span class="sep">◆</span><span>Credibilidad</span><span class="sep">◆</span><span>Talento joven</span><span class="sep">◆</span><span>Influencia medible</span><span class="sep">◆</span><span>Voces creíbles</span><span class="sep">◆</span><span>Credibilidad</span><span class="sep">◆</span><span>Talento joven</span><span class="sep">◆</span><span>Influencia medible</span><span class="sep">◆</span><span>Voces creíbles</span><span class="sep">◆</span><span>Credibilidad</span><span class="sep">◆</span><span>Talento joven</span><span class="sep">◆</span><span>Influencia medible</span><span class="sep">◆</span><span>Voces creíbles</span><span class="sep">◆</span><span>Credibilidad</span><span class="sep">◆</span><span>Talento joven</span><span class="sep">◆</span><span>Influencia medible</span><span class="sep">◆</span><span>Voces creíbles</span><span class="sep">◆</span><span>Credibilidad</span><span class="sep">◆</span><span>Talento joven</span><span class="sep">◆</span><span>Influencia medible</span><span class="sep">◆</span><span>Voces creíbles</span><span class="sep">◆</span><span>Credibilidad</span><span class="sep">◆</span><span>Talento joven</span><span class="sep">◆</span><span>Influencia medible</span><span class="sep">◆</span><span>Voces creíbles</span><span class="sep">◆</span><span>Credibilidad</span><span class="sep">◆</span></div>
+</div>
 
 <!-- STATS -->
 <section class="stats">
@@ -402,16 +547,6 @@
     <div class="stat reveal-up"><div class="num" data-count="58"><i>0</i>%</div><p>de la fuerza laboral global será Gen Z hacia 2030.</p></div>
   </div>
 </section>
-
-<!-- MARQUEE -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>No se trata de <em>alquilar alcance</em>, sino de <em>curar el ajuste</em>.</span><span class="sep">◆</span>
-    <span>No se trata de <em>alquilar alcance</em>, sino de <em>curar el ajuste</em>.</span><span class="sep">◆</span>
-    <span>No se trata de <em>alquilar alcance</em>, sino de <em>curar el ajuste</em>.</span><span class="sep">◆</span>
-    <span>No se trata de <em>alquilar alcance</em>, sino de <em>curar el ajuste</em>.</span><span class="sep">◆</span>
-  </div>
-</div>
 
 <!-- PUNTO DE PARTIDA -->
 <section class="start" id="empezar">
@@ -446,19 +581,19 @@
     <h2 class="sec-title reveal-up">Tres formas de comunicarte con el <em>talento joven</em>.</h2>
     <div class="svc-grid">
       <div class="svc reveal-up">
-        <div class="idx">01 — Atracción</div>
+        <img class="svc-img" src="img/atraccion.jpg" alt="Atracción con influencia"><div class="idx">01 — Atracción</div>
         <h3>Atracción con Influencia</h3>
         <p>Vinculamos el perfil que buscás con un creador de nicho que tiene credibilidad genuina en esa comunidad profesional, para potenciar una búsqueda concreta y mejorar la calidad del flujo de candidatos.</p>
         <a href="#brief" class="link">Cargá tu brief y encontrá tu match <span>→</span></a>
       </div>
       <div class="svc reveal-up">
-        <div class="idx">02 — Cultura</div>
+        <img class="svc-img" src="img/cultura.jpg" alt="Cultura desde adentro"><div class="idx">02 — Cultura</div>
         <h3>Cultura desde Adentro</h3>
         <p>Traducimos tu cultura y tu propuesta de valor empleadora a contenido auténtico producido con creadores, con presencia sostenida en los canales donde el talento joven se informa.</p>
         <a href="#contacto" class="link">Hablemos de este servicio <span>→</span></a>
       </div>
       <div class="svc reveal-up">
-        <div class="idx">03 — Interno</div>
+        <img class="svc-img" src="img/internos.jpg" alt="Influencers internos"><div class="idx">03 — Interno</div>
         <h3>Influencers Internos</h3>
         <p>Identificamos, formamos y activamos a colaboradores de tu empresa como voces creíbles de la marca empleadora, sistematizando el contenido que generan ellos mismos, con trayectos de capacitación acordados con cada cliente.</p>
         <a href="#contacto" class="link">Hablemos de este servicio <span>→</span></a>
@@ -487,6 +622,7 @@
       <div class="brief-copy reveal-up">
         <p>Contanos a quién buscás y qué querés comunicar. Nuestro asistente traduce tu input a un brief estructurado y te propone, de nuestra red de creadores de nicho, el perfil que mejor comunica esa búsqueda con ideas de contenido e indicadores en lenguaje de talento.</p>
         <span class="pill">Demo interactiva</span>
+        <img class="brief-igpost" src="img/post-ig.jpg" alt="Ejemplo de post">
       </div>
 
       <div class="reveal-up">
@@ -654,7 +790,7 @@
 <!-- CIERRE (mantiene el mail) -->
 <section class="close" id="cierre">
   <div class="wrap">
-    <h2 class="reveal-up">Atraé con credibilidad. Mostrá tu cultura. <em>Medilo en tu idioma.</em></h2>
+    <h2 class="reveal-up close-type"><span class="tl">Atraé con credibilidad.</span><span class="tl">Mostrá tu cultura.</span><span class="tl"><em>Medilo en tu idioma.</em></span></h2>
     <p class="reveal-up">30 días. USD 1.200. Una hipótesis de cultura puesta a prueba con un creador curado por nicho.</p>
     <a href="#contacto" class="cta reveal-up" id="agendar">Agendar llamada <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M1 7.5h12M8.5 3l4.5 4.5L8.5 12" stroke="#0A0A0C" stroke-width="1.5"/></svg></a>
   </div>
@@ -704,9 +840,14 @@
   </div>
 </section>
 
-<footer>
-  <a class="brand" href="#top"><span class="dot"></span>HR Influence Strategy</a>
-  <p>Traducimos tu empresa al lenguaje de las generaciones que van a trabajar en ella.</p>
+<footer class="bigfoot">
+  <h2 class="bigfoot-title">Let's get <span>HRIS</span></h2>
+  <div class="bigfoot-cols">
+    <div class="bfcol"><span class="bfk">Nuevo negocio</span><a href="#contacto">Escribinos →</a></div>
+    <div class="bfcol"><span class="bfk">Mail</span><a href="mailto:hola@hrinfluencestrategy.com.ar">hola@hrinfluencestrategy.com.ar</a></div>
+    <div class="bfcol"><span class="bfk">Explorar</span><a href="#servicios">Servicios</a><a href="/blog.html">Nuestro blog</a><a href="#brief">Cómo funciona</a></div>
+  </div>
+  <p class="bigfoot-legal">HR Influence Strategy — Traducimos tu empresa al lenguaje de las generaciones que van a trabajar en ella.</p>
 </footer>
 
 <script>
