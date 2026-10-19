@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HR Influence Strategy · Comunicación creíble con el talento joven</title>
-<meta name="description" content="Studio de comunicación con el talento joven a través de creadores de nicho. Traducimos tu empresa al lenguaje de las generaciones que van a trabajar en ella.">
+<title>Hey! Char · HR Influence Strategy</title>
+<meta name="description" content="Hey! Char es el studio de comunicación con el talento joven a través de creadores de nicho. Traducimos tu empresa al lenguaje de las generaciones que van a trabajar en ella.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -40,6 +40,7 @@
     --ink:#0E0E10; --ink-dim:#6B6459; --ink-faint:#9C9488;
     --line:rgba(14,14,16,.12); --line-strong:rgba(14,14,16,.24);
     --rose:#EC6A7C; --rose-dim:#d1556a; --rose-soft:rgba(236,106,124,.14);
+    --lime:#C6F24E; --lime-dim:#a8d62f; --lime-soft:rgba(198,242,78,.16);
     --pos:#3a8f5c; --neg:#9C9488;
     --sans:'Whyte Inktrap',system-ui,sans-serif;
     --serif:'Playfair Display',Georgia,serif;
@@ -51,7 +52,7 @@
   html{scroll-behavior:smooth;background:#0A0A0C}
   html,body{background:var(--bg);min-height:100%}
   body{color:var(--ink);font-family:var(--ui);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
-  ::selection{background:var(--rose);color:#0A0A0C}
+  ::selection{background:var(--lime);color:#0A0A0C}
   a{color:inherit;text-decoration:none}
   button{font-family:inherit}
   .wrap{max-width:var(--maxw);margin:0 auto}
@@ -184,7 +185,7 @@
   .video-ph:hover .play{transform:scale(1.08);background:#f47f8f}
   .video-ph .vlabel{position:relative;margin-top:1.1rem;font-family:var(--sans);font-weight:500;font-size:clamp(1rem,1.8vw,1.15rem);color:var(--ink);letter-spacing:-.01em}
   .video-ph .vsub{position:relative;margin-top:.35rem;font-size:.82rem;color:var(--ink-dim)}
-  .video-ph .badge-demo{position:absolute;top:1.1rem;left:1.1rem;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rose);border:1px solid var(--rose-soft);border-radius:999px;padding:.35rem .7rem}
+  .video-ph .badge-demo{position:absolute;top:1.1rem;left:1.1rem;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#0A0A0C;background:var(--lime);border:none;border-radius:999px;padding:.35rem .7rem;font-weight:600}
 
   /* ---------- MATCH + DISPOSICIÓN (panel) ---------- */
   .panel{background:linear-gradient(180deg,var(--bg-1),var(--bg));border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-top:1.4rem}
@@ -291,7 +292,7 @@
   .tier .desc{color:var(--ink-dim);font-size:.92rem;line-height:1.5;flex:1;margin-bottom:1.4rem}
   .tier .price{font-family:var(--sans);font-weight:600;font-size:clamp(1.5rem,2.4vw,1.9rem);letter-spacing:-.02em}
   .tier .price small{display:block;font-family:var(--ui);font-weight:400;font-size:.8rem;color:var(--ink-faint);margin-top:.35rem;letter-spacing:.02em}
-  .tier .badge{position:absolute;top:1.2rem;right:1.2rem;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#0A0A0C;background:var(--rose);border-radius:999px;padding:.3rem .6rem;font-weight:600}
+  .tier .badge{position:absolute;top:1.2rem;right:1.2rem;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#0A0A0C;background:var(--lime);border-radius:999px;padding:.3rem .6rem;font-weight:600}
 
   /* ---------- PILOTO TIMELINE ---------- */
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,2vw,1.4rem);margin-top:clamp(2rem,4vw,3rem);counter-reset:s}
@@ -377,7 +378,7 @@
   .nav-cta{background:var(--ink)!important;border:1px solid var(--ink)!important;color:#fff!important;border-radius:999px!important}
   .nav-cta:hover{background:var(--rose)!important;border-color:var(--rose)!important;color:#0A0A0C!important}
   .brand small{color:var(--ink-faint)}
-  ::selection{background:var(--rose);color:#fff}
+  ::selection{background:var(--lime);color:#0A0A0C}
   /* HERO flashero */
   .herox{position:relative;min-height:100svh;display:grid;grid-template-columns:1fr .82fr;align-items:center;gap:2rem;padding:8rem var(--pad) 4rem;max-width:var(--maxw);margin:0 auto}
   @media(max-width:900px){.herox{grid-template-columns:1fr;gap:1.6rem;padding-top:7rem}}
@@ -387,12 +388,15 @@
   .herox-title .l{display:block}
   .herox-title em{font-family:var(--serif);font-weight:400;font-style:italic;text-transform:none;letter-spacing:0;color:var(--rose)}
   .herox-cta{display:inline-flex;align-items:center;gap:.7rem;margin-top:2.2rem;background:var(--ink);color:#fff;font-family:var(--sans);font-weight:500;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;padding:1rem 2rem;border-radius:999px;transition:background .25s,transform .2s}
-  .herox-cta:hover{background:var(--rose);transform:translateY(-2px)}
+  .herox-cta:hover{background:var(--lime);color:#0A0A0C;transform:translateY(-2px)}
   .flash{position:relative;justify-self:center;width:100%;max-width:400px;aspect-ratio:4/5;transform:rotate(2deg);transition:transform .4s}
   .flash:hover{transform:rotate(0)}
   .flash video{width:100%;height:100%;object-fit:cover;border-radius:14px;display:block;box-shadow:0 30px 70px rgba(14,14,16,.18)}
   .flash::after{content:"";position:absolute;inset:-10px;border:2px solid var(--rose);border-radius:18px;transform:rotate(-3deg);z-index:-1}
-  .flash-tag{position:absolute;top:-14px;left:-14px;z-index:2;background:var(--rose);color:#fff;font-family:var(--sans);font-weight:500;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem .8rem;border-radius:999px;transform:rotate(-2deg)}
+  .herox{overflow:hidden}
+  .flash::before{content:"";position:absolute;top:14%;left:16%;right:-8%;bottom:-8%;z-index:-2;background:var(--lime);border-radius:3px;transform:rotate(-6deg)}
+  @media(max-width:900px){.flash::before{left:9%;right:-9%}.flash-ribbon{font-size:.64rem;left:-9%;right:-9%}}
+  .flash-tag{position:absolute;top:-14px;left:-14px;z-index:2;background:var(--lime);color:#0A0A0C;font-family:var(--sans);font-weight:500;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem .8rem;border-radius:999px;transform:rotate(-2deg)}
   /* botones fucsia: texto oscuro ok en claro; suavizo sombras */
   .btn,.cbtn,.hero-cta,.close .cta,.send-btn,.thanks-cta{box-shadow:none!important}
 
@@ -501,17 +505,132 @@
   @keyframes typeCierre{to{width:100%}}
   @media(prefers-reduced-motion:reduce){.close-type .tl{width:100%!important;animation:none}}
 
+
+  /* ---------- LOGO HEY! CHAR ---------- */
+  .brand{gap:.75rem;align-items:center}
+  .brand .dot{display:none}
+  .brand-mark{height:clamp(42px,4.8vw,64px);width:auto;display:block;transition:height .35s}
+  .brand-sub{font-family:var(--ui);font-weight:500;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);padding-left:.8rem;border-left:1px solid var(--line-strong);line-height:1.4;white-space:nowrap}
+  @media(max-width:1180px){.brand-sub{display:none}}
+  @media(max-width:860px){.brand-sub{display:none}}
+  .foot-mark{height:clamp(60px,9vw,120px);width:auto;display:block;margin-bottom:clamp(1.6rem,4vw,2.6rem)}
+
+  /* ---------- COLLAGE DUOTONO ---------- */
+  .collage-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(1.1rem,2.6vw,2.2rem);margin-top:clamp(2.6rem,5vw,4.2rem)}
+  .cfig{margin:0;min-width:0}
+  .cfig img{width:100%;max-width:100%;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:3px}
+  .cfig figcaption{margin-top:.85rem;padding-left:.8rem;border-left:2px solid var(--rose);font-size:.82rem;line-height:1.5;color:var(--ink-dim);max-width:40ch}
+  .cfig figcaption b{color:var(--ink);font-weight:600}
+
+  /* ---------- NOSOTRAS ---------- */
+  .founders{border-top:1px solid var(--line);background:var(--bg-2)}
+  .founders-lead{color:var(--ink-dim);font-size:1.05rem;max-width:54ch;line-height:1.55;margin-top:1.1rem}
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(1.4rem,3.4vw,2.8rem);margin-top:clamp(2.6rem,6vw,4.4rem)}
+  .fcard{perspective:1800px;min-width:0;display:grid}
+  .finner{display:grid;align-items:stretch;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.3,.85,.25,1)}
+  .fcard.flipped .finner{transform:rotateY(180deg)}
+  .fface{grid-area:1/1;min-width:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:flex-start;gap:1rem;padding:clamp(1.6rem,3.2vw,2.5rem);border:1px solid var(--line);border-radius:3px;background:var(--bg-1)}
+  .fback{transform:rotateY(180deg);background:var(--ink);border-color:var(--ink);color:var(--bg-1);justify-content:space-between}
+  .fphoto{position:relative;width:clamp(132px,19vw,176px);aspect-ratio:1;flex:none}
+  .fphoto img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+  .fphoto::after{content:"";position:absolute;inset:-11px;border-radius:50%;border:3px solid var(--ring);border-top-color:transparent;border-right-color:transparent;transform:rotate(-28deg);transition:transform .9s cubic-bezier(.3,.85,.25,1)}
+  .fcard:hover .fphoto::after{transform:rotate(152deg)}
+  .fname{font-family:var(--sans);font-weight:600;font-size:clamp(1.35rem,2.4vw,1.75rem);letter-spacing:-.025em;line-height:1.05}
+  .frole{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ring);font-weight:600;margin-top:.5rem}
+  .fquote{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,1.8vw,1.3rem);line-height:1.35;color:var(--ink);max-width:24ch}
+  .fback .fquote{color:var(--bg-1)}
+  .fbio{font-size:.95rem;line-height:1.6;color:rgba(233,229,222,.82);max-width:42ch}
+  .fkicker{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);font-weight:600}
+  .fbtn{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:.6rem;background:none;border:1px solid var(--line-strong);border-radius:999px;color:var(--ink);font-family:var(--ui);font-weight:600;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;padding:.72rem 1.3rem;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+  .fbtn:hover{background:var(--ink);border-color:var(--ink);color:var(--bg-1)}
+  .fback .fbtn{border-color:rgba(233,229,222,.32);color:var(--bg-1)}
+  .fback .fbtn:hover{background:var(--rose);border-color:var(--rose);color:#0A0A0C}
+  .fbtn .ar{transition:transform .3s}
+  .fbtn:hover .ar{transform:translateX(3px)}
+  @media(prefers-reduced-motion:reduce){
+    .finner{transition:none}
+    .fphoto::after{transition:none}
+  }
+
+  /* ---------- BANDA DISRUPTIVA (collage a todo color sobre negro) ---------- */
+  .loud{background:var(--ink);color:var(--bg);overflow:hidden}
+  .loud .sec-label{color:rgba(233,229,222,.62)}
+  .loud .sec-label .rule{background:var(--rose)}
+  .loud-title{font-family:var(--sans);font-weight:700;font-size:clamp(1.85rem,4.3vw,3.4rem);letter-spacing:-.03em;line-height:1.05;max-width:20ch;text-wrap:balance}
+  .loud-title em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--rose)}
+  .loud-sub{color:rgba(233,229,222,.66);font-size:1.02rem;line-height:1.55;max-width:50ch;margin-top:1.1rem}
+  .loud-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:clamp(1rem,2.4vw,1.9rem);margin-top:clamp(2.4rem,5.5vw,4rem)}
+  .lf{margin:0;min-width:0;transform:rotate(var(--r,0deg));transition:transform .55s cubic-bezier(.3,.85,.25,1)}
+  .lf:hover,.lf:focus-within{transform:rotate(0deg) scale(1.035)}
+  .lf img{width:100%;max-width:100%;aspect-ratio:1;object-fit:cover;display:block;border-radius:2px}
+  .lf figcaption{margin-top:.9rem;font-size:.69rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--rose)}
+  .lf figcaption span{display:block;margin-top:.4rem;letter-spacing:0;text-transform:none;font-weight:400;font-size:.84rem;color:rgba(233,229,222,.6);line-height:1.45}
+  @media(prefers-reduced-motion:reduce){.lf{transform:none}.lf:hover{transform:scale(1.02)}}
+
+  /* ---------- NOSOTRAS: collage de fondo ---------- */
+  .founders{position:relative;overflow:hidden}
+  .founders .wrap{position:relative;z-index:2}
+  .founders::before{content:"";position:absolute;inset:0;z-index:0;background-image:url(img/bg-nosotras.jpg);background-size:cover;background-position:center 40%;opacity:.62}
+  .founders::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(237,231,221,.6),rgba(237,231,221,.86))}
+
+  /* ---------- la banda alterna fucsia y lima ---------- */
+  .lf:nth-child(2n) figcaption{color:var(--lime)}
+  .loud-grid{counter-reset:none}
+
+  /* ---------- LIMA: resaltador, chips y acentos sobre negro ---------- */
+  .herox-title em.hl{background-image:linear-gradient(transparent 56%,var(--lime) 56%,var(--lime) 93%,transparent 93%);padding:0 .06em}
+
+  /* fase actual del roadmap: chip lima en vez de texto lima (no contrasta sobre el gris) */
+  .phase.now{border-color:var(--ink);border-width:1.5px}
+  .phase.now .ph{display:inline-block;background:var(--lime);color:#0A0A0C;font-weight:600;padding:.3rem .7rem;border-radius:999px;margin-bottom:.9rem}
+
+  /* sobre negro el lima si funciona como color de texto */
+  .bigfoot-title span{color:var(--lime)}
+  .bigfoot-cols a:hover{color:var(--lime)}
+  .fkicker{color:var(--lime)}
+  .fback .fbtn:hover{background:var(--lime);border-color:var(--lime);color:#0A0A0C}
+  .loud .sec-label .rule{background:var(--lime)}
+
+  /* ---------- faja cruzada sobre el video ---------- */
+  .flash-ribbon{position:absolute;bottom:15%;left:-9%;right:-9%;z-index:3;display:block;overflow:hidden;white-space:nowrap;text-overflow:clip;background:var(--ink);color:var(--lime);font-family:var(--sans);font-weight:600;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;text-align:center;padding:.6rem .5rem;transform:rotate(-5deg);box-shadow:0 12px 30px rgba(14,14,16,.3)}
+
+  /* el CTA principal pasa a lima */
+  .close .cta{background:var(--lime);box-shadow:0 12px 42px rgba(198,242,78,.3)}
+  .close .cta:hover{background:#d4fa6b;box-shadow:0 18px 54px rgba(198,242,78,.42)}
+  .close .cta svg path{stroke:#0A0A0C}
+
+  /* bug previo: una regla posterior reponia 2 columnas y anulaba la media query del celular */
+  /* al costado del slogan en escritorio, tablet y panel lateral */
+  @media(min-width:641px){
+    .herox{grid-template-columns:1.25fr .75fr!important}
+    .flash{max-width:min(400px,38vw)}
+  }
+  /* solo en telefono se apila: a ese ancho el video quedaba de 46px */
+  @media(max-width:640px){
+    .herox{grid-template-columns:1fr!important;gap:2.4rem}
+    .flash{max-width:330px;margin-top:1rem}
+    .flash-ribbon{bottom:13%;font-size:.6rem;letter-spacing:.16em}
+  }
+  @media(min-width:641px) and (max-width:1000px){
+    .flash-ribbon{font-size:.58rem;letter-spacing:.12em;padding:.45rem .3rem}
+  }
+  nav.scrolled .brand-mark{height:clamp(34px,3.6vw,46px)}
+  @media(max-width:520px){.brand-mark{height:38px}}
 </style>
 </head>
 <body>
 
 <nav id="nav">
-  <a class="brand" href="#top"><span class="dot"></span>HR Influence Strategy</a>
+  <a class="brand" href="#top" aria-label="Hey! Char — HR Influence Strategy">
+    <img class="brand-mark" src="img/logo-mark-ink.png" alt="Hey! Char">
+    <span class="brand-sub">HR Influence Strategy</span>
+  </a>
   <div class="navlinks">
     <a href="#top">Inicio</a>
     <a href="#servicios">Servicios</a>
     <a href="#brief">Cómo funciona</a>
     <a href="#medimos">Qué medimos</a>
+    <a href="#nosotras">Nosotras</a>
     <a href="/blog.html">Nuestro blog</a>
   </div>
   <a href="#contacto" class="nav-cta">Contacto</a>
@@ -524,12 +643,13 @@
     <p class="eyebrow2"><span class="rule2"></span></p>
     <h1 class="herox-title">
       <span class="l">Influence is our <em>method</em>.</span>
-      <span class="l">Trust is our <em>metric</em>.</span>
+      <span class="l">Trust is our <em class="hl">metric</em>.</span>
     </h1>
     <a href="#empezar" class="herox-cta">Elegí tu punto de partida →</a>
   </div>
   <div class="flash">
     <span class="flash-tag">● En vivo</span>
+    <span class="flash-ribbon" aria-hidden="true">Sin guión corporativo &nbsp;◆&nbsp; Sin guión corporativo &nbsp;◆&nbsp; Sin guión corporativo</span>
     <video autoplay muted loop playsinline><source src="video/loop.mp4" type="video/mp4"></video>
   </div>
 </header>
@@ -549,6 +669,21 @@
 </section>
 
 <!-- PUNTO DE PARTIDA -->
+<!-- BANDA DISRUPTIVA -->
+<section class="loud">
+  <div class="wrap">
+    <p class="sec-label reveal-up"><span class="rule"></span>La conversaci&oacute;n que ya est&aacute; pasando</p>
+    <h2 class="loud-title reveal-up">El talento joven no te ignora. Le est&aacute; prestando atenci&oacute;n a <em>otra gente</em>.</h2>
+    <p class="loud-sub reveal-up">Esas voces ya tienen la confianza que tu comunicaci&oacute;n interna intenta construir desde cero cada vez. Nosotras no competimos con ellas: trabajamos con ellas.</p>
+    <div class="loud-grid reveal-up">
+      <figure class="lf" style="--r:-2.4deg"><img src="img/c-fan.jpg" alt="Collage: una chica joven mirando su celular sobre un fondo rosa" loading="lazy"><figcaption>D&oacute;nde miran<span>El feed, no el portal de empleo.</span></figcaption></figure>
+      <figure class="lf" style="--r:1.9deg"><img src="img/c-voces.jpg" alt="Collage: tres bocas hablando rodeadas de globos de di&aacute;logo de colores" loading="lazy"><figcaption>A qui&eacute;n le creen<span>A personas con nombre, no a cuentas corporativas.</span></figcaption></figure>
+      <figure class="lf" style="--r:-1.3deg"><img src="img/c-alcance.jpg" alt="Collage: un meg&aacute;fono saliendo de la pantalla de un celular" loading="lazy"><figcaption>Qu&eacute; los alcanza<span>Formato nativo, c&oacute;digos propios del nicho.</span></figcaption></figure>
+      <figure class="lf" style="--r:2.3deg"><img src="img/c-metodo.jpg" alt="Collage: manos conectando elementos alrededor de una laptop" loading="lazy"><figcaption>C&oacute;mo se arma<span>Curadur&iacute;a, gui&oacute;n y medici&oacute;n en lenguaje de RRHH.</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <section class="start" id="empezar">
   <div class="wrap">
     <p class="sec-label reveal-up"><span class="rule"></span>¿Empezamos? · Elegí desde dónde partís</p>
@@ -708,7 +843,18 @@
       <div class="eqop">+</div>
       <div class="eqbox"><b>Consultoras de marca empleadora</b><p>Entienden a RRHH, pero no trabajan con creadores ni en formatos nativos.</p></div>
       <div class="eqop">=</div>
-      <div class="eqbox win"><b>HR Influence Strategy</b><p>Integra ambos mundos y mide sus resultados en el lenguaje del área.</p></div>
+      <div class="eqbox win"><b>Hey! Char</b><p>Integra ambos mundos y mide sus resultados en el lenguaje del área.</p></div>
+    </div>
+
+    <div class="collage-pair reveal-up">
+      <figure class="cfig">
+        <img src="img/blah-duo.jpg" alt="Collage: un orador frente a micr&oacute;fonos y orejas, rodeado de carteles que dicen blah" loading="lazy">
+        <figcaption><b>Lo que pasa hoy.</b> La empresa habla por el canal correcto y aun as&iacute; el mensaje no llega.</figcaption>
+      </figure>
+      <figure class="cfig">
+        <img src="img/news-duo.jpg" alt="Collage: una mano mueve con hilos las letras recortadas de la palabra NEWS" loading="lazy">
+        <figcaption><b>Lo que cambia.</b> El mensaje no lo sostiene el canal: lo sostiene qui&eacute;n lo dice.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -787,6 +933,60 @@
   </div>
 </section>
 
+
+<!-- NOSOTRAS -->
+<section class="founders" id="nosotras">
+  <div class="wrap">
+    <p class="sec-label reveal-up"><span class="rule"></span>Nosotras</p>
+    <h2 class="sec-title reveal-up">Detrás de HRIS hay dos personas, no un <em>logo</em>.</h2>
+    <p class="founders-lead reveal-up">Es la misma tesis que le proponemos a cada cliente: la confianza no la construye una marca, la construyen personas con nombre y con cara. Empezamos por casa.</p>
+
+    <div class="fgrid">
+      <article class="fcard reveal-up" style="--ring:var(--ink)">
+        <div class="finner">
+          <div class="fface">
+            <div class="fphoto"><img src="img/f-dahi.jpg" alt="Collage: un micrófono de estudio del que sale una onda de sonido" loading="lazy"></div>
+            <div>
+              <h3 class="fname">Dahi Nardi</h3>
+              <p class="frole">Co-founder</p>
+            </div>
+            <p class="fquote">&ldquo;Me mueve lo genuino.&rdquo;</p>
+            <button type="button" class="fbtn" data-flip>Mi otro yo <span class="ar">&rarr;</span></button>
+          </div>
+          <div class="fface fback">
+            <div style="display:flex;flex-direction:column;gap:.9rem">
+              <p class="fkicker">Mi otro yo</p>
+              <p class="fbio">Soy de esas personas que sienten mucho, piensan mucho y van con todo. Sensible, curiosa, intensa y profundamente humana. Me mueve lo genuino, aprender, conectar profundo con otros y ponerle alma a cada cosa que hago.</p>
+            </div>
+            <button type="button" class="fbtn" data-flip><span class="ar">&larr;</span> Volver</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="fcard reveal-up" style="--ring:var(--rose)">
+        <div class="finner">
+          <div class="fface">
+            <div class="fphoto"><img src="img/f-sol.jpg" alt="Collage: un tubo de tel&eacute;fono del que brotan flores" loading="lazy"></div>
+            <div>
+              <h3 class="fname">Sol Abraham</h3>
+              <p class="frole">Co-founder</p>
+            </div>
+            <p class="fquote">&ldquo;Hacer m&aacute;gico lo cotidiano.&rdquo;</p>
+            <button type="button" class="fbtn" data-flip>Mi otro yo <span class="ar">&rarr;</span></button>
+          </div>
+          <div class="fface fback">
+            <div style="display:flex;flex-direction:column;gap:.9rem">
+              <p class="fkicker">Mi otro yo</p>
+              <p class="fbio">Siempre dispuesta a crear contextos en los que las personas puedan brillar, crear, sentirse parte y divertirse. Busco que lo genuino prevalezca para conectar con mi prop&oacute;sito de encender luz donde parece no haberla, conectando la liviandad con lo profundo.</p>
+            </div>
+            <button type="button" class="fbtn" data-flip><span class="ar">&larr;</span> Volver</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- CIERRE (mantiene el mail) -->
 <section class="close" id="cierre">
   <div class="wrap">
@@ -841,16 +1041,29 @@
 </section>
 
 <footer class="bigfoot">
+  <img class="foot-mark" src="img/logo-paper.png" alt="Hey! Char — HR Influence Strategy" loading="lazy">
   <h2 class="bigfoot-title">Let's get <span>HRIS</span></h2>
   <div class="bigfoot-cols">
     <div class="bfcol"><span class="bfk">Nuevo negocio</span><a href="#contacto">Escribinos →</a></div>
     <div class="bfcol"><span class="bfk">Mail</span><a href="mailto:hola@hrinfluencestrategy.com.ar">hola@hrinfluencestrategy.com.ar</a></div>
     <div class="bfcol"><span class="bfk">Explorar</span><a href="#servicios">Servicios</a><a href="/blog.html">Nuestro blog</a><a href="#brief">Cómo funciona</a></div>
   </div>
-  <p class="bigfoot-legal">HR Influence Strategy — Traducimos tu empresa al lenguaje de las generaciones que van a trabajar en ella.</p>
+  <p class="bigfoot-legal">Hey! Char · HR Influence Strategy — Traducimos tu empresa al lenguaje de las generaciones que van a trabajar en ella.</p>
 </footer>
 
 <script>
+
+  /* flip tarjetas de fundadoras */
+  document.querySelectorAll('[data-flip]').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const card=b.closest('.fcard');
+      const open=card.classList.toggle('flipped');
+      card.querySelectorAll('[data-flip]').forEach(x=>x.setAttribute('aria-expanded',open));
+      if(typeof track==='function') track('founder_flip',{founder:card.querySelector('.fname').textContent,open:open});
+    });
+    b.setAttribute('aria-expanded','false');
+  });
+
   /* nav */
   const nav=document.getElementById('nav');
   const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>24);
