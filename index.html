@@ -159,10 +159,15 @@
 
   /* ---------- BRIEF BUILDER ---------- */
   .brief{border-top:1px solid var(--line);background:linear-gradient(180deg,var(--bg-1),var(--bg))}
-  .brief-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(2rem,4vw,4rem);align-items:start;margin-top:clamp(2rem,4vw,3rem)}
-  @media(max-width:900px){.brief-grid{grid-template-columns:1fr}}
-  .brief-copy p{color:var(--ink-dim);font-size:1.02rem;line-height:1.6;margin-top:1.2rem;max-width:44ch}
-  .brief-copy .pill{display:inline-block;margin-top:1.6rem;font-size:.78rem;letter-spacing:.02em;color:var(--rose);border:1px solid var(--rose-soft);border-radius:999px;padding:.4rem .9rem}
+  .brief-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,3.4rem);align-items:stretch;margin-top:clamp(2rem,4vw,3rem)}
+  @media(max-width:900px){.brief-grid{grid-template-columns:1fr;gap:2.8rem}}
+  /* encabezado de cada columna: 01 mira / 02 proba */
+  .colhead{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;font-family:var(--ui);font-weight:600;font-size:.82rem;letter-spacing:.02em;color:var(--ink);margin-bottom:1rem}
+  .colhead .n{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--bg-1);font-size:.72rem;flex:none}
+  .colhead .pill{font-size:.72rem;letter-spacing:.02em;color:var(--rose);border:1px solid var(--rose-soft);border-radius:999px;padding:.3rem .75rem;font-weight:500}
+  .video-cap{margin-top:.9rem;font-size:.86rem;line-height:1.5;color:var(--ink-faint)}
+  /* el video acompana mientras se lee el brief generado */
+  @media(min-width:901px) and (min-height:620px){.brief-demo-in{position:sticky;top:92px}}
   .form{background:var(--bg-2);border:1px solid var(--line);border-radius:20px;padding:clamp(1.4rem,2.4vw,2rem)}
   .field{margin-bottom:1.1rem}
   .field label{display:block;font-size:.82rem;color:var(--ink-dim);margin-bottom:.5rem;letter-spacing:.01em}
@@ -176,7 +181,7 @@
   .btn:hover{background:#f47f8f}
   .btn:active{transform:scale(.99)}
   /* video del MVP (placeholder) */
-  .video-wrap{margin:clamp(2rem,4vw,3rem) 0 0;border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+  .video-wrap{margin:0;border-radius:20px;overflow:hidden;border:1px solid var(--line)}
   .demo-video{display:block;width:100%;aspect-ratio:16/9;background:#0E0E10;border:none;outline:none}
   .video-ph{position:relative;width:100%;aspect-ratio:16/9;border:none;cursor:pointer;display:grid;place-items:center;background:#000;overflow:hidden}
   .video-ph .ythumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -445,7 +450,6 @@
   .svc-img{object-position:50% 28%!important}
   .svc-grid{align-items:stretch}
   /* P2: post IG en el hueco del brief */
-  .brief-igpost{display:block;margin-top:2rem;width:100%;max-width:300px;border-radius:14px;box-shadow:0 20px 50px rgba(14,14,16,.14)}
   /* P3: cierre con imagen esfumada atras del texto (mas compacto) */
   .close{position:relative;overflow:hidden;padding:clamp(4rem,7vw,7rem) var(--pad)!important}
   .close .wrap{position:relative;z-index:2}
@@ -465,7 +469,6 @@
 
 
   /* P1: post IG mas ancho, centrado y nitido */
-  .brief-igpost{display:block!important;margin:2rem auto 0!important;width:100%!important;max-width:360px!important;border-radius:14px}
   /* P2: efecto especial en el abono destacado (glow + leve escala + badge que late) */
   .tier.feat{transform:scale(1.045);box-shadow:0 22px 60px rgba(236,106,124,.22);animation:featglow 3.2s ease-in-out infinite;z-index:2}
   @keyframes featglow{0%,100%{box-shadow:0 22px 60px rgba(236,106,124,.20)}50%{box-shadow:0 26px 78px rgba(236,106,124,.42)}}
@@ -473,7 +476,9 @@
   @keyframes badgepulse{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
   @media(max-width:900px){.tier.feat{transform:none}}
   /* P3: mas vida — auras fucsia suaves de fondo en secciones clave */
-  .brief,.ladder{position:relative;overflow:hidden}
+  .ladder{position:relative;overflow:hidden}
+  /* clip solo en X: deja vivo el sticky del video sin soltar el aura */
+  .brief{position:relative;overflow-x:clip;overflow-y:visible}
   .brief::before,.ladder::before{content:"";position:absolute;z-index:0;width:min(60vw,640px);aspect-ratio:1;border-radius:50%;
     background:radial-gradient(circle,rgba(236,106,124,.16),transparent 62%);filter:blur(10px);pointer-events:none;
     animation:auraFloat 14s ease-in-out infinite}
@@ -493,7 +498,6 @@
   .card{transition:transform .35s,border-color .35s,box-shadow .35s}
   .card:hover{box-shadow:0 22px 60px rgba(236,106,124,.18);border-color:var(--rose)}
   /* P4: post IG contenido y centrado */
-  .brief-igpost{max-width:330px!important;margin:2rem auto 0!important}
 
 
 
@@ -674,7 +678,7 @@
 <section class="loud">
   <div class="wrap">
     <p class="sec-label reveal-up"><span class="rule"></span>La conversaci&oacute;n que ya est&aacute; pasando</p>
-    <h2 class="loud-title reveal-up">El talento joven no te ignora. Le est&aacute; prestando atenci&oacute;n a <em>otra gente</em>.</h2>
+    <h2 class="loud-title reveal-up">El talento joven no te ignora. Le cree a <em>otras voces</em>.</h2>
     <p class="loud-sub reveal-up">Esas voces ya tienen la confianza que tu comunicaci&oacute;n interna intenta construir desde cero cada vez. Nosotras no competimos con ellas: trabajamos con ellas.</p>
     <div class="loud-grid reveal-up">
       <figure class="lf" style="--r:-2.4deg"><img src="img/c-fan.jpg" alt="Collage: una chica joven mirando su celular sobre un fondo rosa" loading="lazy"><figcaption>D&oacute;nde miran<span>El feed, no el portal de empleo.</span></figcaption></figure>
@@ -744,24 +748,26 @@
     <p class="sec-label reveal-up"><span class="rule"></span>Atracción con Influencia · Demo con IA</p>
     <h2 class="sec-title reveal-up">Cargá tu brief y encontrá tu <em>match</em>.</h2>
 
-    <!-- ▶ VIDEO DEL MVP — propio, servido desde el repo (video/demo.mp4).
-         Para cambiarlo, reemplazá ese archivo y la portada img/demo-poster.jpg. -->
-    <div class="video-wrap reveal-up">
-      <video class="demo-video" id="demoVideo" controls preload="metadata" playsinline
-             poster="img/demo-poster.jpg" aria-label="Demo del Brief Builder">
-        <source src="video/demo.mp4" type="video/mp4">
-        Tu navegador no puede reproducir este video.
-      </video>
-    </div>
-
     <div class="brief-grid">
-      <div class="brief-copy reveal-up">
-        <p>Contanos a quién buscás y qué querés comunicar. Nuestro asistente traduce tu input a un brief estructurado y te propone, de nuestra red de creadores de nicho, el perfil que mejor comunica esa búsqueda con ideas de contenido e indicadores en lenguaje de talento.</p>
-        <span class="pill">Demo interactiva</span>
-        <img class="brief-igpost" src="img/post-ig.jpg" alt="Ejemplo de post">
+      <!-- columna izquierda: el video (propio, video/demo.mp4).
+           Para cambiarlo, reemplazá ese archivo y la portada img/demo-poster.jpg. -->
+      <div class="brief-demo reveal-up">
+       <div class="brief-demo-in">
+        <p class="colhead"><span class="n">01</span>Mirá cómo funciona</p>
+        <div class="video-wrap">
+          <video class="demo-video" id="demoVideo" controls preload="metadata" playsinline
+                 poster="img/demo-poster.jpg" aria-label="Demo del Brief Builder">
+            <source src="video/demo.mp4" type="video/mp4">
+            Tu navegador no puede reproducir este video.
+          </video>
+        </div>
+        <p class="video-cap">50 segundos, de la búsqueda al brief.</p>
+       </div>
       </div>
 
-      <div class="reveal-up">
+      <!-- columna derecha: el formulario en vivo + el panel de resultado -->
+      <div class="brief-live reveal-up">
+        <p class="colhead"><span class="n">02</span>Probalo vos<span class="pill">Demo interactiva</span></p>
         <div class="form" id="briefForm">
           <div class="field"><label>Rol a cubrir</label><input type="text" id="rol" placeholder="Ej. Encargado de sucursal — Grido"></div>
           <div class="field"><label>Seniority objetivo</label>
