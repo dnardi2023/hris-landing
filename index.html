@@ -177,6 +177,7 @@
   .btn:active{transform:scale(.99)}
   /* video del MVP (placeholder) */
   .video-wrap{margin:clamp(2rem,4vw,3rem) 0 0;border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+  .demo-video{display:block;width:100%;aspect-ratio:16/9;background:#0E0E10;border:none;outline:none}
   .video-ph{position:relative;width:100%;aspect-ratio:16/9;border:none;cursor:pointer;display:grid;place-items:center;background:#000;overflow:hidden}
   .video-ph .ythumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .video-ph::before{content:"";position:absolute;inset:0;background:rgba(10,10,12,.38);transition:background .3s;z-index:1}
@@ -743,14 +744,14 @@
     <p class="sec-label reveal-up"><span class="rule"></span>Atracción con Influencia · Demo con IA</p>
     <h2 class="sec-title reveal-up">Cargá tu brief y encontrá tu <em>match</em>.</h2>
 
-    <!-- ▶ VIDEO DEL MVP — embebido de YouTube (ID: 4kIUCTLbSas). La portada usa el thumbnail
-         de YouTube; al hacer clic se carga el reproductor. Para cambiar el video, reemplazá
-         el ID en el <img class="ythumb"> y en el iframe del script (buscá 4kIUCTLbSas). -->
+    <!-- ▶ VIDEO DEL MVP — propio, servido desde el repo (video/demo.mp4).
+         Para cambiarlo, reemplazá ese archivo y la portada img/demo-poster.jpg. -->
     <div class="video-wrap reveal-up">
-      <button class="video-ph" id="videoPh" aria-label="Reproducir el video del MVP">
-        <img class="ythumb" src="https://img.youtube.com/vi/4kIUCTLbSas/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/4kIUCTLbSas/hqdefault.jpg'" alt="Portada del video del MVP">
-        <span class="play"><svg width="26" height="26" viewBox="0 0 24 24" fill="#0A0A0C"><path d="M8 5v14l11-7z"/></svg></span>
-      </button>
+      <video class="demo-video" id="demoVideo" controls preload="metadata" playsinline
+             poster="img/demo-poster.jpg" aria-label="Demo del Brief Builder">
+        <source src="video/demo.mp4" type="video/mp4">
+        Tu navegador no puede reproducir este video.
+      </video>
     </div>
 
     <div class="brief-grid">
@@ -1234,12 +1235,8 @@
   }
   document.getElementById('agendar').addEventListener('click',e=>{e.preventDefault();goToContact('cierre');});
   var tcta=document.getElementById('thanksCta'); if(tcta) tcta.addEventListener('click',e=>{e.preventDefault();goToContact('brief');});
-  var vph=document.getElementById('videoPh');
-  if(vph) vph.addEventListener('click',()=>{
-    track('video_mvp_play',{});
-    var wrap=vph.parentElement;
-    wrap.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/4kIUCTLbSas?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="HR Influence Strategy — MVP" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="width:100%;aspect-ratio:16/9;display:block;border:0"></iframe>';
-  });
+  var dv=document.getElementById('demoVideo');
+  if(dv) dv.addEventListener('play',function(){ track('video_mvp_play',{}); },{once:true});
 
   /* ===== CONTACTO -> Google Sheet (Apps Script) + redirect a gracias.html ===== */
   (function(){
