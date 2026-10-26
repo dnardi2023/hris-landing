@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piloto · Hey! Char</title>
+<meta name="description" content="Acceso al piloto del Brief Builder de Hey! Char.">
+<meta name="robots" content="noindex">
+
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta name="theme-color" content="#0E0E10">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  @font-face{font-family:'Whyte Inktrap';font-weight:400;src:url(fonts/WhyteInktrap-Regular.woff2) format('woff2');font-display:swap}
+  @font-face{font-family:'Whyte Inktrap';font-weight:600;src:url(fonts/WhyteInktrap-Heavy.woff2) format('woff2');font-display:swap}
+  @font-face{font-family:'Whyte Inktrap';font-weight:900;src:url(fonts/WhyteInktrap-Heavy.woff2) format('woff2');font-display:swap}
+
+  :root{
+    --bg:#E9E5DE; --bg-1:#F2EFE9; --bg-2:#EDE7DD;
+    --ink:#0E0E10; --ink-dim:#6B6459; --ink-faint:#9C9488;
+    --line:rgba(14,14,16,.12); --line-strong:rgba(14,14,16,.24);
+    --rose:#EC6A7C; --rose-soft:rgba(236,106,124,.14);
+    --lime:#C6F24E; --lime-soft:rgba(198,242,78,.16);
+    --sans:'Whyte Inktrap',system-ui,sans-serif;
+    --ui:'Inter',system-ui,sans-serif;
+    --pad:clamp(1.25rem,5vw,4.5rem);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);min-height:100%}
+  body{color:var(--ink);font-family:var(--ui);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit}
+
+  /* ---------- estructura ---------- */
+  .wrap{max-width:720px;margin:0 auto;padding:0 var(--pad)}
+  header{padding:clamp(1.4rem,3vw,2rem) var(--pad);display:flex;align-items:center;
+         justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line)}
+  .marca{height:clamp(30px,4.4vw,40px);width:auto;display:block}
+  .salir{font-family:var(--ui);font-size:.8rem;color:var(--ink-dim);background:none;
+         border:1px solid var(--line-strong);border-radius:999px;padding:.6rem 1.1rem;
+         cursor:pointer;min-height:44px;display:inline-flex;align-items:center}
+  .salir:hover{background:var(--ink);color:var(--bg-1);border-color:var(--ink)}
+
+  main{padding:clamp(2.6rem,7vw,5rem) 0 clamp(4rem,10vw,7rem)}
+  .eyebrow{display:flex;align-items:center;gap:.8rem;font-size:.72rem;letter-spacing:.2em;
+           text-transform:uppercase;color:var(--ink-dim);margin-bottom:1.4rem}
+  .eyebrow .rule{width:34px;height:1px;background:var(--line-strong)}
+  h1{font-family:var(--sans);font-weight:600;font-size:clamp(1.9rem,6vw,3rem);
+     line-height:1.03;letter-spacing:-.03em;max-width:16ch}
+  h1 em{font-style:normal;background:var(--lime);padding:0 .1em}
+  .lead{margin-top:1.2rem;color:var(--ink-dim);font-size:1.02rem;line-height:1.6;max-width:50ch}
+
+  .caja{margin-top:clamp(2rem,5vw,3rem);background:var(--bg-1);border:1px solid var(--line);
+        border-radius:20px;padding:clamp(1.5rem,4vw,2.4rem)}
+
+  /* ---------- botones ---------- */
+  .btn{width:100%;min-height:56px;border:none;border-radius:999px;cursor:pointer;
+       font-family:var(--ui);font-weight:600;font-size:1rem;display:inline-flex;
+       align-items:center;justify-content:center;gap:.8rem;transition:transform .15s,filter .2s}
+  .btn:active{transform:scale(.985)}
+  .btn[disabled]{opacity:.55;cursor:default}
+  .btn-google{background:var(--ink);color:var(--bg-1)}
+  .btn-google:hover:not([disabled]){filter:brightness(1.25)}
+  .btn-lima{background:var(--lime);color:var(--ink)}
+  .btn-lima:hover:not([disabled]){filter:brightness(1.06)}
+  .g-logo{width:20px;height:20px;flex:none}
+
+  label{display:block;font-size:.8rem;letter-spacing:.02em;color:var(--ink-dim);margin-bottom:.5rem}
+  input[type=text]{width:100%;min-height:56px;background:var(--bg-2);border:1px solid var(--line-strong);
+    border-radius:12px;padding:0 1rem;font-family:var(--ui);font-size:1.05rem;color:var(--ink);
+    letter-spacing:.08em;text-transform:uppercase}
+  input[type=text]:focus{outline:2px solid var(--ink);outline-offset:1px}
+  input[type=text]::placeholder{letter-spacing:normal;text-transform:none;color:var(--ink-faint)}
+
+  .quien{display:flex;align-items:center;gap:.9rem;margin-bottom:1.6rem;
+         padding-bottom:1.4rem;border-bottom:1px solid var(--line)}
+  .quien img{width:44px;height:44px;border-radius:50%;flex:none;object-fit:cover;background:var(--bg-2)}
+  .quien b{display:block;font-family:var(--sans);font-weight:600;font-size:1rem;letter-spacing:-.01em}
+  .quien span{display:block;font-size:.84rem;color:var(--ink-dim);word-break:break-all}
+
+  .aviso{margin-top:1rem;font-size:.86rem;line-height:1.5;padding:.9rem 1rem;border-radius:10px}
+  .aviso.mal{background:var(--rose-soft);color:#8d2d3d}
+  .aviso.bien{background:var(--lime-soft);color:#3f5a0b}
+  .legal{margin-top:1.4rem;font-size:.78rem;line-height:1.55;color:var(--ink-faint)}
+  .legal a{text-decoration:underline}
+
+  .pasos{list-style:none;margin-top:1.6rem;display:flex;flex-direction:column;gap:.9rem}
+  .pasos li{display:flex;gap:.8rem;align-items:flex-start;font-size:.95rem;
+            line-height:1.5;color:var(--ink-dim)}
+  .pasos i{flex:none;width:24px;height:24px;border-radius:50%;background:var(--ink);
+           color:var(--bg-1);font-style:normal;font-size:.72rem;font-weight:700;
+           display:grid;place-items:center;margin-top:.1rem}
+
+  .oculto{display:none!important}
+  .cargando{display:grid;place-items:center;min-height:40vh;color:var(--ink-faint);font-size:.9rem}
+
+  footer{border-top:1px solid var(--line);padding:2rem var(--pad);text-align:center;
+         font-size:.8rem;color:var(--ink-faint)}
+
+  @media(max-width:420px){
+    .quien span{font-size:.78rem}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" aria-label="Hey! Char — volver al inicio">
+    <img class="marca" src="img/logo-mark-ink.png" alt="Hey! Char">
+  </a>
+  <button class="salir oculto" id="btnSalir" type="button">Cerrar sesión</button>
+</header>
+
+<main>
+  <!-- ======== mientras resuelve si hay sesión ======== -->
+  <div class="cargando" id="vCargando">Un segundo…</div>
+
+  <!-- ======== 1. sin sesión ======== -->
+  <section class="wrap oculto" id="vEntrar">
+    <p class="eyebrow"><span class="rule"></span>Piloto cerrado</p>
+    <h1>Entrá con tu <em>golden ticket</em>.</h1>
+    <p class="lead">El Brief Builder completo está abierto solo para las empresas del piloto. Si tenés un código, son dos pasos.</p>
+
+    <div class="caja">
+      <ol class="pasos">
+        <li><i>1</i> Entrás con tu cuenta de Google, para saber quién sos.</li>
+        <li><i>2</i> Cargás el código que te dimos.</li>
+      </ol>
+      <div style="margin-top:1.6rem">
+        <button class="btn btn-google" id="btnGoogle" type="button">
+          <svg class="g-logo" viewBox="0 0 48 48" aria-hidden="true">
+            <path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.0 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/>
+            <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.0 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+            <path fill="#4CAF50" d="M24 44c5.2 0 9.8-2 13.3-5.2l-6.2-5.2C29.1 35.1 26.7 36 24 36c-5.3 0-9.7-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/>
+            <path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.5l6.2 5.2C40.9 35.6 44 30.3 44 24c0-1.3-.1-2.6-.4-3.9z"/>
+          </svg>
+          Entrar con Google
+        </button>
+      </div>
+      <p class="legal">Al entrar nos quedamos con tu nombre, tu mail y los briefs que cargues, solo para darte acceso al piloto y contactarte por él. No se los damos a nadie. Si querés que los borremos, escribinos a <a href="mailto:hola@hrinfluencestrategy.com.ar">hola@hrinfluencestrategy.com.ar</a>.</p>
+    </div>
+
+    <p class="legal" style="margin-top:2rem">¿No tenés código? <a href="/#contacto">Pedí el tuyo acá</a>.</p>
+  </section>
+
+  <!-- ======== 2. con sesión, sin acceso ======== -->
+  <section class="wrap oculto" id="vTicket">
+    <p class="eyebrow"><span class="rule"></span>Último paso</p>
+    <h1>Cargá tu <em>código</em>.</h1>
+
+    <div class="caja">
+      <div class="quien">
+        <img id="tAvatar" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+        <div><b id="tNombre">—</b><span id="tMail">—</span></div>
+      </div>
+
+      <label for="codigo">Tu golden ticket</label>
+      <input type="text" id="codigo" placeholder="HEYCHAR-000" autocomplete="off"
+             autocapitalize="characters" spellcheck="false" inputmode="text">
+      <div style="margin-top:1rem">
+        <button class="btn btn-lima" id="btnCanjear" type="button">Activar mi acceso</button>
+      </div>
+      <div class="aviso mal oculto" id="tError"></div>
+    </div>
+
+    <p class="legal" style="margin-top:2rem">¿No tenés código? <a href="/#contacto">Escribinos</a> y te sumamos a la lista.</p>
+  </section>
+
+  <!-- ======== 3. adentro ======== -->
+  <section class="wrap oculto" id="vAdentro">
+    <p class="eyebrow"><span class="rule"></span>Piloto activo</p>
+    <h1>Listo, <em id="aNombre">ya estás</em>.</h1>
+    <p class="lead">Tu acceso quedó activado. Cargá tu búsqueda y te devolvemos el creador que mejor la comunica.</p>
+
+    <div class="caja">
+      <div class="quien">
+        <img id="aAvatar" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+        <div><b id="aNombreFull">—</b><span id="aMail">—</span></div>
+      </div>
+      <a class="btn btn-lima" href="/#brief" style="text-decoration:none">Ir al Brief Builder</a>
+      <p class="legal">Tu acceso queda guardado en este navegador. La próxima vez entrás directo.</p>
+    </div>
+  </section>
+</main>
+
+<footer>Hey! Char · HR Influence Strategy</footer>
+
+<script type="module">
+/* =========================================================
+   CONFIGURACION — pegar los dos valores de Supabase.
+   Los dos son publicos por diseno: van en el HTML a proposito.
+   NUNCA poner aca la clave "service_role".
+   ========================================================= */
+// Estos dos valores son PUBLICOS por diseno: viajan en el HTML y cualquiera
+// que mire el codigo los ve. Lo que protege los datos son las reglas (RLS)
+// que estan en supabase.sql, no el secreto de estas cadenas.
+const SUPABASE_URL  = 'https://phidhsvahnaggcjaizvv.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBoaWRoc3ZhaG5hZ2djamFpenZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMwNTI2MDQsImV4cCI6MjEwODYyODYwNH0.Zq0etL5vD6N5l2uzjF2WGGxMLhzVjsZl7cEYywl3Lbo';
+
+// La libreria vive en el repo (/supabase.js), no en un CDN: el dia de la
+// presentacion el piloto no depende de que una red ajena nos deje pasar.
+import { createClient } from '/supabase.js';
+
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+const $  = id => document.getElementById(id);
+const ver = cual => {
+  ['vCargando','vEntrar','vTicket','vAdentro'].forEach(v => $(v).classList.add('oculto'));
+  $(cual).classList.remove('oculto');
+};
+const track = (n, p) => { if (typeof window.track === 'function') window.track(n, p || {}); };
+
+/* de donde vino, para saber que canal trae leads */
+function origen(){
+  const u = new URLSearchParams(location.search);
+  return u.get('utm_source') || u.get('ref') || document.referrer || 'directo';
+}
+
+async function arrancar(){
+  const { data:{ session } } = await sb.auth.getSession();
+
+  if (!session){ ver('vEntrar'); return; }
+
+  const u = session.user;
+  const nombre = u.user_metadata?.full_name || u.user_metadata?.name || '';
+  const avatar = u.user_metadata?.avatar_url || '';
+
+  $('btnSalir').classList.remove('oculto');
+
+  /* queda registrado el lead apenas entra, tenga codigo o no:
+     saber quien golpeo la puerta es la mitad del dato */
+  await sb.rpc('registrar_lead', {
+    p_nombre: nombre, p_avatar: avatar, p_origen: origen()
+  });
+
+  const { data: lead } = await sb
+    .from('leads').select('acceso,nombre').eq('id', u.id).maybeSingle();
+
+  const pinta = (pre) => {
+    if ($(pre+'Avatar') && avatar) $(pre+'Avatar').src = avatar;
+    if ($(pre+'Nombre')) $(pre+'Nombre').textContent = (nombre || 'ya estás').split(' ')[0];
+    if ($(pre+'NombreFull')) $(pre+'NombreFull').textContent = nombre || u.email;
+    if ($(pre+'Mail')) $(pre+'Mail').textContent = u.email;
+  };
+
+  if (lead?.acceso){
+    pinta('a'); ver('vAdentro'); track('piloto_adentro', {});
+  } else {
+    pinta('t'); ver('vTicket'); track('piloto_pide_ticket', {});
+  }
+}
+
+$('btnGoogle').addEventListener('click', async () => {
+  $('btnGoogle').disabled = true;
+  track('piloto_login_click', {});
+  const { error } = await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: location.origin + '/piloto.html' }
+  });
+  if (error){ $('btnGoogle').disabled = false; alert('No pudimos abrir Google. Probá de nuevo.'); }
+});
+
+$('btnSalir').addEventListener('click', async () => {
+  await sb.auth.signOut();
+  location.href = '/piloto.html';
+});
+
+$('btnCanjear').addEventListener('click', async () => {
+  const cod = $('codigo').value.trim();
+  const err = $('tError');
+  err.classList.add('oculto');
+
+  if (!cod){ err.textContent = 'Escribí el código que te dimos.'; err.classList.remove('oculto'); return; }
+
+  $('btnCanjear').disabled = true;
+  $('btnCanjear').textContent = 'Verificando…';
+
+  const { data, error } = await sb.rpc('canjear_ticket', { codigo: cod });
+
+  $('btnCanjear').disabled = false;
+  $('btnCanjear').textContent = 'Activar mi acceso';
+
+  if (error){
+    err.textContent = 'Algo falló de nuestro lado. Probá de nuevo en un minuto.';
+    err.classList.remove('oculto'); return;
+  }
+  if (data?.ok){
+    track('piloto_ticket_ok', { motivo: data.motivo });
+    arrancar(); return;
+  }
+  const motivos = {
+    invalido:  'Ese código no existe o ya no está activo. Revisá que esté igual al que te pasamos.',
+    usado:     'Ese código ya lo usó otra persona. Escribinos y te damos uno nuevo.',
+    sin_sesion:'Se cerró la sesión. Volvé a entrar con Google.'
+  };
+  err.textContent = motivos[data?.motivo] || 'No pudimos validar ese código.';
+  err.classList.remove('oculto');
+  track('piloto_ticket_falla', { motivo: data?.motivo || 'desconocido' });
+});
+
+/* el enter tambien canjea */
+$('codigo').addEventListener('keydown', e => { if (e.key === 'Enter') $('btnCanjear').click(); });
+
+sb.auth.onAuthStateChange((evento) => {
+  if (evento === 'SIGNED_IN' || evento === 'SIGNED_OUT') arrancar();
+});
+
+arrancar().catch(() => {
+  ver('vEntrar');
+});
+</script>
+</body>
+</html>
