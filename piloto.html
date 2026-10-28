@@ -414,6 +414,37 @@ function origen(){
   return u.get('utm_source') || u.get('ref') || document.referrer || 'directo';
 }
 
+/* ======== EL CODIGO PUEDE VENIR EN LA DIRECCION ========
+   /piloto.html?ticket=HEYCHAR-007-2T3K
+   Sirve para los QR impresos: la persona escanea, entra con Google y ya
+   esta adentro, sin tipear nada. Se guarda antes de ir a Google porque la
+   vuelta del login puede perder los parametros de la direccion. ======== */
+const GUARDADO = 'heychar_ticket_pendiente';
+const VENCE = 60 * 60 * 1000;          // una hora: lo que dura un canje razonable
+
+/* Se usa localStorage y no sessionStorage porque en Android el login de
+   Google se abre en una pestania aparte, y sessionStorage no cruza ese
+   salto. Se le pone vencimiento para que un codigo viejo no reviva solo. */
+function ticketDeLaUrl(){
+  try {
+    const u = new URLSearchParams(location.search).get('ticket');
+    if (u) {
+      const limpio = u.trim().toUpperCase();
+      try { localStorage.setItem(GUARDADO, JSON.stringify({ cod: limpio, t: Date.now() })); } catch(e){}
+      return limpio;
+    }
+    const crudo = localStorage.getItem(GUARDADO);
+    if (!crudo) return '';
+    const g = JSON.parse(crudo);
+    if (!g || !g.cod || (Date.now() - g.t) > VENCE) { olvidarTicket(); return ''; }
+    return g.cod;
+  } catch(e){ return ''; }
+}
+
+function olvidarTicket(){
+  try { localStorage.removeItem(GUARDADO); } catch(e){}
+}
+
 async function arrancar(){
   const { data:{ session } } = await sb.auth.getSession();
 
@@ -446,13 +477,30 @@ async function arrancar(){
     // la app se ofrece recien aca: a quien ya tiene el acceso
     ofrecerInstalar();
   } else {
-    pinta('t'); ver('vTicket'); track('piloto_pide_ticket', {});
+    pinta('t');
+    const traido = ticketDeLaUrl();
+    if (traido) {
+      // vino con el codigo puesto: se canjea sin pedirle nada
+      $('codigo').value = traido;
+      ver('vTicket');
+      track('piloto_ticket_en_url', {});
+      const ok = await canjearAhora(traido, true);
+      if (ok) return;            // canjearAhora ya mostro el adentro
+    } else {
+      ver('vTicket');
+    }
+    track('piloto_pide_ticket', {});
   }
 }
 
 $('btnGoogle').addEventListener('click', async () => {
   $('btnGoogle').disabled = true;
   track('piloto_login_click', {});
+  // La vuelta va SIN parametros, identica a la cargada en Supabase. Si no
+  // coincide exacto con la lista blanca, Supabase la descarta y manda a la
+  // home: el login termina en cualquier lado. El codigo no hace falta aca,
+  // ya quedo guardado en el navegador.
+  ticketDeLaUrl();
   const { error } = await sb.auth.signInWithOAuth({
     provider: 'google',
     options: { redirectTo: location.origin + '/piloto.html' }
@@ -465,12 +513,13 @@ $('btnSalir').addEventListener('click', async () => {
   location.href = '/piloto.html';
 });
 
-$('btnCanjear').addEventListener('click', async () => {
-  const cod = $('codigo').value.trim();
+/* El canje, en un solo lugar: lo usan el boton y el canje automatico.
+   'callado' = true cuando viene del QR: ahi un codigo invalido no se grita,
+   simplemente queda la pantalla normal para corregirlo a mano. */
+async function canjearAhora(cod, callado){
   const err = $('tError');
   err.classList.add('oculto');
-
-  if (!cod){ err.textContent = 'Escribí el código que te dimos.'; err.classList.remove('oculto'); return; }
+  if (!cod){ err.textContent = 'Escribí el código que te dimos.'; err.classList.remove('oculto'); return false; }
 
   $('btnCanjear').disabled = true;
   $('btnCanjear').textContent = 'Verificando…';
@@ -481,21 +530,32 @@ $('btnCanjear').addEventListener('click', async () => {
   $('btnCanjear').textContent = 'Activar mi acceso';
 
   if (error){
-    err.textContent = 'Algo falló de nuestro lado. Probá de nuevo en un minuto.';
-    err.classList.remove('oculto'); return;
+    if (!callado){
+      err.textContent = 'Algo falló de nuestro lado. Probá de nuevo en un minuto.';
+      err.classList.remove('oculto');
+    }
+    return false;
   }
   if (data?.ok){
-    track('piloto_ticket_ok', { motivo: data.motivo });
-    arrancar(); return;
+    olvidarTicket();
+    track('piloto_ticket_ok', { motivo: data.motivo, via: callado ? 'qr' : 'manual' });
+    arrancar();
+    return true;
   }
   const motivos = {
     invalido:  'Ese código no existe o ya no está activo. Revisá que esté igual al que te pasamos.',
     usado:     'Ese código ya lo usó otra persona. Escribinos y te damos uno nuevo.',
     sin_sesion:'Se cerró la sesión. Volvé a entrar con Google.'
   };
+  olvidarTicket();
   err.textContent = motivos[data?.motivo] || 'No pudimos validar ese código.';
   err.classList.remove('oculto');
-  track('piloto_ticket_falla', { motivo: data?.motivo || 'desconocido' });
+  track('piloto_ticket_falla', { motivo: data?.motivo || 'desconocido', via: callado ? 'qr' : 'manual' });
+  return false;
+}
+
+$('btnCanjear').addEventListener('click', () => {
+  canjearAhora($('codigo').value.trim(), false);
 });
 
 
@@ -749,6 +809,10 @@ $('codigo').addEventListener('keydown', e => { if (e.key === 'Enter') $('btnCanj
 sb.auth.onAuthStateChange((evento) => {
   if (evento === 'SIGNED_IN' || evento === 'SIGNED_OUT') arrancar();
 });
+
+/* Se guarda el codigo apenas carga, antes de que la persona haga nada:
+   si viene del QR sin sesion, tiene que sobrevivir la vuelta de Google. */
+ticketDeLaUrl();
 
 arrancar().catch(() => {
   ver('vEntrar');
