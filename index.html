@@ -627,6 +627,71 @@
   }
   nav.scrolled .brand-mark{height:clamp(34px,3.6vw,46px)}
   @media(max-width:520px){.brand-mark{height:38px}}
+  /* ---------- ZONAS TACTILES ----------
+     44px es el minimo para que un dedo acierte sin pelear. Se agranda el
+     area de toque sin mover el diseno: padding hacia adentro + margen
+     negativo que lo compensa. ---------- */
+  @media(hover:none),(pointer:coarse){
+    .svc .link,
+    .bigfoot-cols a,
+    .bigfoot-mail a,
+    nav .navlinks a{
+      min-height:44px;
+      display:inline-flex;
+      align-items:center;
+      padding-block:.55rem;
+      margin-block:-.55rem;
+    }
+    .brand,.nav-cta{min-height:44px;display:inline-flex;align-items:center}
+    .fbtn{min-height:44px}
+    .bigfoot-cols a{margin-bottom:.35rem}
+  }
+
+  /* ---------- BRIEF EN DOS NIVELES ----------
+     Lo abierto demuestra que entendimos. Lo del piloto entrega el trabajo. ---- */
+  .bcuerpo{color:var(--ink-dim);font-size:.92rem;line-height:1.6;margin-top:.7rem}
+  .pq{color:var(--ink-dim);font-size:.88rem;line-height:1.55;margin-top:.5rem}
+
+  .pfila{display:flex;align-items:flex-start;gap:.9rem;padding:.9rem 0;border-top:1px solid var(--line)}
+  .pfila:first-child{border-top:none;padding-top:.2rem}
+  .pfila .rombo{width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+    background:var(--rose-soft);color:var(--rose);font-size:.8rem}
+  .pfila b{font-family:var(--sans);font-weight:600;font-size:.98rem;display:block}
+  .pfila .aud{color:var(--ink-faint);font-size:.82rem;margin-top:.1rem}
+
+  /* las verificaciones concretas: la respuesta a "¿y como se que no es cualquiera?" */
+  .curamos{margin-top:1rem;padding:.9rem 1rem;border:1px solid var(--line);border-radius:9px;background:var(--bg-1)}
+  .curamos b{display:block;font-family:var(--ui);font-weight:600;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:.5rem}
+  .curamos ul{list-style:none;margin:0;padding:0}
+  .curamos li{position:relative;padding-left:1.4rem;color:var(--ink-dim);font-size:.87rem;line-height:1.5;margin-bottom:.4rem}
+  .curamos li:last-child{margin-bottom:0}
+  .curamos li::before{content:'✓';position:absolute;left:0;top:0;color:var(--lime-dim);font-weight:700}
+
+  /* el aviso honesto: lo que un director de RRHH escéptico objetaria */
+  .aviso{margin-top:1rem;padding:.85rem 1rem;border-left:2px solid var(--rose);background:var(--rose-soft);border-radius:0 8px 8px 0}
+  .aviso b{display:block;font-family:var(--ui);font-weight:600;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rose);margin-bottom:.35rem}
+  .aviso p{color:var(--ink-dim);font-size:.87rem;line-height:1.55}
+  .tambien{color:var(--ink-faint);font-size:.8rem;margin-top:.9rem}
+
+  /* el muro: donde termina lo abierto */
+  .gate{padding:1.4rem;background:var(--bg-2);border-top:1px solid var(--line)}
+  .gate-h{font-family:var(--sans);font-weight:600;font-size:1rem;margin-bottom:.2rem}
+  .gate-s{color:var(--ink-dim);font-size:.86rem;line-height:1.55}
+  .gate-l{list-style:none;margin:.9rem 0 1.1rem;padding:0}
+  .gate-l li{position:relative;padding-left:1.1rem;color:var(--ink-dim);font-size:.88rem;line-height:1.5;margin-bottom:.4rem}
+  .gate-l li::before{content:'';position:absolute;left:0;top:.52em;width:5px;height:5px;border-radius:50%;background:var(--rose)}
+  .gate-b{display:flex;gap:.6rem;flex-wrap:wrap}
+  .gate-b .btn{width:auto;flex:1 1 170px;margin-top:0;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;min-height:44px}
+  .btn-ghost{background:transparent;border:1px solid var(--line-strong);color:var(--ink)}
+  .btn-ghost:hover{background:var(--bg-3)}
+
+  /* aviso de que esta persona ya esta adentro del piloto */
+  .adentro{display:none;align-items:center;gap:.5rem;margin-bottom:.9rem;padding:.6rem .8rem;
+    border:1px solid var(--lime-dim);background:var(--lime-soft);border-radius:9px;
+    font-size:.84rem;color:var(--ink)}
+  .adentro.show{display:flex}
+  .adentro i{width:7px;height:7px;border-radius:50%;background:var(--lime-dim);flex:none}
+
 </style>
 </head>
 <body>
@@ -786,6 +851,7 @@
           <div class="field"><label>¿Qué querés comunicar del rol y tu cultura?</label><textarea id="msg" placeholder="Ej. Buscamos gente joven para primer empleo, ambiente dinámico, posibilidad de crecer rápido…"></textarea></div>
           <div class="field"><label>Contexto o desafío adicional <span style="color:var(--ink-faint)">(opcional)</span></label><input type="text" id="ctx" placeholder="Ej. búsqueda urgente, alta rotación en el puesto…"></div>
           <div id="formErr" style="display:none;color:var(--rose);font-size:.85rem;margin-bottom:.6rem"></div>
+          <div class="adentro" id="adentro"><i></i>Estás en el piloto: tu brief sale completo.</div>
           <button class="btn" id="matchBtn">Encontrar mi match</button>
         </div>
 
@@ -1108,53 +1174,153 @@
   const panelTitle=document.getElementById('panelTitle');
   const esc=s=>(s==null?'':String(s)).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const seniorityValue=()=>{const b=document.querySelector('[data-seg="seniority"] button[aria-pressed="true"]');return b?b.dataset.value:'';};
-  let lastRole=''; let lastBrief=null;
+  let lastRole=''; let lastBrief=null; let lastNivel='publico';
 
-  // Brief de ejemplo (Meli / Grido) — se usa solo si la API no responde (preview local).
+  /* ===== BRIEF BUILDER · DOS NIVELES =====
+     Abierto   : el brief reescrito + 3 perfiles compatibles anonimos + criterios.
+     Con ticket: ademas, el perfil curado, las piezas y el plan de 30 dias.
+
+     Quien decide el nivel es el SERVIDOR, mirando si esta persona canjeo su
+     golden ticket. Este archivo solo dibuja lo que le mandan: no hay nada
+     escondido con CSS que alguien pueda destapar con F12. ===== */
+
+  const SB_URL  = 'https://phidhsvahnaggcjaizvv.supabase.co';
+  const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBoaWRoc3ZhaG5hZ2djamFpenZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMwNTI2MDQsImV4cCI6MjEwODYyODYwNH0.Zq0etL5vD6N5l2uzjF2WGGxMLhzVjsZl7cEYywl3Lbo';
+
+  let sb=null, promesaSesion=null;
+
+  /* La libreria de Supabase pesa, asi que la cargamos recien cuando el brief
+     entra en pantalla. Quien nunca baja hasta aca no la descarga nunca. */
+  function prepararSesion(){
+    if(promesaSesion) return promesaSesion;
+    promesaSesion=(async()=>{
+      try{
+        const {createClient}=await import('/supabase.js');
+        sb=createClient(SB_URL,SB_ANON);
+        const {data}=await sb.auth.getSession();
+        return data.session||null;
+      }catch(e){ console.warn('[Brief] sin sesion:',e.message); return null; }
+    })();
+    return promesaSesion;
+  }
+
+  /* Si ya canjeo el ticket, se lo decimos antes de que cargue nada. */
+  async function avisarSiEstaAdentro(){
+    const s=await prepararSesion();
+    if(!s||!sb) return;
+    try{
+      const {data}=await sb.from('leads').select('acceso').maybeSingle();
+      if(data&&data.acceso===true){
+        const a=document.getElementById('adentro');
+        if(a) a.classList.add('show');
+      }
+    }catch(e){ /* si falla, simplemente no mostramos el aviso */ }
+  }
+
+  const secBrief=document.getElementById('brief');
+  if(secBrief&&'IntersectionObserver'in window){
+    const io=new IntersectionObserver(es=>{
+      if(es.some(e=>e.isIntersecting)){ io.disconnect(); avisarSiEstaAdentro(); }
+    },{rootMargin:'400px'});
+    io.observe(secBrief);
+  }
+
+  /* Ejemplo para la vista previa local, con la forma abierta. */
   const DEMO_BRIEF={
-    influencerMatch:{id:"generalista",lead:"El creador que seleccionamos para comunicar esto es",
-      name:"Melina \"Meli\" Sosa",handle:"@meli.primertrabajo",platform:"Instagram + TikTok",followers:"~26.000 seguidores",
-      niche:"Primer empleo y vida de oficina en PyMEs.",audience:"Gen Z en búsqueda de su primer trabajo formal.",
-      whyMatch:"La búsqueda de un encargado de sucursal para Grido apunta a jóvenes en su primer empleo formal, exactamente la comunidad de Meli. Su contenido sobre cómo es empezar a trabajar genera la confianza que un aviso corporativo no logra: habla desde la experiencia real y entre pares."},
-    narrativeAngle:"Mostrar el primer empleo en Grido no como \"un trabajo más\", sino como una escuela de gestión temprana: liderar un equipo y una sucursal a los veintipico.",
-    contentIdeas:[
-      {title:"Un día como encargado de sucursal",format:"Reel POV \"día en la vida\" · TikTok",hook:"\"Tenés 22 y ya manejás tu propia sucursal: te muestro un día real.\""},
-      {title:"Del mostrador a encargado",format:"Carrusel de historia de crecimiento · Instagram",hook:"\"Entré para el verano y terminé liderando el local. Esto aprendí.\""},
-      {title:"3 cosas que nadie te cuenta del primer empleo",format:"Video charla directa a cámara",hook:"\"Nadie te avisa esto antes de tu primer trabajo con gente a cargo.\""}],
-    talentKPIs:["Calidad del flujo de candidatos","Conversión de interés a postulación","Tiempo de cobertura de la búsqueda"],
-    pilotTimeline:{week1:"Brief con RRHH y traducción de la cultura Grido a hipótesis de contenido.",week2:"Aprobación del ángulo y guion junto a Meli.",week3:"Grabación, revisión y publicación en formato nativo.",week4:"Lectura de resultados en indicadores de talento y decisión sobre continuidad."}};
+    briefReformulado:{
+      titular:"No están buscando un encargado: están buscando a alguien dispuesto a liderar antes de sentirse listo.",
+      cuerpo:"El aviso describe tareas, y el candidato de 22 años lee requisitos que no cree cumplir. Lo que hay que comunicar es que el puesto es una escuela de gestión temprana, no un premio a la experiencia previa."},
+    perfilesCompatibles:[
+      {arquetipo:"Voz de primer empleo",audiencia:"Gen Z entrando al trabajo formal, sin referentes cerca que le cuenten cómo es.",porQue:"Habla desde el mismo lugar donde está el candidato: el miedo a no estar a la altura. Eso desarma la objeción antes de que aparezca."},
+      {arquetipo:"Cronista de local",audiencia:"Jóvenes que ya trabajan en comercio y miran el mostrador como techo.",porQue:"Muestra el salto de mostrador a gestión como algo que pasa de verdad, no como una promesa de folleto."},
+      {arquetipo:"Mando medio joven",audiencia:"Quienes ya lideran equipos chicos y buscan dónde crecer.",porQue:"Aporta credibilidad técnica sobre lo que implica tener gente a cargo a esa edad."}],
+    criterios:["Momento de carrera de la audiencia","Cercanía con el oficio real del puesto","Credibilidad construida contando, no vendiendo"]};
 
-  function renderBrief(brief,isDemo){
-    lastBrief=brief;
-    const m=brief.influencerMatch||{};
-    const acurar=m.id==='a_curar';
-    const initial=acurar?'◆':((m.name||'?').trim().charAt(0)||'?');
-    const ideas=(brief.contentIdeas||[]).map(i=>`<div class="idea"><div class="it">${esc(i.title)}</div><div class="ifmt">${esc(i.format)}</div><div class="ihook">${esc(i.hook)}</div></div>`).join('');
-    const kpis=(brief.talentKPIs||[]).map(k=>`<span>${esc(k)}</span>`).join('');
-    const tl=brief.pilotTimeline||{};
-    briefBody.innerHTML=`
-      <div class="brief-match">
-        <div class="av">${esc(initial)}</div>
-        <div class="mtxt" style="flex:1">
-          <div class="brief-lead">${esc(m.lead||'El creador que seleccionamos para comunicar esto es')}</div>
-          <b>${esc(m.name)}${m.handle?' · '+esc(m.handle):''}</b>
-          <p>${esc([m.platform,m.followers].filter(Boolean).join(' · '))}</p>
-          <p style="margin-top:.5rem">${esc(m.whyMatch)}</p>
+  function cabecera(b){
+    const r=b.briefReformulado||{};
+    return `<div class="brief-sec">
+      <h5>Tu brief, reescrito</h5>
+      <div class="angle">${esc(r.titular)}</div>
+      <p class="bcuerpo">${esc(r.cuerpo)}</p>
+    </div>`;
+  }
+
+  function filasPerfiles(lista){
+    return (lista||[]).map(p=>`<div class="pfila">
+      <div class="rombo">&#9670;</div>
+      <div style="flex:1">
+        <b>${esc(p.arquetipo)}</b>
+        <div class="aud">${esc(p.audiencia)}</div>
+        <p class="pq">${esc(p.porQue)}</p>
+      </div></div>`).join('');
+  }
+
+  function renderPublico(b,esEjemplo){
+    briefBody.innerHTML=
+      cabecera(b)+
+      `<div class="brief-sec"><h5>Perfiles compatibles</h5>${filasPerfiles(b.perfilesCompatibles)}</div>`+
+      `<div class="brief-sec"><h5>Criterios del match</h5>
+        <div class="kpi-tags">${(b.criterios||[]).map(c=>`<span>${esc(c)}</span>`).join('')}</div></div>`+
+      `<div class="gate">
+        <div class="gate-h">Hasta acá llega la versión abierta.</div>
+        <p class="gate-s">Te mostramos que entendimos tu búsqueda y qué tipo de voz la comunica. Lo que sigue es el trabajo:</p>
+        <ul class="gate-l">
+          <li>El perfil curado, en profundidad: plataforma, audiencia, tono y por qué ese y no otro</li>
+          <li>Las piezas concretas que produciríamos, con su gancho y qué objeción desarma cada una</li>
+          <li>Indicadores de talento y el plan de los primeros 30 días</li>
+        </ul>
+        <div class="gate-b">
+          <a class="btn" href="/piloto.html">Tengo un golden ticket</a>
+          <a class="btn btn-ghost" href="#contacto" id="pedirTicket">Pedí el tuyo</a>
         </div>
-        <span class="mtag">${acurar?'A curar':'Match'}</span>
-      </div>
-      <div class="brief-sec"><h5>Ángulo narrativo</h5><div class="angle">${esc(brief.narrativeAngle)}</div></div>
-      <div class="brief-sec"><h5>Ideas de contenido</h5>${ideas}</div>
-      <div class="brief-sec"><h5>Indicadores de talento</h5><div class="kpi-tags">${kpis}</div></div>
-      <div class="brief-sec"><h5>Piloto · 30 días</h5><div class="tl">
+      </div>`;
+    panelTitle.textContent='Tu brief · versión abierta'+(esEjemplo?' · ejemplo':'');
+    const pt=document.getElementById('pedirTicket');
+    if(pt) pt.addEventListener('click',e=>{e.preventDefault();track('cta_pedir_ticket',{rol:lastRole});goToContact('brief_publico');});
+  }
+
+  function renderPrivado(b){
+    const e=b.perfilElegido||{};
+    const acurar=e.estado==='a_curar';
+    const otros=(b.perfilesCompatibles||[]).map(p=>p.arquetipo)
+      .filter(a=>a&&a!==e.arquetipo).slice(0,2).join(' · ');
+    const piezas=(b.piezas||[]).map(z=>`<div class="idea">
+      <div class="ifmt">${esc(z.formato)}</div>
+      <div class="it">${esc(z.titulo)}</div>
+      <div class="ihook">${esc(z.gancho)}</div>
+      <p class="pq">${esc(z.que)}</p>
+      <p class="pq"><b>Desarma:</b> ${esc(z.porQue)}</p>
+    </div>`).join('');
+    const tl=b.pilotTimeline||{};
+    briefBody.innerHTML=
+      cabecera(b)+
+      `<div class="brief-sec">
+        <h5>El perfil que elegimos</h5>
+        <div class="pfila">
+          <div class="rombo">&#9670;</div>
+          <div style="flex:1">
+            <b>${esc(e.arquetipo)}${acurar?' · a curar':''}</b>
+            <div class="aud">${esc([e.plataforma,e.alcance].filter(Boolean).join(' · '))}</div>
+            <p class="pq">${esc(e.audiencia)}</p>
+            <p class="pq">${esc(e.tono)}</p>
+          </div>
+        </div>
+        <p class="pq">${esc(e.porQueEste)}</p>
+        ${(e.comoLoCuramos||[]).length?`<div class="curamos"><b>Cómo verificamos esta voz</b><ul>${
+          (e.comoLoCuramos||[]).map(c=>`<li>${esc(c)}</li>`).join('')}</ul></div>`:''}
+        ${e.aTenerEnCuenta?`<div class="aviso"><b>A tener en cuenta</b><p>${esc(e.aTenerEnCuenta)}</p></div>`:''}
+        ${otros?`<p class="tambien">También evaluamos: ${esc(otros)}.</p>`:''}
+      </div>`+
+      `<div class="brief-sec"><h5>Las piezas</h5>${piezas}</div>`+
+      `<div class="brief-sec"><h5>Indicadores de talento</h5>
+        <div class="kpi-tags">${(b.talentKPIs||[]).map(k=>`<span>${esc(k)}</span>`).join('')}</div></div>`+
+      `<div class="brief-sec"><h5>Piloto · 30 días</h5><div class="tl">
         <div class="tlw"><b>Semana 1</b><p>${esc(tl.week1)}</p></div>
         <div class="tlw"><b>Semana 2</b><p>${esc(tl.week2)}</p></div>
         <div class="tlw"><b>Semana 3</b><p>${esc(tl.week3)}</p></div>
         <div class="tlw"><b>Semana 4</b><p>${esc(tl.week4)}</p></div>
       </div></div>`;
-    panelTitle.textContent=(acurar?'Perfil a curar':'Tu brief')+' · Atracción con Influencia'+(isDemo?' · ejemplo':'');
-    resetDisp();
-    dispBlock.style.display='block';
+    panelTitle.textContent='Tu brief · piloto';
   }
 
   function resetDisp(){
@@ -1167,6 +1333,13 @@
     document.getElementById('sendBtn').disabled=true;
     document.getElementById('thanks').classList.remove('show');
     document.querySelector('.send-hint').textContent='Respondé las tres para enviar tu interés.';
+  }
+
+  function renderBrief(brief,nivel,esEjemplo){
+    lastBrief=brief; lastNivel=nivel;
+    if(nivel==='privado') renderPrivado(brief); else renderPublico(brief,esEjemplo);
+    resetDisp();
+    dispBlock.style.display='block';
   }
 
   async function generateBrief(){
@@ -1186,15 +1359,19 @@
     panel.scrollIntoView({behavior:'smooth',block:'center'});
     const btn=document.getElementById('matchBtn');btn.disabled=true;
     try{
-      const r=await fetch('/api/generate-brief',{method:'POST',headers:{'Content-Type':'application/json'},
+      const headers={'Content-Type':'application/json'};
+      const s=await prepararSesion();
+      if(s&&s.access_token) headers.Authorization='Bearer '+s.access_token;
+      const r=await fetch('/api/generate-brief',{method:'POST',headers,
         body:JSON.stringify({role,seniority,culture,context,audience:'company'})});
       if(!r.ok) throw new Error('status '+r.status);
       const j=await r.json();
       if(!j.success||!j.brief) throw new Error(j.error||'sin brief');
-      renderBrief(j.brief,false);
+      track('brief_listo',{nivel:j.nivel});
+      renderBrief(j.brief,j.nivel||'publico',false);
     }catch(e){
       console.warn('[Brief] API no disponible, usando ejemplo (esto es normal en preview local):',e.message);
-      renderBrief(DEMO_BRIEF,true);
+      renderBrief(DEMO_BRIEF,'publico',true);
     }finally{btn.disabled=false;}
   }
   document.getElementById('matchBtn').addEventListener('click',generateBrief);
@@ -1231,12 +1408,13 @@
     const msgField=document.querySelector('#hris-form [name="mensaje"]');
     // Si la persona generó un brief, precargamos el contexto en el mensaje (si el campo está vacío)
     if(msgField && lastBrief && lastRole && !msgField.value.trim()){
-      const m=lastBrief.influencerMatch||{};
-      const creador = m.name ? (m.name + (m.handle?' ('+m.handle+')':'')) : '';
       let pre = 'Generé un brief para la búsqueda: ' + lastRole + '.';
-      if(creador) pre += ' Nos matcheó: ' + creador + '.';
-      if(lastBrief.narrativeAngle) pre += ' Ángulo sugerido: ' + lastBrief.narrativeAngle;
-      pre += ' Me gustaría coordinar una llamada para evaluar el piloto.';
+      const r = lastBrief.briefReformulado || {};
+      if(r.titular) pre += ' Lo que necesitamos comunicar: ' + r.titular;
+      const perfiles = (lastBrief.perfilesCompatibles||[]).map(p=>p.arquetipo).filter(Boolean);
+      if(perfiles.length) pre += ' Perfiles compatibles: ' + perfiles.join(', ') + '.';
+      if(lastNivel !== 'privado') pre += ' Me gustaría acceder al piloto para ver la versión completa.';
+      else pre += ' Me gustaría coordinar una llamada para avanzar.';
       msgField.value = pre;
     }
     const contacto=document.getElementById('contacto');
