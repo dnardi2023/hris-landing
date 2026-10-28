@@ -3,55 +3,27 @@
   "short_name": "HEY! CHAR",
   "description": "La herramienta del piloto: cargás tu búsqueda y te devuelve el perfil curado, las piezas que produciríamos y el plan de 30 días.",
   "lang": "es-AR",
-  "dir": "ltr",
-  "id": "/",
   "scope": "/",
-  "start_url": "/piloto.html?origen=app",
+  "start_url": "/piloto.html",
   "display": "standalone",
-  "display_override": [
-    "standalone",
-    "minimal-ui"
-  ],
-  "orientation": "any",
   "background_color": "#E9E5DE",
   "theme_color": "#0E0E10",
-  "categories": [
-    "business",
-    "productivity"
-  ],
   "icons": [
     {
       "src": "/img/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
       "src": "/img/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
       "src": "/img/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Cargar una búsqueda",
-      "short_name": "Brief",
-      "description": "Ir directo al formulario",
-      "url": "/piloto.html?origen=app",
-      "icons": [
-        {
-          "src": "/img/icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
     }
   ]
 }
