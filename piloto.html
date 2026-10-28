@@ -10,11 +10,18 @@
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="application-name" content="HEY! CHAR">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="HEY! CHAR">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+
 <meta name="theme-color" content="#0E0E10">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
   @font-face{font-family:'Whyte Inktrap';font-weight:400;src:url(fonts/WhyteInktrap-Regular.woff2) format('woff2');font-display:swap}
@@ -28,6 +35,7 @@
     --rose:#EC6A7C; --rose-soft:rgba(236,106,124,.14);
     --lime:#C6F24E; --lime-soft:rgba(198,242,78,.16);
     --sans:'Whyte Inktrap',system-ui,sans-serif;
+    --serif:'Playfair Display',Georgia,serif;
     --ui:'Inter',system-ui,sans-serif;
     --pad:clamp(1.25rem,5vw,4.5rem);
   }
@@ -105,6 +113,127 @@
   @media(max-width:420px){
     .quien span{font-size:.78rem}
   }
+
+  /* ===================== EL BRIEF, ADENTRO DE LA APP =====================
+     Esta es la herramienta. La web muestra una version abierta; lo de aca
+     es lo que se gana con el golden ticket. ============================== */
+  .campo{margin-bottom:1.1rem}
+  .campo label{display:block;font-family:var(--ui);font-size:.82rem;color:var(--ink-dim);margin-bottom:.45rem}
+  .campo input,.campo textarea{
+    width:100%;background:var(--bg);border:1px solid var(--line-strong);border-radius:12px;
+    padding:.85rem 1rem;font-family:var(--ui);font-size:.95rem;color:var(--ink);
+    min-height:48px;resize:vertical;
+  }
+  .campo textarea{min-height:104px;line-height:1.5}
+  .campo input:focus,.campo textarea:focus{outline:none;border-color:var(--rose)}
+  .campo input::placeholder,.campo textarea::placeholder{color:var(--ink-faint)}
+
+  .seg{display:flex;gap:.5rem;flex-wrap:wrap}
+  .seg button{
+    flex:1;min-width:92px;min-height:48px;background:var(--bg);
+    border:1px solid var(--line-strong);border-radius:12px;padding:.6rem .5rem;
+    color:var(--ink-dim);font-family:var(--ui);font-size:.86rem;cursor:pointer;transition:all .2s;
+  }
+  .seg button[aria-pressed="true"]{background:var(--rose-soft);border-color:var(--rose);color:var(--ink)}
+
+  .errcampo{display:none;color:var(--rose);font-size:.85rem;margin-bottom:.7rem}
+
+  /* el panel de resultado */
+  .panel{
+    margin-top:1.6rem;background:var(--bg-1);border:1px solid var(--line);
+    border-radius:18px;overflow:hidden;
+  }
+  .panel.oculto{display:none}
+  .panel-top{
+    display:flex;align-items:center;gap:.6rem;padding:.9rem 1.3rem;
+    border-bottom:1px solid var(--line);background:var(--bg-2);
+    font-family:var(--ui);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);
+  }
+  .panel-top i{width:7px;height:7px;border-radius:50%;background:var(--lime);flex:none}
+  .cargador{padding:2.8rem 1.4rem;text-align:center;color:var(--ink-dim);font-size:.94rem}
+  .cargador .giro{
+    width:26px;height:26px;border:2px solid var(--line-strong);border-top-color:var(--rose);
+    border-radius:50%;margin:0 auto 1rem;animation:giro .8s linear infinite;
+  }
+  @keyframes giro{to{transform:rotate(360deg)}}
+
+  .sec{padding:1.3rem;border-bottom:1px solid var(--line)}
+  .sec:last-child{border-bottom:none}
+  .sec h5{font-family:var(--ui);font-weight:600;font-size:.72rem;letter-spacing:.16em;
+          text-transform:uppercase;color:var(--rose);margin-bottom:.85rem}
+  .titular{font-family:var(--serif);font-style:italic;font-size:1.14rem;line-height:1.4;color:var(--ink)}
+  .cuerpo{color:var(--ink-dim);font-size:.92rem;line-height:1.6;margin-top:.7rem}
+  .pq{color:var(--ink-dim);font-size:.88rem;line-height:1.55;margin-top:.5rem}
+
+  .pfila{display:flex;align-items:flex-start;gap:.9rem;padding:.9rem 0;border-top:1px solid var(--line)}
+  .pfila:first-of-type{border-top:none;padding-top:0}
+  .pfila .rombo{width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;
+                background:var(--rose-soft);color:var(--rose);font-size:.8rem}
+  .pfila b{font-family:var(--sans);font-weight:600;font-size:.98rem;display:block}
+  .pfila .aud{color:var(--ink-faint);font-size:.82rem;margin-top:.1rem}
+
+  .curamos{margin-top:1rem;padding:.9rem 1rem;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+  .curamos b{display:block;font-family:var(--ui);font-weight:600;font-size:.7rem;letter-spacing:.14em;
+             text-transform:uppercase;color:var(--ink-dim);margin-bottom:.5rem}
+  .curamos ul{list-style:none;margin:0;padding:0}
+  .curamos li{position:relative;padding-left:1.4rem;color:var(--ink-dim);font-size:.87rem;line-height:1.5;margin-bottom:.4rem}
+  .curamos li:last-child{margin-bottom:0}
+  .curamos li::before{content:'\2713';position:absolute;left:0;top:0;color:#7a9b1f;font-weight:700}
+
+  /* la objecion honesta. Se llama asi y no .aviso porque esa clase ya existe
+     en esta pagina para los errores del canje. */
+  .objecion{margin-top:1rem;padding:.85rem 1rem;border-left:2px solid var(--rose);
+            background:var(--rose-soft);border-radius:0 10px 10px 0}
+  .objecion b{display:block;font-family:var(--ui);font-weight:600;font-size:.7rem;letter-spacing:.14em;
+              text-transform:uppercase;color:var(--rose);margin-bottom:.35rem}
+  .objecion p{color:var(--ink-dim);font-size:.87rem;line-height:1.55}
+  .tambien{color:var(--ink-faint);font-size:.8rem;margin-top:.9rem}
+
+  .pieza{padding:.9rem 0;border-bottom:1px solid var(--line)}
+  .pieza:first-of-type{padding-top:0}
+  .pieza:last-child{border-bottom:none;padding-bottom:0}
+  .pieza .fmt{font-size:.74rem;color:var(--rose);margin-bottom:.3rem}
+  .pieza .tit{font-family:var(--sans);font-weight:600;font-size:.98rem}
+  .pieza .gancho{color:var(--ink-dim);font-size:.9rem;font-style:italic;line-height:1.45;margin-top:.35rem}
+
+  .tags{display:flex;flex-wrap:wrap;gap:.5rem}
+  .tags span{font-size:.85rem;background:var(--bg-2);border:1px solid var(--line-strong);
+             border-radius:999px;padding:.45rem .9rem;color:var(--ink)}
+
+  .plan{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+  .plan .sem{border-top:2px solid var(--line-strong);padding-top:.7rem}
+  .plan .sem b{font-size:.72rem;color:var(--rose);display:block;margin-bottom:.35rem}
+  .plan .sem p{font-size:.82rem;color:var(--ink-dim);line-height:1.4}
+
+  .otravez{margin-top:1.3rem}
+
+  /* ===================== BARRA DE INSTALACION =====================
+     Solo aparece adentro: la app se ofrece a quien ya tiene acceso. ===== */
+  #instalar{
+    position:fixed; left:0; right:0; bottom:0; z-index:9999;
+    display:none; gap:.9rem; align-items:center;
+    padding:.9rem clamp(1rem,4vw,1.6rem);
+    padding-bottom:calc(.9rem + env(safe-area-inset-bottom));
+    background:var(--bg-1); border-top:1px solid var(--line);
+    box-shadow:0 -8px 30px rgba(14,14,16,.08);
+    font-family:var(--sans); color:var(--ink);
+  }
+  #instalar.ver{display:flex}
+  #instalar img{width:38px;height:38px;border-radius:9px;flex:none}
+  #instalar .txt{flex:1;min-width:0}
+  #instalar .txt b{display:block;font-weight:600;font-size:.95rem;line-height:1.25}
+  #instalar .txt span{display:block;font-size:.8rem;color:var(--ink-dim);margin-top:.15rem;line-height:1.4}
+  #instalar .acc{display:flex;gap:.5rem;flex:none}
+  #instalar button{min-height:44px;padding:.6rem 1.1rem;border-radius:10px;cursor:pointer;
+                   font-family:inherit;font-weight:600;font-size:.88rem;border:none;width:auto}
+  #instalarSi{background:var(--rose);color:#0A0A0C}
+  #instalarNo{background:transparent;color:var(--ink-dim);border:1px solid var(--line-strong)}
+  #instalar.ios #instalarSi{display:none}
+  @media(max-width:560px){
+    #instalar{flex-wrap:wrap}
+    #instalar .acc{width:100%}
+    #instalar .acc button{flex:1}
+  }
 </style>
 </head>
 <body>
@@ -174,15 +303,46 @@
   <!-- ======== 3. adentro ======== -->
   <section class="wrap oculto" id="vAdentro">
     <p class="eyebrow"><span class="rule"></span>Piloto activo</p>
-    <h1>Listo, <em id="aNombre">ya estás</em>.</h1>
-    <p class="lead">Tu acceso quedó activado. Cargá tu búsqueda y te devolvemos el creador que mejor la comunica.</p>
+    <h1>Cargá tu <em>búsqueda</em>.</h1>
+    <p class="lead">Contanos a quién buscás y qué querés comunicar. Te devolvemos el perfil curado, las piezas que produciríamos y el plan de los primeros 30 días.</p>
 
     <div class="caja">
       <div class="quien">
         <img id="aAvatar" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
         <div><b id="aNombreFull">—</b><span id="aMail">—</span></div>
       </div>
-      <a class="btn btn-lima" href="/#brief" style="text-decoration:none">Ir al Brief Builder</a>
+
+      <div id="formBrief">
+        <div class="campo">
+          <label for="bRol">Rol a cubrir</label>
+          <input type="text" id="bRol" placeholder="Ej. Encargado de sucursal" autocomplete="off">
+        </div>
+        <div class="campo">
+          <label>Seniority objetivo</label>
+          <div class="seg" data-seg="seniority">
+            <button type="button" data-value="early" aria-pressed="false">Early (0–3)</button>
+            <button type="button" data-value="semi" aria-pressed="false">Semi-Senior</button>
+            <button type="button" data-value="senior" aria-pressed="false">Senior</button>
+          </div>
+        </div>
+        <div class="campo">
+          <label for="bMsg">¿Qué querés comunicar del rol y de tu cultura?</label>
+          <textarea id="bMsg" placeholder="Ej. buscamos gente joven para su primer empleo, se crece rápido, el equipo es chico y se aprende haciendo…"></textarea>
+        </div>
+        <div class="campo">
+          <label for="bCtx">Contexto o desafío adicional <span style="color:var(--ink-faint)">(opcional)</span></label>
+          <input type="text" id="bCtx" placeholder="Ej. búsqueda urgente, mucha rotación en el puesto…" autocomplete="off">
+        </div>
+        <p class="errcampo" id="bErr"></p>
+        <button class="btn btn-lima" id="bGenerar" type="button">Generar mi brief</button>
+      </div>
+
+      <div class="panel oculto" id="bPanel">
+        <div class="panel-top"><i></i><span id="bPanelTitulo">Tu brief</span></div>
+        <div id="bCuerpo"></div>
+      </div>
+
+      <button class="btn otravez oculto" id="bOtro" type="button">Cargar otra búsqueda</button>
       <p class="legal">Tu acceso queda guardado en este navegador. La próxima vez entrás directo.</p>
     </div>
   </section>
@@ -250,6 +410,8 @@ async function arrancar(){
 
   if (lead?.acceso){
     pinta('a'); ver('vAdentro'); track('piloto_adentro', {});
+    // la app se ofrece recien aca: a quien ya tiene el acceso
+    ofrecerInstalar();
   } else {
     pinta('t'); ver('vTicket'); track('piloto_pide_ticket', {});
   }
@@ -303,6 +465,242 @@ $('btnCanjear').addEventListener('click', async () => {
   track('piloto_ticket_falla', { motivo: data?.motivo || 'desconocido' });
 });
 
+
+/* =========================================================
+   EL BRIEF, ADENTRO DE LA APP
+   El servidor decide el nivel mirando si esta persona canjeo
+   su ticket. Como aca siempre lo canjeo, siempre vuelve el
+   completo; igual mandamos el token y dejamos que el servidor
+   mande, nunca al reves.
+   ========================================================= */
+const esc = s => (s == null ? '' : String(s)).replace(/[&<>"]/g, c => (
+  { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+let seniorityElegido = '';
+document.querySelectorAll('[data-seg="seniority"] button').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('[data-seg="seniority"] button')
+      .forEach(o => o.setAttribute('aria-pressed', 'false'));
+    b.setAttribute('aria-pressed', 'true');
+    seniorityElegido = b.dataset.value;
+  });
+});
+
+
+/* La espera del nivel completo es mas larga: se cuenta en que esta. */
+const PASOS = ['Leyendo tu búsqueda…','Buscando el campo que encaja…',
+               'Eligiendo la voz que mejor comunica…','Escribiendo las piezas…',
+               'Armando el plan de 30 días…'];
+let relojPasos = null;
+function arrancarPasos(nodo){
+  let i = 0;
+  const pinta = () => { const t = nodo.querySelector('.paso'); if (t) t.textContent = PASOS[i]; };
+  pinta();
+  relojPasos = setInterval(() => { i = Math.min(i + 1, PASOS.length - 1); pinta(); }, 4500);
+}
+function pararPasos(){ if (relojPasos) { clearInterval(relojPasos); relojPasos = null; } }
+
+function dibujarBrief(b) {
+  const e = b.perfilElegido || {};
+  const aCurar = e.estado === 'a_curar';
+  const otros = (b.perfilesCompatibles || []).map(x => x.arquetipo)
+    .filter(a => a && a !== e.arquetipo).slice(0, 2).join(' · ');
+  const r = b.briefReformulado || {};
+  const piezas = (b.piezas || []).map(z => `<div class="pieza">
+      <div class="fmt">${esc(z.formato)}</div>
+      <div class="tit">${esc(z.titulo)}</div>
+      <div class="gancho">${esc(z.gancho)}</div>
+      <p class="pq">${esc(z.que)}</p>
+      <p class="pq"><b>Desarma:</b> ${esc(z.porQue)}</p>
+    </div>`).join('');
+  const tl = b.pilotTimeline || {};
+
+  $('bCuerpo').innerHTML =
+    `<div class="sec">
+      <h5>Tu brief, reescrito</h5>
+      <div class="titular">${esc(r.titular)}</div>
+      <p class="cuerpo">${esc(r.cuerpo)}</p>
+    </div>` +
+    `<div class="sec">
+      <h5>El perfil que elegimos</h5>
+      <div class="pfila">
+        <div class="rombo">&#9670;</div>
+        <div style="flex:1">
+          <b>${esc(e.arquetipo)}${aCurar ? ' · a curar' : ''}</b>
+          <div class="aud">${esc([e.plataforma, e.alcance].filter(Boolean).join(' · '))}</div>
+          <p class="pq">${esc(e.audiencia)}</p>
+          <p class="pq">${esc(e.tono)}</p>
+        </div>
+      </div>
+      <p class="pq">${esc(e.porQueEste)}</p>
+      ${(e.comoLoCuramos || []).length ? `<div class="curamos"><b>Cómo verificamos esta voz</b><ul>${
+        (e.comoLoCuramos || []).map(c => `<li>${esc(c)}</li>`).join('')}</ul></div>` : ''}
+      ${e.aTenerEnCuenta ? `<div class="objecion"><b>A tener en cuenta</b><p>${esc(e.aTenerEnCuenta)}</p></div>` : ''}
+      ${otros ? `<p class="tambien">También evaluamos: ${esc(otros)}.</p>` : ''}
+    </div>` +
+    `<div class="sec"><h5>Las piezas</h5>${piezas}</div>` +
+    `<div class="sec"><h5>Indicadores de talento</h5>
+      <div class="tags">${(b.talentKPIs || []).map(k => `<span>${esc(k)}</span>`).join('')}</div></div>` +
+    `<div class="sec"><h5>Piloto · 30 días</h5><div class="plan">
+      <div class="sem"><b>Semana 1</b><p>${esc(tl.week1)}</p></div>
+      <div class="sem"><b>Semana 2</b><p>${esc(tl.week2)}</p></div>
+      <div class="sem"><b>Semana 3</b><p>${esc(tl.week3)}</p></div>
+      <div class="sem"><b>Semana 4</b><p>${esc(tl.week4)}</p></div>
+    </div></div>`;
+}
+
+/* Cada brief queda guardado: es lo que despues lee el panel de leads.
+   Si falla, no se le arruina el resultado a la persona. */
+async function guardarBrief(datos, resultado) {
+  try {
+    const { data: s } = await sb.auth.getSession();
+    if (!s.session) return;
+    const { error } = await sb.from('briefs').insert({
+      usuario:   s.session.user.id,
+      rol:       datos.role,
+      seniority: datos.seniority,
+      mensaje:   datos.culture,
+      contexto:  datos.context || null,
+      resultado: resultado
+    });
+    if (error) console.warn('[brief] no se pudo guardar:', error.message);
+  } catch (e) {
+    console.warn('[brief] no se pudo guardar:', e.message);
+  }
+}
+
+$('bGenerar').addEventListener('click', async () => {
+  const datos = {
+    role:      $('bRol').value.trim(),
+    seniority: seniorityElegido,
+    culture:   $('bMsg').value.trim(),
+    context:   $('bCtx').value.trim(),
+    audience:  'company'
+  };
+  const err = $('bErr');
+  if (!datos.role || !datos.seniority || !datos.culture) {
+    err.textContent = 'Completá el rol, el seniority y qué querés comunicar.';
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+
+  const btn = $('bGenerar');
+  btn.disabled = true;
+  btn.textContent = 'Generando…';
+  $('bPanel').classList.remove('oculto');
+  $('bOtro').classList.add('oculto');
+  $('bPanelTitulo').textContent = 'Generando tu brief…';
+  $('bCuerpo').innerHTML = '<div class="cargador"><div class="giro"></div><span class="paso">Leyendo tu búsqueda…</span></div>';
+  arrancarPasos($('bCuerpo'));
+  $('bPanel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  track('app_brief_generado', { rol: datos.role });
+
+  try {
+    const { data: s } = await sb.auth.getSession();
+    const cab = { 'Content-Type': 'application/json' };
+    if (s.session && s.session.access_token) cab.Authorization = 'Bearer ' + s.session.access_token;
+
+    const r = await fetch('/api/generate-brief', { method: 'POST', headers: cab, body: JSON.stringify(datos) });
+    if (!r.ok) throw new Error('status ' + r.status);
+    const j = await r.json();
+    if (!j.success || !j.brief) throw new Error(j.error || 'sin brief');
+
+    if (j.nivel !== 'privado') {
+      // No deberia pasar: si pasa, el acceso se perdio por algun lado.
+      $('bPanelTitulo').textContent = 'Tu acceso no se reconoció';
+      $('bCuerpo').innerHTML = '<div class="sec"><p class="cuerpo">Volvé a entrar con Google para recuperar el acceso completo.</p></div>';
+      track('app_brief_sin_acceso', {});
+      return;
+    }
+
+    $('bPanelTitulo').textContent = 'Tu brief · piloto';
+    dibujarBrief(j.brief);
+    $('bOtro').classList.remove('oculto');
+    track('app_brief_listo', {});
+    guardarBrief(datos, j.brief);
+
+  } catch (e) {
+    $('bPanelTitulo').textContent = 'No pudimos generarlo';
+    $('bCuerpo').innerHTML = '<div class="sec"><p class="cuerpo">Algo falló de nuestro lado. Probá de nuevo en un minuto.</p></div>';
+    $('bOtro').classList.remove('oculto');
+    track('app_brief_error', { motivo: e.message });
+  } finally {
+    pararPasos();
+    btn.disabled = false;
+    btn.textContent = 'Generar mi brief';
+  }
+});
+
+$('bOtro').addEventListener('click', () => {
+  $('bPanel').classList.add('oculto');
+  $('bOtro').classList.add('oculto');
+  $('bRol').value = ''; $('bMsg').value = ''; $('bCtx').value = '';
+  seniorityElegido = '';
+  document.querySelectorAll('[data-seg="seniority"] button')
+    .forEach(o => o.setAttribute('aria-pressed', 'false'));
+  $('formBrief').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  $('bRol').focus();
+});
+
+/* =========================================================
+   LA APP: se ofrece instalar solo a quien ya esta adentro.
+   ========================================================= */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(e =>
+    console.warn('[app] no se registro el service worker:', e.message));
+}
+
+function ofrecerInstalar() {
+  const barra = $('instalar');
+  if (!barra || barra.dataset.listo) return;
+  barra.dataset.listo = '1';
+
+  let instalada = false;
+  try {
+    instalada = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  } catch (e) {}
+  if (instalada) { track('app_abierta_instalada', {}); return; }
+
+  try {
+    const hasta = parseInt(localStorage.getItem('heychar_instalar_no') || '0', 10);
+    if (hasta && Date.now() < hasta) return;
+  } catch (e) {}
+
+  const esIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !('MSStream' in window);
+  let guardado = null;
+  const mostrar = () => barra.classList.add('ver');
+
+  addEventListener('beforeinstallprompt', ev => {
+    ev.preventDefault(); guardado = ev; mostrar();
+    track('app_instalar_ofrecida', { via: 'navegador' });
+  });
+
+  if (esIOS) {
+    barra.classList.add('ios');
+    $('instalarPie').textContent = 'Tocá Compartir, abajo, y elegí "Agregar a inicio".';
+    setTimeout(() => { mostrar(); track('app_instalar_ofrecida', { via: 'ios' }); }, 2500);
+  }
+
+  const cerrar = recordar => {
+    barra.classList.remove('ver');
+    if (recordar) {
+      try { localStorage.setItem('heychar_instalar_no', String(Date.now() + 60 * 24 * 60 * 60 * 1000)); } catch (e) {}
+    }
+  };
+
+  $('instalarNo').addEventListener('click', () => { cerrar(true); track('app_instalar_rechazada', {}); });
+  $('instalarSi').addEventListener('click', () => {
+    if (!guardado) { cerrar(false); return; }
+    guardado.prompt();
+    guardado.userChoice.then(r => {
+      track('app_instalar_respuesta', { resultado: r && r.outcome });
+      cerrar(false); guardado = null;
+    });
+  });
+  addEventListener('appinstalled', () => { cerrar(false); track('app_instalada', {}); });
+}
+
 /* el enter tambien canjea */
 $('codigo').addEventListener('keydown', e => { if (e.key === 'Enter') $('btnCanjear').click(); });
 
@@ -314,5 +712,17 @@ arrancar().catch(() => {
   ver('vEntrar');
 });
 </script>
+
+<div id="instalar" role="region" aria-label="Instalar la aplicación">
+  <img src="/img/icon-192.png" alt="">
+  <div class="txt">
+    <b>Instalá HEY! CHAR</b>
+    <span id="instalarPie">Tu brief, a un toque. Queda como app y abre aunque la red ande mal.</span>
+  </div>
+  <div class="acc">
+    <button id="instalarSi" type="button">Instalar</button>
+    <button id="instalarNo" type="button">Ahora no</button>
+  </div>
+</div>
 </body>
 </html>
