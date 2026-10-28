@@ -517,8 +517,6 @@ async function arrancar(){
 
   if (lead?.acceso){
     pinta('a'); ver('vAdentro'); track('piloto_adentro', {});
-    // la app se ofrece recien aca: a quien ya tiene el acceso
-    ofrecerInstalar();
   } else {
     pinta('t');
     const traido = ticketDeLaUrl();
@@ -818,7 +816,7 @@ function pintarBarra(){
   if (promptApp) {
     barra.classList.remove('ios');
     titulo.textContent = 'Instalá HEY! CHAR';
-    pie.textContent = 'Queda como app en tu pantalla de inicio y abre aunque la red ande mal.';
+    pie.textContent = 'Instalala primero y entrá desde el ícono con tu golden ticket.';
     boton.style.display = '';
     return;
   }
@@ -1025,6 +1023,11 @@ sb.auth.onAuthStateChange((evento) => {
 /* Se guarda el codigo apenas carga, antes de que la persona haga nada:
    si viene del QR sin sesion, tiene que sobrevivir la vuelta de Google. */
 ticketDeLaUrl();
+
+/* Instalar la app es LO PRIMERO que se ofrece, antes del login y antes del
+   ticket. El orden es: instalo -> abro -> pongo el codigo -> cargo el brief.
+   Ofrecerlo recien al final era pedirselo a quien ya no lo necesitaba. */
+ofrecerInstalar();
 
 arrancar().catch(() => {
   ver('vEntrar');
