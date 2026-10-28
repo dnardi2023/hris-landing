@@ -806,12 +806,29 @@ const ICONO_COMPARTIR = '<span class="compartir"><svg viewBox="0 0 24 24" fill="
 
 const esIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !('MSStream' in window);
 
+/* Samsung Internet fabrica el paquete de Android con una version vieja, y
+   Play Protect lo bloquea con un cartel de "app no segura". No es nada del
+   sitio: es el servicio de empaquetado de ese navegador. Chrome usa el de
+   Google, que esta al dia. Asi que a los Samsung los mandamos a Chrome
+   ANTES de que se coman el susto. */
+const esSamsung = () => /SamsungBrowser/i.test(navigator.userAgent);
+
 function pintarBarra(){
   const barra = $('instalar');
   if (!barra) return;
   const titulo = barra.querySelector('.txt b');
   const pie    = $('instalarPie');
   const boton  = $('instalarSi');
+
+  if (esSamsung()) {
+    barra.classList.remove('ios');
+    titulo.textContent = 'Abrila en Chrome para instalarla';
+    pie.innerHTML = 'Samsung Internet genera una app que Android bloquea por seguridad. ' +
+                    'Copiá esta dirección, pegala en <b>Chrome</b> y se instala sin advertencias.';
+    boton.textContent = 'Copiar la dirección';
+    boton.style.display = '';
+    return;
+  }
 
   if (promptApp) {
     barra.classList.remove('ios');
@@ -861,7 +878,18 @@ function ofrecerInstalar() {
   };
 
   $('instalarNo').addEventListener('click', () => { cerrar(true); track('app_instalar_rechazada', {}); });
-  $('instalarSi').addEventListener('click', () => {
+  $('instalarSi').addEventListener('click', async () => {
+    if (esSamsung()) {
+      const dir = location.origin + '/piloto.html';
+      try {
+        await navigator.clipboard.writeText(dir);
+        $('instalarPie').innerHTML = 'Listo, copiada. Abrí <b>Chrome</b>, pegala en la barra de direcciones y entrá.';
+      } catch (e) {
+        $('instalarPie').innerHTML = 'Abrí <b>Chrome</b> y entrá a <b>' + dir.replace('https://','') + '</b>';
+      }
+      track('app_samsung_a_chrome', {});
+      return;
+    }
     if (!promptApp) { pintarBarra(); return; }
     promptApp.prompt();
     promptApp.userChoice.then(r => {
