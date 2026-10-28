@@ -267,6 +267,33 @@
     #instalar .acc{width:100%}
     #instalar .acc button{flex:1}
   }
+
+  /* ===================== ESCANEAR LA GOLDEN TICKET =====================
+     La camara ocupa toda la caja, con un marco de punteria encima. ====== */
+  .escanear{margin-top:.4rem}
+  .o-bien{display:flex;align-items:center;gap:.8rem;margin:1.3rem 0 1rem;
+          font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+  .o-bien::before,.o-bien::after{content:'';flex:1;height:1px;background:var(--line)}
+  .manual{display:none}
+  .manual.ver{display:block}
+
+  .camara{position:relative;margin-top:.4rem;border-radius:16px;overflow:hidden;
+          background:#0E0E10;aspect-ratio:1/1}
+  .camara video{width:100%;height:100%;object-fit:cover;display:block}
+  .mira{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+  .mira i{width:62%;aspect-ratio:1/1;border-radius:14px;
+          box-shadow:0 0 0 2000px rgba(14,14,16,.55);
+          border:2px solid var(--lime)}
+  .camara p{position:absolute;left:0;right:0;bottom:0;margin:0;padding:.9rem 1rem;
+            background:linear-gradient(transparent,rgba(14,14,16,.85));
+            color:#F2EFE9;font-size:.84rem;text-align:center}
+  .cam-cerrar{margin-top:.8rem;width:100%;min-height:48px;border-radius:999px;
+              border:1px solid var(--line-strong);background:transparent;
+              font-family:var(--sans);font-weight:600;font-size:.92rem;
+              color:var(--ink-dim);cursor:pointer}
+  .leyendo{position:absolute;inset:0;display:grid;place-items:center;
+           background:rgba(14,14,16,.78);color:var(--lime);
+           font-family:var(--sans);font-weight:600;font-size:1rem}
 </style>
 </head>
 <body>
@@ -313,7 +340,8 @@
   <!-- ======== 2. con sesión, sin acceso ======== -->
   <section class="wrap oculto" id="vTicket">
     <p class="eyebrow"><span class="rule"></span>Último paso</p>
-    <h1>Cargá tu <em>código</em>.</h1>
+    <h1>Mostrá tu <em>golden ticket</em>.</h1>
+    <p class="lead">Apuntá la cámara a la tarjeta que te dimos.</p>
 
     <div class="caja">
       <div class="quien">
@@ -321,11 +349,26 @@
         <div><b id="tNombre">—</b><span id="tMail">—</span></div>
       </div>
 
-      <label for="codigo">Tu golden ticket</label>
-      <input type="text" id="codigo" placeholder="HEYCHAR-000" autocomplete="off"
-             autocapitalize="characters" spellcheck="false" inputmode="text">
-      <div style="margin-top:1rem">
-        <button class="btn btn-lima" id="btnCanjear" type="button">Activar mi acceso</button>
+      <button class="btn btn-lima escanear" id="btnEscanear" type="button">Escanear mi golden ticket</button>
+
+      <div class="camara oculto" id="camara">
+        <video id="video" playsinline muted></video>
+        <div class="mira"><i></i></div>
+        <p id="camPie">Apuntá a la tarjeta</p>
+        <div class="leyendo oculto" id="leyendo">Leyendo…</div>
+      </div>
+      <button class="cam-cerrar oculto" id="btnCerrarCam" type="button">Cancelar</button>
+
+      <p class="o-bien">o</p>
+      <button class="cam-cerrar" id="btnManual" type="button" style="margin-top:0">Escribir el código a mano</button>
+
+      <div class="manual" id="manual">
+        <label for="codigo" style="margin-top:1.2rem">Tu golden ticket</label>
+        <input type="text" id="codigo" placeholder="HEYCHAR-000-XXXX" autocomplete="off"
+               autocapitalize="characters" spellcheck="false" inputmode="text">
+        <div style="margin-top:1rem">
+          <button class="btn btn-lima" id="btnCanjear" type="button">Activar mi acceso</button>
+        </div>
       </div>
       <div class="aviso mal oculto" id="tError"></div>
     </div>
@@ -737,11 +780,62 @@ $('bOtro').addEventListener('click', () => {
 });
 
 /* =========================================================
-   LA APP: se ofrece instalar solo a quien ya esta adentro.
+   LA APP: se ofrece instalar a quien ya esta adentro.
+
+   La barra NO espera el aviso del navegador para mostrarse. Chrome lo
+   dispara apenas carga la pagina, mucho antes de que terminemos el login,
+   asi que esperarlo significaba no mostrarla nunca. Ahora se muestra
+   siempre y el aviso, si llega, solo agrega el boton de un toque.
    ========================================================= */
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js').catch(e =>
     console.warn('[app] no se registro el service worker:', e.message));
+}
+
+/* Se escucha desde el primer instante, antes de cualquier otra cosa. */
+let promptApp = null;
+addEventListener('beforeinstallprompt', ev => {
+  ev.preventDefault();
+  promptApp = ev;
+  const b = document.getElementById('instalar');
+  if (b && b.classList.contains('ver')) pintarBarra();   // ya estaba a la vista: se mejora
+});
+
+const ICONO_COMPARTIR = '<span class="compartir"><svg viewBox="0 0 24 24" fill="none" ' +
+  'stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" ' +
+  'aria-hidden="true"><path d="M12 15V3"/><path d="m8 7 4-4 4 4"/>' +
+  '<path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/></svg></span>';
+
+const esIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !('MSStream' in window);
+
+function pintarBarra(){
+  const barra = $('instalar');
+  if (!barra) return;
+  const titulo = barra.querySelector('.txt b');
+  const pie    = $('instalarPie');
+  const boton  = $('instalarSi');
+
+  if (promptApp) {
+    barra.classList.remove('ios');
+    titulo.textContent = 'Instalá HEY! CHAR';
+    pie.textContent = 'Queda como app en tu pantalla de inicio y abre aunque la red ande mal.';
+    boton.style.display = '';
+    return;
+  }
+  if (esIOS()) {
+    barra.classList.add('ios');
+    titulo.textContent = 'Dejala en tu pantalla de inicio';
+    pie.innerHTML = 'Tocá ' + ICONO_COMPARTIR + ' abajo en Safari y elegí <b>Agregar a inicio</b>. ' +
+                    'Si no ves la barra, tocá la dirección del sitio.';
+    boton.style.display = 'none';
+    return;
+  }
+  // Android sin aviso, o escritorio
+  barra.classList.remove('ios');
+  titulo.textContent = 'Dejala en tu pantalla de inicio';
+  pie.innerHTML = 'Abrí el menú <b>⋮</b> del navegador y elegí ' +
+                  '<b>Instalar aplicación</b> o <b>Agregar a la pantalla principal</b>.';
+  boton.style.display = 'none';
 }
 
 function ofrecerInstalar() {
@@ -760,29 +854,6 @@ function ofrecerInstalar() {
     if (hasta && Date.now() < hasta) return;
   } catch (e) {}
 
-  const esIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !('MSStream' in window);
-  let guardado = null;
-  const mostrar = () => { barra.classList.add('ver'); document.body.classList.add('con-barra'); };
-
-  addEventListener('beforeinstallprompt', ev => {
-    ev.preventDefault(); guardado = ev; mostrar();
-    track('app_instalar_ofrecida', { via: 'navegador' });
-  });
-
-  if (esIOS) {
-    barra.classList.add('ios');
-    barra.querySelector('.txt b').textContent = 'Dejala en tu pantalla de inicio';
-    // El icono real de Compartir de iOS: asi lo reconoce de una, sin buscarlo.
-    const COMPARTIR = '<span class="compartir"><svg viewBox="0 0 24 24" fill="none" ' +
-      'stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" ' +
-      'aria-hidden="true"><path d="M12 15V3"/><path d="m8 7 4-4 4 4"/>' +
-      '<path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/></svg></span>';
-    $('instalarPie').innerHTML =
-      'Tocá ' + COMPARTIR + ' abajo en Safari y elegí <b>Agregar a inicio</b>. ' +
-      'Si no ves la barra, tocá la dirección del sitio.';
-    setTimeout(() => { mostrar(); track('app_instalar_ofrecida', { via: 'ios' }); }, 2500);
-  }
-
   const cerrar = recordar => {
     barra.classList.remove('ver');
     document.body.classList.remove('con-barra');
@@ -793,15 +864,156 @@ function ofrecerInstalar() {
 
   $('instalarNo').addEventListener('click', () => { cerrar(true); track('app_instalar_rechazada', {}); });
   $('instalarSi').addEventListener('click', () => {
-    if (!guardado) { cerrar(false); return; }
-    guardado.prompt();
-    guardado.userChoice.then(r => {
+    if (!promptApp) { pintarBarra(); return; }
+    promptApp.prompt();
+    promptApp.userChoice.then(r => {
       track('app_instalar_respuesta', { resultado: r && r.outcome });
-      cerrar(false); guardado = null;
+      cerrar(false); promptApp = null;
     });
   });
   addEventListener('appinstalled', () => { cerrar(false); track('app_instalada', {}); });
+
+  pintarBarra();
+  barra.classList.add('ver');
+  document.body.classList.add('con-barra');
+  track('app_instalar_ofrecida', { via: promptApp ? 'navegador' : (esIOS() ? 'ios' : 'menu') });
 }
+
+
+/* ===================== EL ESCANER =====================
+   Se usa el lector del propio navegador cuando existe (Android), y si no
+   se baja una libreria chica (iPhone). La libreria se pide recien al abrir
+   la camara: quien nunca escanea no la descarga.
+
+   La tarjeta trae una direccion con el codigo adentro, pero tambien vale
+   un codigo suelto: de ahi que se busque el patron en cualquier texto. ==== */
+const PATRON = /HEYCHAR-\d{3}-[A-Z0-9]{4}/i;
+
+let flujo = null, leyendoYa = false, pedirParar = false;
+
+function codigoDe(texto){
+  const m = PATRON.exec(texto || '');
+  return m ? m[0].toUpperCase() : null;
+}
+
+function cerrarCamara(){
+  pedirParar = true;
+  if (flujo){ flujo.getTracks().forEach(t => t.stop()); flujo = null; }
+  $('camara').classList.add('oculto');
+  $('btnCerrarCam').classList.add('oculto');
+  $('leyendo').classList.add('oculto');
+  $('btnEscanear').classList.remove('oculto');
+  $('btnEscanear').disabled = false;
+  $('btnEscanear').textContent = 'Escanear mi golden ticket';
+  leyendoYa = false;
+}
+
+async function conseguirLector(){
+  // el del navegador, si esta
+  if ('BarcodeDetector' in window) {
+    try {
+      const tipos = await window.BarcodeDetector.getSupportedFormats();
+      if (tipos.includes('qr_code')) {
+        const d = new window.BarcodeDetector({ formats: ['qr_code'] });
+        return async (lienzo) => {
+          const r = await d.detect(lienzo);
+          return r && r.length ? r[0].rawValue : null;
+        };
+      }
+    } catch(e){ /* sigue con la libreria */ }
+  }
+  const jsQR = (await import('/qr.js')).default;
+  return (lienzo) => {
+    const ctx = lienzo.getContext('2d', { willReadFrequently: true });
+    const d = ctx.getImageData(0, 0, lienzo.width, lienzo.height);
+    const r = jsQR(d.data, d.width, d.height, { inversionAttempts: 'dontInvert' });
+    return r ? r.data : null;
+  };
+}
+
+async function abrirCamara(){
+  const err = $('tError');
+  err.classList.add('oculto');
+  $('btnEscanear').disabled = true;
+  $('btnEscanear').textContent = 'Abriendo la cámara…';
+
+  try {
+    flujo = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 } },
+      audio: false
+    });
+  } catch(e){
+    $('btnEscanear').disabled = false;
+    $('btnEscanear').textContent = 'Escanear mi golden ticket';
+    err.innerHTML = (e && e.name === 'NotAllowedError')
+      ? 'No nos diste permiso para la cámara. Podés escribir el código a mano acá abajo.'
+      : 'No pudimos abrir la cámara en este dispositivo. Escribí el código a mano acá abajo.';
+    err.classList.remove('oculto');
+    $('manual').classList.add('ver');
+    track('piloto_camara_falla', { motivo: e && e.name });
+    return;
+  }
+
+  const video = $('video');
+  video.srcObject = flujo;
+  video.setAttribute('playsinline', '');
+  await video.play().catch(() => {});
+
+  $('btnEscanear').classList.add('oculto');
+  $('camara').classList.remove('oculto');
+  $('btnCerrarCam').classList.remove('oculto');
+  track('piloto_camara_abierta', {});
+
+  const lector = await conseguirLector();
+  const lienzo = document.createElement('canvas');
+  const ctx = lienzo.getContext('2d', { willReadFrequently: true });
+  pedirParar = false;
+  leyendoYa = true;
+
+  const mirar = async () => {
+    if (pedirParar || !leyendoYa) return;
+    if (video.readyState === video.HAVE_ENOUGH_DATA) {
+      const lado = Math.min(video.videoWidth, video.videoHeight);
+      if (lado) {
+        // se mira solo el centro, que es donde apunta el marco
+        const rec = Math.floor(lado * 0.72);
+        lienzo.width = rec; lienzo.height = rec;
+        ctx.drawImage(video,
+          Math.floor((video.videoWidth - rec) / 2),
+          Math.floor((video.videoHeight - rec) / 2),
+          rec, rec, 0, 0, rec, rec);
+        let texto = null;
+        try { texto = await lector(lienzo); } catch(e){ /* cuadro perdido, sigue */ }
+        const cod = codigoDe(texto);
+        if (cod) {
+          leyendoYa = false;
+          $('leyendo').classList.remove('oculto');
+          track('piloto_ticket_escaneado', {});
+          const ok = await canjearAhora(cod, false);
+          cerrarCamara();
+          if (!ok) $('manual').classList.add('ver');
+          return;
+        }
+        if (texto) {
+          // leyo algo, pero no es una golden ticket
+          $('camPie').textContent = 'Ese código no es una golden ticket';
+        }
+      }
+    }
+    requestAnimationFrame(mirar);
+  };
+  requestAnimationFrame(mirar);
+}
+
+$('btnEscanear').addEventListener('click', abrirCamara);
+$('btnCerrarCam').addEventListener('click', () => { cerrarCamara(); track('piloto_camara_cerrada', {}); });
+$('btnManual').addEventListener('click', () => {
+  $('manual').classList.add('ver');
+  $('btnManual').style.display = 'none';
+  $('codigo').focus();
+});
+// si la persona se va de la pagina, la camara se apaga
+document.addEventListener('visibilitychange', () => { if (document.hidden && flujo) cerrarCamara(); });
 
 /* el enter tambien canjea */
 $('codigo').addEventListener('keydown', e => { if (e.key === 'Enter') $('btnCanjear').click(); });
