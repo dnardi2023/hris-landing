@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sin conexión · Hey! Char</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<meta name="theme-color" content="#0E0E10">
+<style>
+  @font-face{font-family:'Whyte Inktrap';font-weight:400;src:url(/fonts/WhyteInktrap-Regular.woff2) format('woff2');font-display:swap}
+  @font-face{font-family:'Whyte Inktrap';font-weight:900;src:url(/fonts/WhyteInktrap-Heavy.woff2) format('woff2');font-display:swap}
+  :root{
+    --bg:#E9E5DE; --bg-1:#F2EFE9; --ink:#0E0E10; --ink-dim:#6B6459;
+    --line:rgba(14,14,16,.12); --line-strong:rgba(14,14,16,.24);
+    --rose:#EC6A7C; --lime:#C6F24E;
+    --sans:'Whyte Inktrap',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--ink); font-family:var(--sans);
+    min-height:100dvh; display:grid; place-items:center;
+    padding:clamp(1.25rem,5vw,3rem);
+  }
+  .caja{max-width:30rem; text-align:left}
+  .marca{height:34px; margin-bottom:2.4rem; display:block}
+  h1{font-size:clamp(1.8rem,6vw,2.6rem); line-height:1.1; letter-spacing:-.02em; font-weight:900}
+  h1 em{font-style:normal; background:var(--lime); padding:0 .18em}
+  p{margin-top:1.1rem; color:var(--ink-dim); font-size:1rem; line-height:1.6}
+  .btn{
+    margin-top:2rem; display:inline-flex; align-items:center; justify-content:center;
+    min-height:44px; padding:.85rem 1.6rem; border:none; border-radius:11px;
+    background:var(--rose); color:#0A0A0C; font-family:var(--sans); font-weight:600;
+    font-size:.98rem; cursor:pointer;
+  }
+  .btn:hover{background:#d1556a}
+  .pie{margin-top:2.6rem; padding-top:1.2rem; border-top:1px solid var(--line);
+       font-size:.82rem; color:var(--ink-dim)}
+  @media(prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){--bg:#0E0E10; --ink:#F2EFE9; --ink-dim:#9C9488; --line:rgba(242,239,233,.14)}
+  }
+</style>
+</head>
+<body>
+  <div class="caja">
+    <img class="marca" src="/img/logo-mark-ink.png" alt="Hey! Char">
+    <h1>Esto necesita <em>conexión</em>.</h1>
+    <p>La app abrió bien, pero esta parte todavía no la tenemos guardada en tu dispositivo. Volvé a intentar cuando tengas señal.</p>
+    <button class="btn" onclick="location.reload()">Reintentar</button>
+    <p class="pie">Hey! Char · HR Influence Strategy</p>
+  </div>
+</body>
+</html>
