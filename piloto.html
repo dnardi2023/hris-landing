@@ -879,16 +879,24 @@ function ofrecerInstalar() {
   } catch (e) {}
   if (instalada) { track('app_abierta_instalada', {}); return; }
 
-  try {
-    const hasta = parseInt(localStorage.getItem('heychar_instalar_no') || '0', 10);
-    if (hasta && Date.now() < hasta) return;
-  } catch (e) {}
+  /* ?instalar=1 borra el "ahora no" y vuelve a mostrar la barra. Sirve para
+     probar, y para cuando haya que ayudar a alguien que la descarto sin querer. */
+  let forzar = false;
+  try { forzar = new URLSearchParams(location.search).get('instalar') === '1'; } catch (e) {}
+  if (forzar) { try { localStorage.removeItem('heychar_instalar_no'); } catch (e) {} }
+
+  if (!forzar) {
+    try {
+      const hasta = parseInt(localStorage.getItem('heychar_instalar_no') || '0', 10);
+      if (hasta && Date.now() < hasta) return;
+    } catch (e) {}
+  }
 
   const cerrar = recordar => {
     barra.classList.remove('ver');
     document.body.classList.remove('con-barra');
     if (recordar) {
-      try { localStorage.setItem('heychar_instalar_no', String(Date.now() + 60 * 24 * 60 * 60 * 1000)); } catch (e) {}
+      try { localStorage.setItem('heychar_instalar_no', String(Date.now() + 7 * 24 * 60 * 60 * 1000)); } catch (e) {}
     }
   };
 
