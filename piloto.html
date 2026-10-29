@@ -813,6 +813,11 @@ const esIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !('MSStream'
    ANTES de que se coman el susto. */
 const esSamsung = () => /SamsungBrowser/i.test(navigator.userAgent);
 
+/* En iPhone solo Safari instala de verdad. Chrome, Firefox y Edge en iOS
+   tienen "Agregar a inicio", pero crean un marcador, no una app: abre con
+   la barra del navegador y sin pantalla completa. Apple no deja otra cosa. */
+const esSafariIOS = () => esIOS() && !/CriOS|FxiOS|EdgiOS|OPiOS|YaBrowser/i.test(navigator.userAgent);
+
 function pintarBarra(){
   const barra = $('instalar');
   if (!barra) return;
@@ -839,9 +844,19 @@ function pintarBarra(){
   }
   if (esIOS()) {
     barra.classList.add('ios');
+    if (!esSafariIOS()) {
+      // en iPhone, fuera de Safari, "Agregar a inicio" deja un marcador
+      titulo.textContent = 'Abrila en Safari para instalarla';
+      pie.innerHTML = 'En iPhone solo Safari instala la app de verdad. ' +
+                      'Copiá esta dirección y abrila en <b>Safari</b>.';
+      boton.textContent = 'Copiar la dirección';
+      boton.style.display = 'inline-flex';   // explicito: el estilo .ios lo esconde
+      return;
+    }
     titulo.textContent = 'Dejala en tu pantalla de inicio';
-    pie.innerHTML = 'Tocá ' + ICONO_COMPARTIR + ' abajo en Safari y elegí <b>Agregar a inicio</b>. ' +
-                    'Si no ves la barra, tocá la dirección del sitio.';
+    pie.innerHTML = '1. Tocá ' + ICONO_COMPARTIR + ' en la barra de abajo.<br>' +
+                    '2. Deslizá la lista hacia arriba.<br>' +
+                    '3. Elegí <b>Agregar a inicio</b>.';
     boton.style.display = 'none';
     return;
   }
@@ -879,13 +894,14 @@ function ofrecerInstalar() {
 
   $('instalarNo').addEventListener('click', () => { cerrar(true); track('app_instalar_rechazada', {}); });
   $('instalarSi').addEventListener('click', async () => {
-    if (esSamsung()) {
+    if (esSamsung() || (esIOS() && !esSafariIOS())) {
       const dir = location.origin + '/piloto.html';
       try {
         await navigator.clipboard.writeText(dir);
-        $('instalarPie').innerHTML = 'Listo, copiada. Abrí <b>Chrome</b>, pegala en la barra de direcciones y entrá.';
+        const donde = esIOS() ? 'Safari' : 'Chrome';
+        $('instalarPie').innerHTML = 'Listo, copiada. Abrí <b>' + donde + '</b>, pegala en la barra de direcciones y entrá.';
       } catch (e) {
-        $('instalarPie').innerHTML = 'Abrí <b>Chrome</b> y entrá a <b>' + dir.replace('https://','') + '</b>';
+        $('instalarPie').innerHTML = 'Abrí <b>' + (esIOS() ? 'Safari' : 'Chrome') + '</b> y entrá a <b>' + dir.replace('https://','') + '</b>';
       }
       track('app_samsung_a_chrome', {});
       return;
