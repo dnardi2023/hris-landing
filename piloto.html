@@ -207,93 +207,49 @@
 
   .otravez{margin-top:1.3rem}
   /* aire al pie para que la barra de instalacion no tape el ultimo boton */
-  body.con-barra main{padding-bottom:190px}
 
-  /* ===================== BARRA DE INSTALACION =====================
-     Solo aparece adentro: la app se ofrece a quien ya tiene acceso. ===== */
+
+  /* ===================== EL CARTEL DE INSTALACION =====================
+     Lo primero que ve quien abre el link: grande, al medio, empujando a
+     instalar. Con una puerta chica abajo para seguir en el navegador: si
+     alguien no puede instalar, igual tiene que poder probar el piloto. === */
   #instalar{
-    position:fixed; left:0; right:0; bottom:0; z-index:9999;
-    display:none; gap:.9rem; align-items:center;
-    padding:.9rem clamp(1rem,4vw,1.6rem);
-    padding-bottom:calc(.9rem + env(safe-area-inset-bottom));
-    background:var(--bg-1); border-top:1px solid var(--line);
-    box-shadow:0 -8px 30px rgba(14,14,16,.08);
+    position:fixed; inset:0; z-index:9999; display:none;
+    place-items:center; padding:1.2rem;
+    background:rgba(14,14,16,.62);
+    -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px);
     font-family:var(--sans); color:var(--ink);
   }
-  #instalar.ver{display:flex}
-  #instalar img{width:38px;height:38px;border-radius:9px;flex:none}
-  #instalar .txt{flex:1;min-width:0}
-  #instalar .txt > b{display:block;font-weight:600;font-size:.95rem;line-height:1.25}
-  #instalar .txt > span{display:block;font-size:.8rem;color:var(--ink-dim);margin-top:.15rem;line-height:1.4}
-  #instalar .acc{display:flex;gap:.5rem;flex:none}
-  #instalar button{min-height:44px;padding:.6rem 1.1rem;border-radius:10px;cursor:pointer;
-                   font-family:inherit;font-weight:600;font-size:.88rem;border:none;width:auto}
-  #instalarSi{background:var(--rose);color:#0A0A0C}
-  #instalarNo{background:transparent;color:var(--ink-dim);border:1px solid var(--line-strong)}
-  /* En iPhone el boton Compartir esta en la barra de Safari, abajo del todo.
-     Si nuestra barra se pega al borde, la tapa. Por eso en iOS se levanta y
-     apunta hacia abajo, hacia donde la persona tiene que mirar. */
-  #instalar.ios #instalarSi{display:none}
-  #instalar.ios{
-    bottom:78px;
-    margin:0 .6rem;
-    border:1px solid var(--line-strong);
-    border-radius:16px;
-    box-shadow:0 10px 40px rgba(14,14,16,.18);
-    /* apilada: en una columna angosta el texto no entra al lado del boton */
-    flex-direction:column;
-    align-items:stretch;
-    gap:.75rem;
+  #instalar.ver{display:grid}
+  .ins-card{
+    width:100%; max-width:26rem; background:var(--bg-1);
+    border-radius:22px; padding:clamp(1.6rem,5vw,2.2rem);
+    box-shadow:0 24px 70px rgba(14,14,16,.3);
+    text-align:center; max-height:88dvh; overflow-y:auto;
   }
-  #instalar.ios img{display:none}
-  #instalar.ios .txt{width:100%}
-  #instalar.ios .txt > span{font-size:.86rem}
-  #instalar.ios .acc{width:100%}
-  #instalar.ios .acc button{width:100%}
-  #instalar.ios::after{
-    content:'';position:absolute;left:50%;bottom:-9px;transform:translateX(-50%) rotate(45deg);
-    width:16px;height:16px;background:var(--bg-1);
-    border-right:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);
+  .ins-card img{width:76px;height:76px;border-radius:20px;margin:0 auto .9rem;display:block}
+  .ins-card .txt b{display:block;font-weight:600;font-size:1.45rem;line-height:1.15;letter-spacing:-.02em}
+  .ins-card .txt > span{
+    display:block;margin-top:.7rem;font-size:.95rem;line-height:1.55;color:var(--ink-dim);
   }
-  #instalar.ios .acc{width:auto;flex:none}
-  #instalar .txt > span b{display:inline;font-weight:600;color:var(--ink)}
+  .ins-card .txt > span b{display:inline;font-weight:600;color:var(--ink);font-size:inherit}
+  .ins-card .acc{display:flex;flex-direction:column;gap:.6rem;margin-top:1.5rem}
+  .ins-card button{
+    width:100%; min-height:54px; border-radius:999px; cursor:pointer;
+    font-family:inherit; font-weight:600; font-size:1rem; border:none;
+  }
+  #instalarSi{background:var(--lime);color:var(--ink)}
+  #instalarSi:hover{filter:brightness(1.06)}
+  #instalarNo{background:transparent;color:var(--ink-dim);font-size:.9rem;min-height:44px}
+  #instalarNo:hover{color:var(--ink)}
   #instalar .compartir{
     display:inline-block;width:1em;height:1em;
     vertical-align:-.15em;margin:0 .15em;color:#007AFF;
   }
   #instalar .compartir svg{width:100%;height:100%;display:block}
-  @media(max-width:560px){
-    #instalar{flex-wrap:wrap}
-    #instalar .acc{width:100%}
-    #instalar .acc button{flex:1}
-  }
+  /* en iPhone los pasos van alineados a la izquierda: se leen mejor */
+  #instalar.ios .ins-card .txt > span{text-align:left}
 
-  /* ===================== ESCANEAR LA GOLDEN TICKET =====================
-     La camara ocupa toda la caja, con un marco de punteria encima. ====== */
-  .escanear{margin-top:.4rem}
-  .o-bien{display:flex;align-items:center;gap:.8rem;margin:1.3rem 0 1rem;
-          font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
-  .o-bien::before,.o-bien::after{content:'';flex:1;height:1px;background:var(--line)}
-  .manual{display:none}
-  .manual.ver{display:block}
-
-  .camara{position:relative;margin-top:.4rem;border-radius:16px;overflow:hidden;
-          background:#0E0E10;aspect-ratio:1/1}
-  .camara video{width:100%;height:100%;object-fit:cover;display:block}
-  .mira{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
-  .mira i{width:62%;aspect-ratio:1/1;border-radius:14px;
-          box-shadow:0 0 0 2000px rgba(14,14,16,.55);
-          border:2px solid var(--lime)}
-  .camara p{position:absolute;left:0;right:0;bottom:0;margin:0;padding:.9rem 1rem;
-            background:linear-gradient(transparent,rgba(14,14,16,.85));
-            color:#F2EFE9;font-size:.84rem;text-align:center}
-  .cam-cerrar{margin-top:.8rem;width:100%;min-height:48px;border-radius:999px;
-              border:1px solid var(--line-strong);background:transparent;
-              font-family:var(--sans);font-weight:600;font-size:.92rem;
-              color:var(--ink-dim);cursor:pointer}
-  .leyendo{position:absolute;inset:0;display:grid;place-items:center;
-           background:rgba(14,14,16,.78);color:var(--lime);
-           font-family:var(--sans);font-weight:600;font-size:1rem}
 </style>
 </head>
 <body>
@@ -894,7 +850,6 @@ function ofrecerInstalar() {
 
   const cerrar = recordar => {
     barra.classList.remove('ver');
-    document.body.classList.remove('con-barra');
     if (recordar) {
       try { localStorage.setItem('heychar_instalar_no', String(Date.now() + 7 * 24 * 60 * 60 * 1000)); } catch (e) {}
     }
@@ -925,7 +880,6 @@ function ofrecerInstalar() {
 
   pintarBarra();
   barra.classList.add('ver');
-  document.body.classList.add('con-barra');
   track('app_instalar_ofrecida', { via: promptApp ? 'navegador' : (esIOS() ? 'ios' : 'menu') });
 }
 
@@ -1086,15 +1040,17 @@ arrancar().catch(() => {
 });
 </script>
 
-<div id="instalar" role="region" aria-label="Instalar la aplicación">
-  <img src="/img/icon-192.png" alt="">
-  <div class="txt">
-    <b>Instalá HEY! CHAR</b>
-    <span id="instalarPie">Tu brief, a un toque. Queda como app y abre aunque la red ande mal.</span>
-  </div>
-  <div class="acc">
-    <button id="instalarSi" type="button">Instalar</button>
-    <button id="instalarNo" type="button">Ahora no</button>
+<div id="instalar" role="dialog" aria-modal="true" aria-label="Instalar la aplicación">
+  <div class="ins-card">
+    <img src="/img/icon-192.png" alt="">
+    <div class="txt">
+      <b>Instalá HEY! CHAR</b>
+      <span id="instalarPie">Tu brief, a un toque. Queda como app y abre aunque la red ande mal.</span>
+    </div>
+    <div class="acc">
+      <button id="instalarSi" type="button">Instalar</button>
+      <button id="instalarNo" type="button">Seguir en el navegador</button>
+    </div>
   </div>
 </div>
 </body>
