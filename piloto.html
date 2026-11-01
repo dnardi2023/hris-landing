@@ -250,6 +250,49 @@
   /* en iPhone los pasos van alineados a la izquierda: se leen mejor */
   #instalar.ios .ins-card .txt > span{text-align:left}
 
+  /* ===== portada de la app ===== */
+  .hero-frase{font-family:var(--sans);font-weight:900;letter-spacing:-.035em;
+              line-height:.98;font-size:clamp(2.6rem,11vw,4.1rem);margin:.2rem 0 0}
+  .hero-frase em{font-style:normal;color:var(--ink);background:var(--lime);padding:0 .09em}
+  .hero-sub{font-family:var(--ui);font-size:1.02rem;line-height:1.6;color:var(--ink-dim);
+            margin:1.1rem 0 0;max-width:34ch}
+  .cta-caja{margin:2rem 0 .4rem}
+  .cta-caja .btn{width:100%}
+  .cta-pie{font-family:var(--ui);font-size:.82rem;color:var(--ink-faint);
+           margin:.7rem 0 0;line-height:1.5;text-align:center}
+  .bloque{margin-top:2.6rem}
+  .bloque > .eyebrow{margin-bottom:.9rem}
+
+  /* ===== acordeon ===== */
+  .acordeon{border-top:1px solid var(--line)}
+  .acordeon details{border-bottom:1px solid var(--line)}
+  .acordeon summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:.85rem;
+                    padding:1.02rem 0;font-family:var(--sans);font-weight:700;font-size:1rem;
+                    letter-spacing:-.01em;color:var(--ink)}
+  .acordeon summary::-webkit-details-marker{display:none}
+  .acordeon summary:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .acordeon .num{font-family:var(--ui);font-size:.64rem;font-weight:600;letter-spacing:.16em;
+                 color:var(--ink-faint);min-width:1.5rem;flex:none}
+  .acordeon .mas{margin-left:auto;flex:none;width:1.05rem;height:1.05rem;position:relative;
+                 transition:transform .22s ease;align-self:center}
+  .acordeon .mas::before,.acordeon .mas::after{content:'';position:absolute;background:var(--ink);
+                 left:50%;top:50%;transform:translate(-50%,-50%)}
+  .acordeon .mas::before{width:1.05rem;height:1.6px}
+  .acordeon .mas::after{width:1.6px;height:1.05rem}
+  .acordeon details[open] .mas{transform:rotate(45deg)}
+  .acordeon .cont{padding:0 0 1.2rem 2.35rem;font-family:var(--ui);font-size:.92rem;
+                  line-height:1.65;color:var(--ink-dim)}
+  .acordeon .precio{display:inline-block;margin-top:.75rem;font-family:var(--sans);font-weight:900;
+                    font-size:.9rem;color:var(--ink);background:var(--lime);padding:.3rem .6rem}
+  .acordeon .cont p + p{margin-top:.6rem}
+
+  /* volver a la portada */
+  .volver{display:inline-flex;align-items:center;gap:.45rem;background:none;border:0;padding:0;
+          font-family:var(--ui);font-size:.84rem;color:var(--ink-dim);cursor:pointer;
+          margin-bottom:1.4rem}
+  .volver:hover{color:var(--ink)}
+  .volver svg{width:.95rem;height:.95rem;flex:none}
+
 </style>
 </head>
 <body>
@@ -265,8 +308,82 @@
   <!-- ======== mientras resuelve si hay sesión ======== -->
   <div class="cargando" id="vCargando">Un segundo…</div>
 
+
+  <!-- ======== 0. portada: que hacemos + puerta al piloto ======== -->
+  <section class="wrap oculto" id="vInicio">
+    <p class="eyebrow"><span class="rule"></span>HR Influence Strategy</p>
+    <h1 class="hero-frase">Tu mensaje,<br><em>sus voces.</em></h1>
+    <p class="hero-sub">El talento joven ya no escucha a las empresas: le cree a las personas que sigue. Nosotras conectamos tu b&uacute;squeda con el creador que esa comunidad ya escucha.</p>
+
+    <div class="cta-caja">
+      <button class="btn btn-lima" id="btnCta" type="button">Canjear mi golden ticket</button>
+      <p class="cta-pie" id="ctaPie">&iquest;No ten&eacute;s c&oacute;digo? <a href="/#contacto">Ped&iacute; el tuyo</a>.</p>
+    </div>
+
+    <div class="bloque">
+      <p class="eyebrow"><span class="rule"></span>Qu&eacute; hacemos</p>
+      <div class="acordeon">
+        <details>
+          <summary><span class="num">01</span>Atracci&oacute;n con Influencia<span class="mas"></span></summary>
+          <div class="cont"><p>Vinculamos el perfil que busc&aacute;s con un creador de nicho que tiene credibilidad genuina en esa comunidad profesional, para potenciar una b&uacute;squeda concreta y mejorar la calidad del flujo de candidatos.</p></div>
+        </details>
+        <details>
+          <summary><span class="num">02</span>Cultura desde Adentro<span class="mas"></span></summary>
+          <div class="cont"><p>Traducimos tu cultura y tu propuesta de valor empleadora a contenido aut&eacute;ntico producido con creadores, con presencia sostenida en los canales donde el talento joven se informa.</p></div>
+        </details>
+        <details>
+          <summary><span class="num">03</span>Influencers Internos<span class="mas"></span></summary>
+          <div class="cont"><p>Identificamos, formamos y activamos a colaboradores de tu empresa como voces cre&iacute;bles de la marca empleadora, sistematizando el contenido que generan ellos mismos, con trayectos de capacitaci&oacute;n acordados con cada cliente.</p></div>
+        </details>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <p class="eyebrow"><span class="rule"></span>C&oacute;mo se contrata</p>
+      <div class="acordeon">
+        <details>
+          <summary><span class="num">01</span>Piloto<span class="mas"></span></summary>
+          <div class="cont"><p>El primer paso, de bajo riesgo. Una b&uacute;squeda activa, un creador de nicho y dos o tres piezas nativas. Medimos candidatos calificados y costo por candidato calificado. Sin compromiso posterior.</p><span class="precio">USD 1.200</span></div>
+        </details>
+        <details>
+          <summary><span class="num">02</span>Abono mensual<span class="mas"></span></summary>
+          <div class="cont"><p>Para sostener la comunicaci&oacute;n en el tiempo: creadores de nicho y contenido producido mes a mes, con curadur&iacute;a y reporte.</p><span class="precio">USD 1.800 / mes</span></div>
+        </details>
+        <details>
+          <summary><span class="num">03</span>Programa anual<span class="mas"></span></summary>
+          <div class="cont"><p>Estructurado y presupuestable. Incluye la formaci&oacute;n de influencers internos y la producci&oacute;n sostenida con creadores de nicho, con reporte formal y revisi&oacute;n trimestral.</p><span class="precio">USD 45.000 &middot; 12 meses</span></div>
+        </details>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <p class="eyebrow"><span class="rule"></span>C&oacute;mo corre un piloto</p>
+      <div class="acordeon">
+        <details>
+          <summary><span class="num">01</span>D&iacute;a 1&ndash;5 &middot; Brief HR<span class="mas"></span></summary>
+          <div class="cont"><p>Workshop de 90 minutos. Traducimos cultura real a hip&oacute;tesis de contenido.</p></div>
+        </details>
+        <details>
+          <summary><span class="num">02</span>D&iacute;a 6&ndash;10 &middot; Curadur&iacute;a<span class="mas"></span></summary>
+          <div class="cont"><p>Propuesta de creadores por nicho. Aprob&aacute;s el match antes de que se produzca nada.</p></div>
+        </details>
+        <details>
+          <summary><span class="num">03</span>D&iacute;a 11&ndash;25 &middot; Producci&oacute;n<span class="mas"></span></summary>
+          <div class="cont"><p>Dos o tres piezas nativas, en el lenguaje del canal y de la comunidad.</p></div>
+        </details>
+        <details>
+          <summary><span class="num">04</span>D&iacute;a 26&ndash;30 &middot; Reporte<span class="mas"></span></summary>
+          <div class="cont"><p>Candidatos calificados y costo por candidato calificado. Los n&uacute;meros que import&aacute;s a tu tablero.</p></div>
+        </details>
+      </div>
+    </div>
+
+    <p class="legal" style="margin-top:2.4rem">Con el golden ticket abr&iacute;s el <b>Brief Builder</b>: carg&aacute;s una b&uacute;squeda real y te devolvemos el perfil curado, las piezas que produc&iacute;riamos y el plan de los primeros 30 d&iacute;as.</p>
+  </section>
+
   <!-- ======== 1. sin sesión ======== -->
   <section class="wrap oculto" id="vEntrar">
+    <button class="volver" type="button" data-volver><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Volver</button>
     <p class="eyebrow"><span class="rule"></span>Piloto cerrado</p>
     <h1>Entrá con tu <em>golden ticket</em>.</h1>
     <p class="lead">El Brief Builder completo está abierto solo para las empresas del piloto. Si tenés un código, son dos pasos.</p>
@@ -295,6 +412,7 @@
 
   <!-- ======== 2. con sesión, sin acceso ======== -->
   <section class="wrap oculto" id="vTicket">
+    <button class="volver" type="button" data-volver><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Volver</button>
     <p class="eyebrow"><span class="rule"></span>Último paso</p>
     <h1>Mostrá tu <em>golden ticket</em>.</h1>
     <p class="lead">Apuntá la cámara a la tarjeta que te dimos.</p>
@@ -334,6 +452,7 @@
 
   <!-- ======== 3. adentro ======== -->
   <section class="wrap oculto" id="vAdentro">
+    <button class="volver" type="button" data-volver><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Volver</button>
     <p class="eyebrow"><span class="rule"></span>Piloto activo</p>
     <h1>Cargá tu <em>búsqueda</em>.</h1>
     <p class="lead">Contanos a quién buscás y qué querés comunicar. Te devolvemos el perfil curado, las piezas que produciríamos y el plan de los primeros 30 días.</p>
@@ -402,7 +521,7 @@ const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
 
 const $  = id => document.getElementById(id);
 const ver = cual => {
-  ['vCargando','vEntrar','vTicket','vAdentro'].forEach(v => $(v).classList.add('oculto'));
+  ['vCargando','vInicio','vEntrar','vTicket','vAdentro'].forEach(v => $(v).classList.add('oculto'));
   $(cual).classList.remove('oculto');
 };
 const track = (n, p) => { if (typeof window.track === 'function') window.track(n, p || {}); };
@@ -447,7 +566,7 @@ function olvidarTicket(){
 async function arrancar(){
   const { data:{ session } } = await sb.auth.getSession();
 
-  if (!session){ ver('vEntrar'); return; }
+  if (!session){ portada('vEntrar'); return; }
 
   const u = session.user;
   const nombre = u.user_metadata?.full_name || u.user_metadata?.name || '';
@@ -472,23 +591,51 @@ async function arrancar(){
   };
 
   if (lead?.acceso){
-    pinta('a'); ver('vAdentro'); track('piloto_adentro', {});
+    pinta('a');
+    portada('vAdentro', 'Entrar a mi Brief Builder',
+            'Tu acceso ya está activo.');
+    track('piloto_adentro', {});
   } else {
     pinta('t');
     const traido = ticketDeLaUrl();
     if (traido) {
-      // vino con el codigo puesto: se canjea sin pedirle nada
+      // vino con el codigo puesto: se canjea sin pedirle nada, sin pasar por la portada
       $('codigo').value = traido;
       ver('vTicket');
       track('piloto_ticket_en_url', {});
       const ok = await canjearAhora(traido, true);
       if (ok) return;            // canjearAhora ya mostro el adentro
     } else {
-      ver('vTicket');
+      portada('vTicket');
     }
     track('piloto_pide_ticket', {});
   }
 }
+
+/* La portada es lo primero que se ve siempre. El boton grande cambia de
+   destino segun en que punto del camino esta la persona, pero el texto de
+   arriba y los desplegables son los mismos para todos. */
+let DESTINO = 'vEntrar';
+function portada(destino, rotulo, pie){
+  DESTINO = destino;
+  if (rotulo) $('btnCta').textContent = rotulo;
+  if (pie) $('ctaPie').innerHTML = pie;
+  ver('vInicio');
+  track('app_portada', { destino });
+}
+
+$('btnCta').addEventListener('click', () => {
+  track('app_cta', { destino: DESTINO });
+  ver(DESTINO);
+  window.scrollTo({ top: 0, behavior: 'instant' });
+});
+
+document.querySelectorAll('[data-volver]').forEach(b => {
+  b.addEventListener('click', () => {
+    ver('vInicio');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  });
+});
 
 $('btnGoogle').addEventListener('click', async () => {
   $('btnGoogle').disabled = true;
