@@ -79,11 +79,14 @@
   .g-logo{width:20px;height:20px;flex:none}
 
   label{display:block;font-size:.8rem;letter-spacing:.02em;color:var(--ink-dim);margin-bottom:.5rem}
-  input[type=text]{width:100%;min-height:56px;background:var(--bg-2);border:1px solid var(--line-strong);
-    border-radius:12px;padding:0 1rem;font-family:var(--ui);font-size:1.05rem;color:var(--ink);
-    letter-spacing:.08em;text-transform:uppercase}
-  input[type=text]:focus{outline:2px solid var(--ink);outline-offset:1px}
-  input[type=text]::placeholder{letter-spacing:normal;text-transform:none;color:var(--ink-faint)}
+  input[type=text],input[type=email]{width:100%;min-height:56px;background:var(--bg-2);
+    border:1px solid var(--line-strong);border-radius:12px;padding:0 1rem;font-family:var(--ui);
+    font-size:1.05rem;color:var(--ink)}
+  /* solo el codigo del ticket va en mayuscula y espaciado: es un codigo, no un nombre */
+  #codigo{letter-spacing:.08em;text-transform:uppercase}
+  input[type=text]:focus,input[type=email]:focus{outline:2px solid var(--ink);outline-offset:1px}
+  input[type=text]::placeholder,input[type=email]::placeholder{letter-spacing:normal;
+    text-transform:none;color:var(--ink-faint)}
 
   .quien{display:flex;align-items:center;gap:.9rem;margin-bottom:1.6rem;
          padding-bottom:1.4rem;border-bottom:1px solid var(--line)}
@@ -301,6 +304,7 @@
   .ejes p{margin:0;font-size:.9rem;line-height:1.55;color:var(--ink-dim)}
   @media (max-width:420px){ .ejes > div{grid-template-columns:1fr;gap:.15rem} }
 
+  .opc{color:var(--ink-faint);font-weight:400}
 </style>
 </head>
 <body>
@@ -309,7 +313,7 @@
   <a href="/" aria-label="Hey! Char — volver al inicio">
     <img class="marca" src="img/logo-mark-ink.png" alt="Hey! Char">
   </a>
-  <button class="salir oculto" id="btnSalir" type="button">Cerrar sesión</button>
+  <button class="salir oculto" id="btnSalir" type="button">Salir</button>
 </header>
 
 <main>
@@ -421,17 +425,12 @@
   <!-- ======== 2. con sesión, sin acceso ======== -->
   <section class="wrap oculto" id="vTicket">
     <button class="volver" type="button" data-volver><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Volver</button>
-    <p class="eyebrow"><span class="rule"></span>Último paso</p>
-    <h1>Mostrá tu <em>golden ticket</em>.</h1>
-    <p class="lead">Apuntá la cámara a la tarjeta que te dimos.</p>
+    <p class="eyebrow"><span class="rule"></span>Paso 1 de 2</p>
+    <h1>Tu <em>golden ticket</em>.</h1>
+    <p class="lead">Escaneá la tarjeta que te dimos, o escribí el código a mano.</p>
 
     <div class="caja">
-      <div class="quien">
-        <img id="tAvatar" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-        <div><b id="tNombre">—</b><span id="tMail">—</span></div>
-      </div>
-
-      <button class="btn btn-lima escanear" id="btnEscanear" type="button">Escanear mi golden ticket</button>
+      <button class="btn btn-lima escanear" id="btnEscanear" type="button">Escanear con la cámara</button>
 
       <div class="camara oculto" id="camara">
         <video id="video" playsinline muted></video>
@@ -456,6 +455,39 @@
     </div>
 
     <p class="legal" style="margin-top:2rem">¿No tenés código? <a href="/#contacto">Escribinos</a> y te sumamos a la lista.</p>
+  </section>
+
+
+  <!-- ======== 2.b con el codigo ya validado: quien sos ======== -->
+  <section class="wrap oculto" id="vDatos">
+    <p class="eyebrow"><span class="rule"></span>Paso 2 de 2</p>
+    <h1>&iquest;Con <em>qui&eacute;n</em> hablamos?</h1>
+    <p class="lead">Es lo &uacute;nico que necesitamos para mandarte el resultado de tu piloto.</p>
+
+    <div class="caja">
+      <div class="aviso bien">C&oacute;digo validado.</div>
+
+      <div class="campo">
+        <label for="dNombre">Tu nombre</label>
+        <input type="text" id="dNombre" placeholder="Nombre y apellido" autocomplete="name" spellcheck="false">
+      </div>
+      <div class="campo">
+        <label for="dMail">Tu mail de trabajo</label>
+        <input type="email" id="dMail" placeholder="nombre@empresa.com" autocomplete="email"
+               autocapitalize="off" spellcheck="false" inputmode="email">
+      </div>
+      <div class="campo">
+        <label for="dEmpresa">Empresa <span class="opc">(opcional)</span></label>
+        <input type="text" id="dEmpresa" placeholder="D&oacute;nde trabaj&aacute;s" autocomplete="organization">
+      </div>
+
+      <div style="margin-top:1.4rem">
+        <button class="btn btn-lima" id="btnDatos" type="button">Entrar al piloto</button>
+      </div>
+      <div class="aviso mal oculto" id="dError"></div>
+
+      <p class="legal">Guardamos tu nombre, tu mail y los briefs que cargues, solo para darte acceso al piloto y contactarte por &eacute;l. No se los damos a nadie. Si quer&eacute;s que los borremos, escribinos a <a href="mailto:hola@hrinfluencestrategy.com.ar">hola@hrinfluencestrategy.com.ar</a>.</p>
+    </div>
   </section>
 
   <!-- ======== 3. adentro ======== -->
@@ -529,7 +561,7 @@ const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
 
 const $  = id => document.getElementById(id);
 const ver = cual => {
-  ['vCargando','vInicio','vEntrar','vTicket','vAdentro'].forEach(v => $(v).classList.add('oculto'));
+  ['vCargando','vInicio','vEntrar','vTicket','vDatos','vAdentro'].forEach(v => $(v).classList.add('oculto'));
   $(cual).classList.remove('oculto');
 };
 const track = (n, p) => { if (typeof window.track === 'function') window.track(n, p || {}); };
@@ -572,9 +604,25 @@ function olvidarTicket(){
 }
 
 async function arrancar(){
-  const { data:{ session } } = await sb.auth.getSession();
+  let { data:{ session } } = await sb.auth.getSession();
 
-  if (!session){ portada('vEntrar'); return; }
+  /* Nadie tiene que crearse una cuenta para probar el piloto. Se le da una
+     identidad anonima apenas entra, y asi las reglas de la base —cada quien
+     ve solo lo suyo— siguen valiendo igual. Los datos de contacto se piden
+     despues, cuando el codigo ya se valido: es el orden que menos gente
+     pierde en el camino. */
+  if (!session){
+    const { data, error } = await sb.auth.signInAnonymously();
+    if (error || !data?.session){
+      console.warn('sin sesión anónima:', error && error.message);
+      $('tError').textContent = 'No pudimos abrir tu sesión. Recargá la página y probá de nuevo.';
+      $('tError').classList.remove('oculto');
+      portada('vTicket');
+      return;
+    }
+    session = data.session;
+    track('piloto_sesion_anon', {});
+  }
 
   const u = session.user;
   const nombre = u.user_metadata?.full_name || u.user_metadata?.name || '';
@@ -589,7 +637,7 @@ async function arrancar(){
   });
 
   const { data: lead } = await sb
-    .from('leads').select('acceso,nombre').eq('id', u.id).maybeSingle();
+    .from('leads').select('acceso,nombre,email').eq('id', u.id).maybeSingle();
 
   const pinta = (pre) => {
     if ($(pre+'Avatar') && avatar) $(pre+'Avatar').src = avatar;
@@ -600,6 +648,12 @@ async function arrancar(){
 
   if (lead?.acceso){
     pinta('a');
+    if (!lead.email){
+      // canjeo el codigo pero todavia no dejo sus datos: se los pedimos ahora
+      ver('vDatos');
+      track('piloto_faltan_datos', {});
+      return;
+    }
     portada('vAdentro', 'Entrar a mi Brief Builder',
             'Tu acceso ya está activo.');
     track('piloto_adentro', {});
@@ -635,6 +689,46 @@ function portada(destino, rotulo, pie){
 $('btnCta').addEventListener('click', () => {
   track('app_cta', { destino: DESTINO });
   ver(DESTINO);
+  window.scrollTo({ top: 0, behavior: 'instant' });
+});
+
+/* Los datos de contacto. Se validan aca y tambien en la base: un mail mal
+   escrito es un lead que no vuelve. */
+$('btnDatos').addEventListener('click', async () => {
+  const err = $('dError');
+  err.classList.add('oculto');
+  const nombre  = $('dNombre').value.trim();
+  const mail    = $('dMail').value.trim().toLowerCase();
+  const empresa = $('dEmpresa').value.trim();
+
+  if (!nombre){ err.textContent = 'Falta tu nombre.'; err.classList.remove('oculto'); $('dNombre').focus(); return; }
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail)){
+    err.textContent = 'Revisá el mail: algo no cierra.'; err.classList.remove('oculto'); $('dMail').focus(); return;
+  }
+
+  $('btnDatos').disabled = true;
+  $('btnDatos').textContent = 'Guardando…';
+
+  const { data, error } = await sb.rpc('guardar_contacto', {
+    p_nombre: nombre, p_email: mail, p_empresa: empresa || null,
+    p_rol: null, p_origen: origen()
+  });
+
+  $('btnDatos').disabled = false;
+  $('btnDatos').textContent = 'Entrar al piloto';
+
+  if (error || !data?.ok){
+    err.textContent = (data && data.motivo === 'mail_invalido')
+      ? 'Revisá el mail: algo no cierra.'
+      : 'No pudimos guardarlo. Probá de nuevo en un minuto.';
+    err.classList.remove('oculto');
+    return;
+  }
+
+  track('piloto_datos_ok', {});
+  const el = $('aNombreFull'); if (el) el.textContent = nombre;
+  const em = $('aMail');       if (em) em.textContent = mail;
+  ver('vAdentro');
   window.scrollTo({ top: 0, behavior: 'instant' });
 });
 
