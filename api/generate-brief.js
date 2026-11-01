@@ -340,13 +340,55 @@ clase de match que buscamos.
 
 La vertical sirve para saber DONDE buscar la voz, no para copiar el puesto.
 
+EJEMPLO RESUELTO. Estudialo antes de responder.
+
+Busqueda: "Encargado de sucursal — heladeria, Neuquen".
+
+MAL, y es el error que mas se repite:
+  arquetipo: "Ex encargado de sucursal que cuenta su dia"
+  Por que esta mal: espeja el puesto. Esa cuenta casi no existe en
+  Argentina, y si existiera su audiencia serian otros encargados, no
+  candidatos. Ademas no dice nada del territorio ni del vinculo.
+
+BIEN:
+  arquetipo:  "Referente de primer empleo del Alto Valle"
+  audiencia:  "Jovenes de 19 a 26 anios en su primer o segundo trabajo
+               formal, la mayoria en comercio y gastronomia."
+  territorio: "Neuquen y Rio Negro, que es donde esta la busqueda."
+  autoridad:  "Trabajo en atencion al publico y muestra turnos reales,
+               no da consejos genericos de carrera."
+  vinculo:    "Le aconseja a quien recien empieza, asi que una
+               recomendacion laboral suya se lee como dato y no como aviso."
+
+Mira la diferencia: el perfil correcto NO tuvo el puesto. Comparte la
+AUDIENCIA del puesto, el TERRITORIO del puesto y el momento de carrera
+del candidato. Eso es el match.
+
+LA PRUEBA QUE TIENE QUE PASAR TU RESPUESTA: el arquetipo tiene que
+describir una cuenta que hoy exista de verdad en Argentina y que se pueda
+salir a buscar manana. Si para cumplir con el arquetipo habria que
+inventar a una persona que no existe, el arquetipo esta mal planteado y
+hay que volver a empezar por la audiencia.
+
 Tu tarea.
 
 1. REESCRIBIR EL BRIEF. Tomá lo que escribieron y devolveles la version afilada: que es lo que en realidad necesitan comunicar, dicho mejor de lo que ellos lo dijeron. Esta es la prueba de que los entendimos. Si lo que escribieron es vago, nombrá con precision lo que esta en juego detras.
 
-2. TRES PERFILES COMPATIBLES. Elegí las TRES verticales mas afines a esta busqueda y convertí cada una en un arquetipo de voz concreto para ESTE caso. Ordenalos del mas al menos afin. El arquetipo no es el nombre de la vertical: es como se llamaria esa voz puesta a comunicar esta busqueda en particular.
+2. EL CANDIDATO. Antes de pensar en ninguna voz, describi a la persona que
+   queremos que se postule. NO es el creador: es quien tiene que ver el
+   contenido y decir "esto es para mi". Tres cosas, cortas:
+   - quien es: edad aproximada y momento de carrera.
+   - donde esta: zona o tipo de ciudad. Si la busqueda no lo aclara, decilo
+     como condicion a confirmar.
+   - que mira: en que plataformas pasa el tiempo y que tipo de contenido
+     consume. Aca se decide todo lo que viene despues.
 
-3. LOS CRITERIOS. Con que criterios se hizo ese match. Sacalos de las dimensiones de la rubrica, puestos en lenguaje de esta busqueda.
+   Este paso es obligatorio y es el que ordena el resto. El creador NO sale
+   del puesto: sale de la dieta de contenido de este candidato.
+
+3. TRES PERFILES COMPATIBLES. Preguntate: quien le habla HOY a la persona que describiste en el punto 2. Recien ahi elegi las TRES verticales donde vive esa voz y convertí cada una en un arquetipo de voz concreto para ESTE caso. Ordenalos del mas al menos afin. El arquetipo no es el nombre de la vertical: es como se llamaria esa voz puesta a comunicar esta busqueda en particular.
+
+4. LOS CRITERIOS. Con que criterios se hizo ese match. Sacalos de las dimensiones de la rubrica, puestos en lenguaje de esta busqueda.
 
 RESPONDE SOLO EN JSON VALIDO, sin texto previo, sin markdown, sin backticks:
 
@@ -354,6 +396,11 @@ RESPONDE SOLO EN JSON VALIDO, sin texto previo, sin markdown, sin backticks:
   "briefReformulado": {
     "titular": "una frase que nombre el verdadero desafio de comunicacion de esta busqueda",
     "cuerpo": "2 frases: que necesitan comunicar realmente y por que su mensaje actual no esta llegando. Lenguaje de RRHH, cero marketing."
+  },
+  "candidato": {
+    "quien": "edad aproximada y momento de carrera, en una frase",
+    "donde": "zona o tipo de ciudad; si la busqueda no lo aclara, decilo como condicion a confirmar",
+    "queMira": "en que plataformas esta y que tipo de contenido consume, en una frase"
   },
   "perfilesCompatibles": [
     {
@@ -370,8 +417,10 @@ RESPONDE SOLO EN JSON VALIDO, sin texto previo, sin markdown, sin backticks:
 Reglas que no se negocian:
 - PROHIBIDO escribir nombres propios de personas, arrobas, handles o cantidades de seguidores. Ni inventados ni reales. Hablamos de ARQUETIPOS de voz, no de personas. Si se te escapa un nombre, la respuesta es invalida.
 - Los tres arquetipos tienen que salir de TRES verticales distintas, y ser realmente distintos entre si, no el mismo dicho de tres maneras.
-- Ningun arquetipo puede ser el puesto buscado con otro nombre. Se elige por
-  AUDIENCIA, no por oficio espejado.
+- Ningun arquetipo puede ser el puesto buscado con otro nombre, ni contener
+  sus palabras. Se elige por AUDIENCIA, no por oficio espejado.
+- Cada arquetipo tiene que describir una cuenta que hoy exista de verdad en
+  Argentina. Si habria que inventar a la persona, esta mal planteado.
 - Si la busqueda cae en una vertical con CUIDADO marcado, tenelo presente al describir la voz.
 - Nada de lenguaje de marketing (impresiones, CPM, alcance, engagement). Los indicadores de la casa son: calidad del flujo de candidatos, conversion de interes a postulacion, percepcion de marca empleadora, costo por contratacion, tiempo de cobertura.
 - Espaniol rioplatense profesional, con voseo. PROHIBIDA la jerga para nombrar
@@ -414,6 +463,11 @@ RESPONDE SOLO EN JSON VALIDO, sin texto previo, sin markdown, sin backticks:
   "briefReformulado": {
     "titular": "una frase que nombre el verdadero desafio de comunicacion de esta busqueda",
     "cuerpo": "2 o 3 frases: que necesitan comunicar realmente, por que su mensaje actual no esta llegando, y que tendria que cambiar"
+  },
+  "candidato": {
+    "quien": "edad aproximada y momento de carrera, en una frase",
+    "donde": "zona o tipo de ciudad; si la busqueda no lo aclara, decilo como condicion a confirmar",
+    "queMira": "en que plataformas esta y que tipo de contenido consume, en una frase"
   },
   "perfilesCompatibles": [
     {"arquetipo": "...", "audiencia": "...", "porQue": "..."},
@@ -460,6 +514,12 @@ Reglas que no se negocian:
   un minuto en aparecer no lo lee nadie: la precision vale mas que el volumen.
 - PROHIBIDO escribir nombres propios de personas, arrobas, handles o cantidades exactas de seguidores, aca tampoco. Trabajamos con el PERFIL; la persona se presenta cuando se firma. Si se te escapa un nombre, la respuesta es invalida.
 - "alcance" va siempre como banda, nunca como cifra cerrada. No inventamos precision que no tenemos.
+- La audiencia del creador y el candidato del punto 2 tienen que ser LA MISMA
+  gente. Si no se superponen, el match esta mal hecho, por bueno que suene.
+- El arquetipo NO PUEDE CONTENER las palabras del puesto buscado. Si la
+  busqueda dice "encargado de sucursal", en el arquetipo no aparecen ni
+  "encargado" ni "sucursal". Ni con "ex" adelante, ni en diminutivo, ni como
+  sinonimo directo. Esta es una regla de forma y se revisa antes de responder.
 - El arquetipo NO puede ser el puesto buscado con otro nombre. Si la busqueda
   dice "encargado de sucursal", el arquetipo no es "ex encargado de sucursal"
   ni "encargado que cuenta su dia". Si lo que escribiste se parece al puesto,
