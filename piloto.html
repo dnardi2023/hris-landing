@@ -606,24 +606,19 @@ function olvidarTicket(){
 async function arrancar(){
   let { data:{ session } } = await sb.auth.getSession();
 
-  /* Nadie tiene que crearse una cuenta para probar el piloto. Se le da una
-     identidad anonima apenas entra, y asi las reglas de la base —cada quien
-     ve solo lo suyo— siguen valiendo igual. Los datos de contacto se piden
-     despues, cuando el codigo ya se valido: es el orden que menos gente
-     pierde en el camino. */
+  /* Quien solo viene a mirar los servicios no necesita ninguna identidad:
+     la sesion anonima se crea recien cuando va a canjear un codigo. Si la
+     creáramos al abrir, cada visita dejaria un usuario en la base y todos
+     contarian como usuarios activos del mes. */
   if (!session){
-    const { data, error } = await sb.auth.signInAnonymously();
-    if (error || !data?.session){
-      const detalle = (error && (error.message || error.error_description)) || 'sin detalle';
-      console.warn('sin sesión anónima:', detalle, error);
-      $('tError').innerHTML = 'No pudimos abrir tu sesión.<br><span style="opacity:.75">'
-        + String(detalle).replace(/[<>]/g, '') + '</span>';
-      $('tError').classList.remove('oculto');
-      portada('vTicket');
-      return;
-    }
-    session = data.session;
-    track('piloto_sesion_anon', {});
+    /* Salvo que venga del QR de una tarjeta: ahi si hace falta la sesion ya
+       mismo, porque el codigo se canjea solo y la persona no toca nada. */
+    if (!ticketDeLaUrl()){ portada('vTicket'); return; }
+    ver('vTicket');
+    if (!(await asegurarSesion($('tError')))) return;
+    const { data:{ session: nueva } } = await sb.auth.getSession();
+    if (!nueva) return;
+    session = nueva;
   }
 
   const u = session.user;
@@ -684,6 +679,15 @@ function portada(destino, rotulo, pie){
   DESTINO = destino;
   if (rotulo) $('btnCta').textContent = rotulo;
   if (pie) $('ctaPie').innerHTML = pie;
+
+  /* arrancar() se vuelve a ejecutar cada vez que cambia la sesion, y eso
+     pasa justo cuando la persona toca "Activar mi acceso". Si en ese momento
+     la mandaramos a la portada, perderia lo que estaba haciendo. Asi que la
+     portada solo se muestra si todavia no entro al circuito. */
+  const enCamino = ['vTicket','vDatos','vAdentro']
+    .some(v => !$(v).classList.contains('oculto'));
+  if (enCamino) return;
+
   ver('vInicio');
   track('app_portada', { destino });
 }
@@ -764,6 +768,27 @@ $('btnSalir').addEventListener('click', async () => {
 /* El canje, en un solo lugar: lo usan el boton y el canje automatico.
    'callado' = true cuando viene del QR: ahi un codigo invalido no se grita,
    simplemente queda la pantalla normal para corregirlo a mano. */
+/* Abre la identidad anonima solo si todavia no hay ninguna. Devuelve false
+   y deja el motivo a la vista si la base no la deja crear. */
+async function asegurarSesion(cajaError){
+  const { data:{ session } } = await sb.auth.getSession();
+  if (session) return true;
+
+  const { data, error } = await sb.auth.signInAnonymously();
+  if (error || !data?.session){
+    const detalle = (error && (error.message || error.error_description)) || 'sin detalle';
+    console.warn('sin sesión anónima:', detalle, error);
+    if (cajaError){
+      cajaError.innerHTML = 'No pudimos abrir tu sesión.<br><span style="opacity:.75">'
+        + String(detalle).replace(/[<>]/g, '') + '</span>';
+      cajaError.classList.remove('oculto');
+    }
+    return false;
+  }
+  track('piloto_sesion_anon', {});
+  return true;
+}
+
 async function canjearAhora(cod, callado){
   const err = $('tError');
   err.classList.add('oculto');
@@ -771,6 +796,12 @@ async function canjearAhora(cod, callado){
 
   $('btnCanjear').disabled = true;
   $('btnCanjear').textContent = 'Verificando…';
+
+  if (!(await asegurarSesion(err))){
+    $('btnCanjear').disabled = false;
+    $('btnCanjear').textContent = 'Activar mi acceso';
+    return false;
+  }
 
   const { data, error } = await sb.rpc('canjear_ticket', { codigo: cod });
 
