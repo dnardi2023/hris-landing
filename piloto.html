@@ -308,6 +308,23 @@
   @media (max-width:420px){ .ejes > div{grid-template-columns:1fr;gap:.15rem} }
 
   .opc{color:var(--ink-faint);font-weight:400}
+  /* los dos ritmos del piloto */
+  .ritmos{display:grid;gap:1.1rem}
+  .ritmo{border-top:2px solid var(--line-strong);padding-top:.8rem}
+  .ritmo.express{border-top-color:var(--rose)}
+  .r-eti{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;
+         font-family:var(--ui);font-weight:600;font-size:.78rem;letter-spacing:.1em;
+         text-transform:uppercase;color:var(--ink);margin:0 0 .6rem}
+  .ritmo.express .r-eti{color:var(--rose)}
+  .r-eti span{font-family:var(--sans);font-weight:900;font-size:.95rem;letter-spacing:-.01em;
+              text-transform:none;color:var(--ink);background:var(--lime);padding:.08em .4em}
+  .r-pasos{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+  .r-pasos li{display:flex;gap:.6rem;align-items:baseline}
+  .r-pasos i{font-style:normal;font-family:var(--ui);font-size:.66rem;font-weight:600;
+             color:var(--ink-faint);min-width:.9rem;flex:none}
+  .r-pasos span{font-size:.84rem;line-height:1.45;color:var(--ink-dim)}
+  @media (min-width:560px){ .ritmos{grid-template-columns:1fr 1fr;gap:1.4rem} }
+
 </style>
 </head>
 <body>
@@ -393,7 +410,7 @@
       </div>
     </div>
 
-    <p class="legal" style="margin-top:2.4rem;opacity:.55;font-size:.72rem">Versi&oacute;n <b id="sello">v9 · 01/11 16:28</b></p>
+    <p class="legal" style="margin-top:2.4rem;opacity:.55;font-size:.72rem">Versi&oacute;n <b id="sello">v10 · 01/11 16:30</b></p>
     <p class="legal" style="margin-top:.6rem">Con el golden ticket abr&iacute;s el <b>Brief Builder</b>: carg&aacute;s una b&uacute;squeda real y te devolvemos el perfil curado, las piezas que produc&iacute;riamos y el plan de los primeros 30 d&iacute;as.</p>
   </section>
 
@@ -947,12 +964,29 @@ function dibujarBrief(b) {
     `<div class="sec"><h5>Las piezas</h5>${piezas}</div>` +
     `<div class="sec"><h5>Indicadores de talento</h5>
       <div class="tags">${(b.talentKPIs || []).map(k => `<span>${esc(k)}</span>`).join('')}</div></div>` +
-    `<div class="sec"><h5>Piloto · 30 días</h5><div class="plan">
-      <div class="sem"><b>Semana 1</b><p>Workshop de brief. Traducimos la cultura real a hipótesis de contenido.</p></div>
-      <div class="sem"><b>Semana 2</b><p>Curaduría. Te proponemos el creador y aprobás el match antes de producir.</p></div>
-      <div class="sem"><b>Semana 3</b><p>Producción de las piezas, en el lenguaje del canal.</p></div>
-      <div class="sem"><b>Semana 4</b><p>Reporte: candidatos calificados y costo por candidato calificado.</p></div>
-    </div></div>`;
+    `<div class="sec"><h5>Cómo corre el piloto</h5>
+      <div class="ritmos">
+        <div class="ritmo">
+          <p class="r-eti">Estándar<span>30 días</span></p>
+          <ol class="r-pasos">
+            <li><i>1</i><span>Workshop de brief: traducimos tu cultura real a hipótesis de contenido.</span></li>
+            <li><i>2</i><span>Curaduría: te proponemos el creador y aprobás el match antes de producir.</span></li>
+            <li><i>3</i><span>Producción de las piezas, en el lenguaje del canal.</span></li>
+            <li><i>4</i><span>Reporte: candidatos calificados y costo por candidato calificado.</span></li>
+          </ol>
+        </div>
+        <div class="ritmo express">
+          <p class="r-eti">Express<span>12 días</span></p>
+          <ol class="r-pasos">
+            <li><i>1</i><span>Brief en una llamada de 60 minutos, el mismo día que nos escribís.</span></li>
+            <li><i>2</i><span>Curaduría en 48 horas, sobre perfiles ya verificados de la vertical.</span></li>
+            <li><i>3</i><span>Una pieza al aire el día 7, las siguientes en los días que siguen.</span></li>
+            <li><i>4</i><span>Reporte al cierre, con el mismo detalle.</span></li>
+          </ol>
+        </div>
+      </div>
+      <p class="tambien">Si la búsqueda es urgente, arrancamos por el ritmo express. Los plazos se cierran en el primer llamado.</p>
+    </div>`;
 }
 
 /* Cada brief queda guardado: es lo que despues lee el panel de leads.
