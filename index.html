@@ -854,63 +854,98 @@
   .cre-listo p{font-size:.94rem;line-height:1.6;opacity:.78;max-width:40ch;margin:0 auto 1.4rem}
   .cre-listo .btn-app{width:auto;min-width:9rem}
 
-  /* ===== NOSOTRAS, con el lenguaje de la presentación ===== */
-  .nos{background:var(--ink);color:var(--bg-1)}
-  /* La hoja trae section{padding:...!important}, así que acá hace falta la
-     misma prioridad. El rótulo ahora es grande y necesita aire para no
-     quedar debajo de la barra fija. */
-  #nosotras.nos{padding-top:clamp(5.5rem,11vw,9rem)!important;
-                padding-bottom:clamp(4.5rem,9vw,7rem)!important;
-                scroll-margin-top:7rem}
-  /* la sección ya traía una foto de fondo con un velo claro encima: se
-     conserva la textura y se le da vuelta el velo */
-  .nos::before{opacity:.26}
-  .nos::after{background:linear-gradient(180deg,rgba(14,14,16,.90),rgba(14,14,16,.965))}
-  .nos-label{display:flex;align-items:center;gap:.9rem;
-             font-family:var(--sans);font-weight:600;
-             font-size:clamp(1.7rem,4.4vw,2.9rem);letter-spacing:-.02em;
-             text-transform:uppercase;color:var(--bg-1);margin:0}
-  .nos-barra{width:8px;height:1em;background:var(--rose);flex:none;border-radius:2px}
-  .nos-title{font-family:var(--sans);font-weight:600;
-             font-size:clamp(1.7rem,4.4vw,3.1rem);line-height:1.08;
-             letter-spacing:-.03em;margin:1.4rem 0 0;max-width:20ch;color:var(--bg-1)}
-  .nos-title em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--rose)}
-  .nos-lead{color:rgba(242,239,233,.72);font-size:1.02rem;line-height:1.6;
-            max-width:52ch;margin:1.2rem 0 0}
+  /* ===== NOSOTRAS: la foto al medio y un cartel de cada lado ===== */
+  .nos-fila{display:grid;grid-template-columns:1fr;
+            gap:clamp(1.1rem,3vw,1.8rem);align-items:start;
+            margin-top:clamp(2.2rem,5vw,3.2rem)}
 
-  /* la foto, con el doble marco corrido de la lámina */
-  .nos-foto{position:relative;width:clamp(210px,26vw,310px);aspect-ratio:1;
-            margin:clamp(2.6rem,6vw,3.8rem) auto 0}
+  .nos-foto{position:relative;width:clamp(190px,22vw,280px);aspect-ratio:1;
+            margin:0 auto;justify-self:center}
   .nos-foto img{width:100%;height:100%;object-fit:cover;display:block;
-                border-radius:26px;position:relative;z-index:2}
-  .nos-foto::before,.nos-foto::after{content:"";position:absolute;inset:0;border-radius:26px}
+                border-radius:24px;position:relative;z-index:2}
+  .nos-foto::before,.nos-foto::after{content:"";position:absolute;inset:0;border-radius:24px}
   .nos-foto::before{background:var(--lime);transform:rotate(4deg) translate(10px,8px);z-index:1}
   .nos-foto::after{border:3px solid var(--rose);transform:rotate(-4deg) translate(-9px,-7px);z-index:3}
 
-  /* las tarjetas, sobre el fondo oscuro */
-  .nos .fgrid{margin-top:clamp(2.6rem,6vw,4rem)}
-  .nos .fface{background:rgba(242,239,233,.05);border-color:rgba(242,239,233,.16);
-              border-radius:18px;gap:.85rem}
-  .nos .fback{background:var(--bg-1);border-color:var(--bg-1);color:var(--ink)}
-  .nos-chapa{display:inline-block;background:var(--rose);color:#0E0E10;
-             padding:.1em .34em .16em;border-radius:3px}
-  .fcard[style*="--lime"] .nos-chapa{background:var(--lime)}
-  .nos .fname{color:var(--bg-1);margin:0}
-  .nos .frole{color:var(--ring)}
-  .nos .fquote{color:var(--bg-1)}
-  .nos .fface .fbtn{border-color:rgba(242,239,233,.34);color:var(--bg-1)}
-  .nos .fface .fbtn:hover{background:var(--bg-1);color:var(--ink);border-color:var(--bg-1)}
-  .nos .fback .fbtn{border-color:rgba(14,14,16,.3);color:var(--ink)}
-  .nos .fback .fbtn:hover{background:var(--ink);color:var(--bg-1)}
-  .nos-bio{display:flex;flex-direction:column;gap:.85rem}
-  .nos .fkicker{color:var(--rose)}
-  .nos .fbio{color:var(--ink)}
-  .nos .fbio mark{background:var(--rose);color:#0E0E10;padding:.04em .16em .1em;
+  /* cada lado: la flecha y, al lado, el cartel con su recuadro */
+  .nos-lado{display:grid;grid-template-columns:auto minmax(0,1fr);
+            gap:clamp(.5rem,1.6vw,1rem);align-items:start}
+  .nos-flecha-caja{display:block;color:var(--tinte);line-height:0;
+                   margin-top:.55rem;flex:none}
+  .nos-flecha{width:clamp(54px,6vw,86px);height:auto;display:block;
+              animation:nosEmpuja 1.9s ease-in-out infinite}
+  @keyframes nosEmpuja{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}
+  .nos-lado:hover .nos-flecha{animation-duration:.8s}
+
+  /* el cartel */
+  .nos-cartel{min-width:0}
+  .nos-cartel summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;
+    justify-content:space-between;gap:.8rem;
+    background:var(--tinte);color:#0E0E10;
+    border-radius:999px;padding:.95rem clamp(1rem,2.2vw,1.5rem);
+    font-family:var(--sans);font-weight:600;
+    font-size:clamp(.92rem,1.3vw,1.06rem);letter-spacing:-.015em;
+    box-shadow:0 10px 28px rgba(14,14,16,.12);
+    transition:transform .22s ease, box-shadow .22s ease;
+  }
+  .nos-cartel summary::-webkit-details-marker{display:none}
+  .nos-cartel summary:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(14,14,16,.18)}
+  .nos-cartel summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+  .nos-mas{flex:none;width:28px;height:28px;border-radius:50%;
+           display:grid;place-items:center;background:rgba(14,14,16,.14);
+           transition:transform .28s cubic-bezier(.3,.85,.25,1)}
+  .nos-mas svg{width:13px;height:13px}
+  .nos-cartel[open] .nos-mas{transform:rotate(135deg)}
+
+  /* el recuadro, entrando con un sacudón */
+  .nos-caja{margin-top:.9rem;background:var(--bg-1);
+            border:1px solid var(--line);border-left:4px solid var(--tinte);
+            border-radius:14px;padding:clamp(1.1rem,2.4vw,1.6rem);
+            animation:nosSacude .62s cubic-bezier(.36,.07,.19,.97) both}
+  @keyframes nosSacude{
+    0%{opacity:0;transform:translate(0,-10px) rotate(0)}
+    28%{opacity:1;transform:translate(-10px,0) rotate(-1.2deg)}
+    45%{transform:translate(8px,0) rotate(.9deg)}
+    62%{transform:translate(-5px,0) rotate(-.55deg)}
+    80%{transform:translate(3px,0) rotate(.3deg)}
+    100%{opacity:1;transform:translate(0,0) rotate(0)}
+  }
+  .nos-nombre{font-family:var(--sans);font-weight:600;font-size:1.12rem;
+              letter-spacing:-.02em;color:var(--ink);margin:0 0 .8rem}
+  .nos-nombre span{display:block;font-size:.68rem;letter-spacing:.2em;
+                   text-transform:uppercase;color:var(--ink-faint);margin-top:.3rem}
+  .nos-texto{color:var(--ink-dim);font-size:.96rem;line-height:1.6;margin:0}
+  .nos-texto mark{background:var(--tinte);color:#0E0E10;padding:.05em .18em .12em;
                   border-radius:2px;box-decoration-break:clone;
                   -webkit-box-decoration-break:clone}
-  .nos .fbio mark.lima{background:var(--lime)}
-  .nos-cierre{font-family:var(--serif);font-style:italic;
-              font-size:1.06rem;line-height:1.35;color:var(--ink);margin:0}
+  .nos-remate{font-family:var(--serif);font-style:italic;font-size:1.04rem;
+              line-height:1.4;color:var(--ink);margin:.8rem 0 0}
+
+  /* en pantalla ancha: cartel · foto · cartel, todo en una línea */
+  @media (min-width:900px){
+    .nos-fila{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+              gap:clamp(1.2rem,2.6vw,2.2rem);align-items:start}
+    /* a la izquierda el cartel va primero y la flecha mira hacia él */
+    .nos-izq{grid-template-columns:minmax(0,1fr) auto}
+    .nos-izq .nos-flecha-caja{order:2}
+    .nos-izq .nos-cartel{order:1}
+    /* se espeja con 'scale', que es una propiedad aparte de 'transform':
+       así el empujón de la animación sigue funcionando y queda mirando
+       hacia el cartel */
+    .nos-izq .nos-flecha{scale:-1 1}
+  }
+
+  /* en teléfono la foto va primero: presenta antes de invitar a abrir */
+  @media (max-width:899px){
+    .nos-foto{order:-1;margin-bottom:.4rem}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .nos-caja{animation:none}
+    .nos-flecha{animation:none}
+    .nos-cartel summary,.nos-mas{transition:none}
+  }
 
 </style>
 </head>
@@ -1269,54 +1304,46 @@
 
 
 <!-- NOSOTRAS -->
-<section class="founders nos" id="nosotras">
+<section class="founders" id="nosotras">
   <div class="wrap">
-    <p class="nos-label reveal-up"><span class="nos-barra"></span>Nosotras</p>
-    <h2 class="nos-title reveal-up">Detrás de HRIS hay dos personas, no un <em>logo</em>.</h2>
-    <p class="nos-lead reveal-up">Es la misma tesis que le proponemos a cada cliente: la confianza no la construye una marca, la construyen personas con nombre y con cara. Empezamos por casa.</p>
+    <p class="sec-label reveal-up"><span class="rule"></span>Nosotras</p>
+    <h2 class="sec-title reveal-up">Detrás de HRIS hay dos personas, no un <em>logo</em>.</h2>
+    <p class="founders-lead reveal-up">Es la misma tesis que le proponemos a cada cliente: la confianza no la construye una marca, la construyen personas con nombre y con cara. Empezamos por casa.</p>
 
-    <figure class="nos-foto reveal-up">
-      <img src="img/nosotras.jpg" alt="Dahiana Nardi y Sol Abraham, las dos fundadoras" loading="lazy">
-    </figure>
+    <div class="nos-fila reveal-up">
+      <div class="nos-lado nos-izq" style="--tinte:var(--rose)">
+        <span class="nos-flecha-caja"><svg class="nos-flecha" viewBox="0 0 160 70" fill="none" aria-hidden="true"><path d="M8 20C8 20 56 6 96 24 118 34 132 42 146 46" stroke="currentColor" stroke-width="9" stroke-linecap="round"/><path d="M122 30 148 46.5 124 62" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <details class="nos-cartel" name="otroyo">
+          <summary>
+            <span class="nos-quien">Descubrí el otro yo de <b>Dahi</b></span>
+            <span class="nos-mas" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+          </summary>
+          <div class="nos-caja">
+            <p class="nos-nombre">Dahiana Nardi <span>Co-founder</span></p>
+            <p class="nos-texto">Soy de esas personas que sienten mucho, piensan mucho y van con todo. <mark>Sensible, curiosa, intensa y profundamente humana.</mark> Me mueve lo genuino, aprender, conectar profundo con otros</p>
+            <p class="nos-remate">¡y ponerle alma a cada cosa que hago!</p>
+          </div>
+        </details>
+      </div>
 
-    <div class="fgrid">
-      <article class="fcard reveal-up" style="--ring:var(--rose)">
-        <div class="finner">
-          <div class="fface">
-            <h3 class="fname"><span class="nos-chapa">Dahiana Nardi</span></h3>
-            <p class="frole">Co-founder</p>
-            <p class="fquote">&ldquo;Me mueve lo genuino.&rdquo;</p>
-            <button type="button" class="fbtn" data-flip>Descubrí mi otro yo <span class="ar">&rarr;</span></button>
-          </div>
-          <div class="fface fback">
-            <div class="nos-bio">
-              <p class="fkicker">Mi otro yo</p>
-              <p class="fbio">Soy de esas personas que sienten mucho, piensan mucho y van con todo. <mark>Sensible, curiosa, intensa y profundamente humana.</mark> Me mueve lo genuino, aprender, conectar profundo con otros</p>
-              <p class="nos-cierre">¡y ponerle alma a cada cosa que hago!</p>
-            </div>
-            <button type="button" class="fbtn" data-flip><span class="ar">&larr;</span> Volver</button>
-          </div>
-        </div>
-      </article>
+      <figure class="nos-foto">
+        <img src="img/nosotras.jpg" alt="Dahiana Nardi y Sol Abraham, las dos fundadoras" loading="lazy">
+      </figure>
 
-      <article class="fcard reveal-up" style="--ring:var(--lime)">
-        <div class="finner">
-          <div class="fface">
-            <h3 class="fname"><span class="nos-chapa">Sol Abraham</span></h3>
-            <p class="frole">Co-founder</p>
-            <p class="fquote">&ldquo;Hacer m&aacute;gico lo cotidiano.&rdquo;</p>
-            <button type="button" class="fbtn" data-flip>Descubrí mi otro yo <span class="ar">&rarr;</span></button>
+      <div class="nos-lado nos-der" style="--tinte:var(--lime)">
+        <span class="nos-flecha-caja"><svg class="nos-flecha" viewBox="0 0 160 70" fill="none" aria-hidden="true"><path d="M8 20C8 20 56 6 96 24 118 34 132 42 146 46" stroke="currentColor" stroke-width="9" stroke-linecap="round"/><path d="M122 30 148 46.5 124 62" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <details class="nos-cartel" name="otroyo">
+          <summary>
+            <span class="nos-quien">Descubrí el otro yo de <b>Sol</b></span>
+            <span class="nos-mas" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+          </summary>
+          <div class="nos-caja">
+            <p class="nos-nombre">Sol Abraham <span>Co-founder</span></p>
+            <p class="nos-texto">Amo <mark>crear contextos en los que las personas puedan brillar, crear, sentirse parte ¡y divertirse!</mark> Busco que mi propósito de encender luz donde parece no haberla esté siempre presente, conectando la liviandad y lo profundo,</p>
+            <p class="nos-remate">¡haciendo mágico lo cotidiano!</p>
           </div>
-          <div class="fface fback">
-            <div class="nos-bio">
-              <p class="fkicker">Mi otro yo</p>
-              <p class="fbio">Amo <mark class="lima">crear contextos en los que las personas puedan brillar, crear, sentirse parte ¡y divertirse!</mark> Busco que mi propósito de encender luz donde parece no haberla esté siempre presente, conectando la liviandad y lo profundo,</p>
-              <p class="nos-cierre">¡haciendo mágico lo cotidiano!</p>
-            </div>
-            <button type="button" class="fbtn" data-flip><span class="ar">&larr;</span> Volver</button>
-          </div>
-        </div>
-      </article>
+        </details>
+      </div>
     </div>
   </div>
 </section>
