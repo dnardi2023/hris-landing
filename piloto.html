@@ -390,7 +390,7 @@
       </div>
     </div>
 
-    <p class="legal" style="margin-top:2.4rem;opacity:.55;font-size:.72rem">Versi&oacute;n <b id="sello">v2 · 01/11 13:17</b></p>
+    <p class="legal" style="margin-top:2.4rem;opacity:.55;font-size:.72rem">Versi&oacute;n <b id="sello">v4 · 01/11 13:42</b></p>
     <p class="legal" style="margin-top:.6rem">Con el golden ticket abr&iacute;s el <b>Brief Builder</b>: carg&aacute;s una b&uacute;squeda real y te devolvemos el perfil curado, las piezas que produc&iacute;riamos y el plan de los primeros 30 d&iacute;as.</p>
   </section>
 
@@ -447,7 +447,8 @@
       <div class="manual" id="manual">
         <label for="codigo" style="margin-top:1.2rem">Tu golden ticket</label>
         <input type="text" id="codigo" placeholder="HEYCHAR-000-XXXX" autocomplete="off"
-               autocapitalize="characters" spellcheck="false" inputmode="text">
+               autocapitalize="characters" spellcheck="false" inputmode="text"
+               autocorrect="off" data-gramm="false">
         <div style="margin-top:1rem">
           <button class="btn btn-lima" id="btnCanjear" type="button">Activar mi acceso</button>
         </div>
@@ -701,6 +702,16 @@ $('btnCta').addEventListener('click', () => {
 
 /* Los datos de contacto. Se validan aca y tambien en la base: un mail mal
    escrito es un lead que no vuelve. */
+/* Se acomoda mientras escribe, asi nadie pelea con el autocorrector. */
+$('codigo').addEventListener('input', (e) => {
+  const limpio = normalizarCodigo(e.target.value);
+  if (limpio !== e.target.value) {
+    const alFinal = e.target.selectionStart === e.target.value.length;
+    e.target.value = limpio;
+    if (alFinal) e.target.setSelectionRange(limpio.length, limpio.length);
+  }
+});
+
 $('btnDatos').addEventListener('click', async () => {
   const err = $('dError');
   err.classList.add('oculto');
@@ -771,6 +782,16 @@ $('btnSalir').addEventListener('click', async () => {
    simplemente queda la pantalla normal para corregirlo a mano. */
 /* Abre la identidad anonima solo si todavia no hay ninguna. Devuelve false
    y deja el motivo a la vista si la base no la deja crear. */
+/* El teclado del iPhone escribe "HEY CHAR" en vez de "HEYCHAR": le parecen
+   dos palabras y mete un espacio. Tambien pasa que alguien copia el codigo
+   con un guion raro o en minuscula. Se limpia todo y se rearma la forma
+   canonica antes de preguntarle nada a la base. */
+function normalizarCodigo(txt){
+  const crudo = String(txt || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  const m = crudo.match(/^HEYCHAR(\d{3})([A-Z0-9]{4})$/);
+  return m ? `HEYCHAR-${m[1]}-${m[2]}` : crudo;
+}
+
 async function asegurarSesion(cajaError){
   const { data:{ session } } = await sb.auth.getSession();
   if (session) return true;
@@ -793,6 +814,8 @@ async function asegurarSesion(cajaError){
 async function canjearAhora(cod, callado){
   const err = $('tError');
   err.classList.add('oculto');
+  cod = normalizarCodigo(cod);
+  if (cod && $('codigo')) $('codigo').value = cod;
   if (!cod){ err.textContent = 'Escribí el código que te dimos.'; err.classList.remove('oculto'); return false; }
 
   $('btnCanjear').disabled = true;
@@ -894,6 +917,15 @@ function dibujarBrief(b) {
       <div class="titular">${esc(r.titular)}</div>
       <p class="cuerpo">${esc(r.cuerpo)}</p>
     </div>` +
+    (b.candidato ? `<div class="sec">
+      <h5>A quién queremos llegar</h5>
+      <div class="ejes">
+        ${[['Quién es', b.candidato.quien], ['Dónde está', b.candidato.donde],
+           ['Qué mira', b.candidato.queMira]].filter(x => x[1])
+          .map(x => `<div><b>${x[0]}</b><p>${esc(x[1])}</p></div>`).join('')}
+      </div>
+      <p class="tambien">El creador se elige por esta persona, no por el puesto.</p>
+    </div>` : '') +
     `<div class="sec">
       <h5>El perfil que elegimos</h5>
       <div class="pfila">
