@@ -340,6 +340,28 @@ clase de match que buscamos.
 
 La vertical sirve para saber DONDE buscar la voz, no para copiar el puesto.
 
+COMO ESTA ORGANIZADA NUESTRA BASE DE CREADORES. Esto es lo que tenes que
+usar para describir el perfil.
+
+Nuestros creadores NO estan clasificados por cargo. Ninguno figura como
+"gerente" ni "encargado" ni "supervisor". Estan clasificados por:
+
+  - LA INDUSTRIA O EL TEMA del que hablan con autoridad.
+  - LA AUDIENCIA que los sigue: edad, momento de carrera, si ya estan en el
+    rubro o quieren entrar.
+  - EL RASGO que los distingue: algunos son ademas profesionales matriculados
+    del rubro que comunican, otros se destacan por el tono, otros por su
+    territorio, otros por el formato.
+  - EL ALCANCE, siempre en bandas.
+
+Entonces el perfil que proponemos se NOMBRA con esas dimensiones, nunca con
+un puesto. Si lo que escribiste como arquetipo se puede poner en un
+organigrama, esta mal y hay que rehacerlo.
+
+Son personas que producen contenido y tienen audiencia propia. Pueden ser
+ademas profesionales idoneos del tema; eso suma credibilidad y conviene
+decirlo en el rasgo. Lo que nunca son es un cargo de la empresa del cliente.
+
 COMO SE LE PRESENTA EL PERFIL AL CLIENTE. Este documento lo lee una gerenta
 de RRHH que esta evaluando si contratarnos.
 
@@ -444,8 +466,8 @@ RESPONDE SOLO EN JSON VALIDO, sin texto previo, sin markdown, sin backticks:
 Reglas que no se negocian:
 - PROHIBIDO escribir nombres propios de personas, arrobas, handles o cantidades de seguidores. Ni inventados ni reales. Hablamos de ARQUETIPOS de voz, no de personas. Si se te escapa un nombre, la respuesta es invalida.
 - Los tres arquetipos tienen que salir de TRES verticales distintas, y ser realmente distintos entre si, no el mismo dicho de tres maneras.
-- Ningun arquetipo puede ser el puesto buscado con otro nombre, ni contener
-  sus palabras. Se elige por AUDIENCIA, no por oficio espejado.
+- Ningun arquetipo puede ser un cargo ni el puesto buscado con otro nombre.
+  Se nombran por industria, audiencia y rasgo. Se elige por AUDIENCIA, no por oficio espejado.
 - Cada arquetipo tiene que describir una cuenta que hoy exista de verdad en
   Argentina. Si habria que inventar a la persona, esta mal planteado.
 - Si la busqueda cae en una vertical con CUIDADO marcado, tenelo presente al describir la voz.
@@ -503,7 +525,9 @@ RESPONDE SOLO EN JSON VALIDO, sin texto previo, sin markdown, sin backticks:
   ],
   "criterios": ["criterio 1", "criterio 2", "criterio 3"],
   "perfilElegido": {
-    "arquetipo": "el perfil de creador seleccionado, 2 a 4 palabras. Describe a la PERSONA QUE COMUNICA, no al puesto que se busca.",
+    "arquetipo": "como se llama este perfil en nuestra base, 3 a 6 palabras. PROHIBIDO que sea un cargo. Se arma con industria + audiencia + rasgo distintivo. Ejemplos de la forma correcta: 'Creadora de retail con audiencia joven del interior', 'Divulgador tecnico con matricula', 'Voz de oficio del Alto Valle'. Ejemplos PROHIBIDOS: 'Subgerente de cadena', 'Ex encargado', 'Jefe de turno', cualquier cosa que nombre un puesto.",
+    "industria": "a que industria o tema le habla este creador, en pocas palabras",
+    "rasgo": "que lo distingue dentro de nuestra base: si ademas es profesional del rubro, si se destaca por el tono, por el territorio, por el formato o por la edad de su audiencia. Una frase.",
     "plataforma": "donde publica y donde esta su comunidad",
     "alcance": "banda de alcance, por ejemplo 'entre 25.000 y 60.000 seguidores'. Nunca un numero exacto.",
     "aQuienLlega": "A QUE PUBLICO ALCANZA. Quienes lo siguen: edad, ocupacion, momento de carrera. Maximo 2 frases. Este publico tiene que ser el mismo candidato del punto 2.",
@@ -519,19 +543,13 @@ RESPONDE SOLO EN JSON VALIDO, sin texto previo, sin markdown, sin backticks:
       "formato": "uno de los cuatro formatos de la casa, con su nombre exacto",
       "titulo": "titulo concreto de ESTA pieza para ESTA busqueda",
       "que": "que se ve y que se cuenta, en una frase",
-      "gancho": "la frase de apertura textual, en la voz del creador. Puede ser coloquial y hablar de vos, pero sin jerga para nombrar a las personas",
+      "gancho": "la frase de apertura textual, en la voz del creador. Coloquial, pero sin jerga para nombrar a las personas",
       "porQue": "que objeción del candidato desarma esta pieza"
     },
     { "formato": "...", "titulo": "...", "que": "...", "gancho": "...", "porQue": "..." },
     { "formato": "...", "titulo": "...", "que": "...", "gancho": "...", "porQue": "..." }
   ],
-  "talentKPIs": ["indicador 1", "indicador 2", "indicador 3"],
-  "pilotTimeline": {
-    "week1": "que pasa en la semana 1",
-    "week2": "semana 2",
-    "week3": "semana 3",
-    "week4": "semana 4"
-  }
+  "talentKPIs": ["indicador 1", "indicador 2", "indicador 3"]
 }
 
 Reglas que no se negocian:
@@ -545,6 +563,10 @@ Reglas que no se negocian:
   confirmar. Inventar contexto es la forma mas rapida de perder al cliente.
 - La audiencia del creador y el candidato del punto 2 tienen que ser LA MISMA
   gente. Si no se superponen, el match esta mal hecho, por bueno que suene.
+- El arquetipo NO PUEDE SER UN CARGO. Revisalo antes de responder: si contiene
+  alguna de estas palabras, esta mal y hay que rehacerlo — gerente, subgerente,
+  encargado, jefe, lider, supervisor, coordinador, responsable, director,
+  capataz, ex-nada. Tampoco el puesto buscado disfrazado.
 - El arquetipo NO PUEDE CONTENER las palabras del puesto buscado. Si la
   busqueda dice "encargado de sucursal", en el arquetipo no aparecen ni
   "encargado" ni "sucursal". Ni con "ex" adelante, ni en diminutivo, ni como
@@ -660,7 +682,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
-        max_tokens: nivel === 'privado' ? 4000 : 1800,
+        max_tokens: nivel === 'privado' ? 3200 : 1500,
         messages: [{ role: 'user', content: prompt }]
       })
     });
