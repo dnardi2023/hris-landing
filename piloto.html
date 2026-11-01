@@ -402,7 +402,7 @@
 
     <div class="caja">
       <ol class="pasos">
-        <li><i>1</i> Entrás con tu cuenta de Google, para saber quién sos.</li>
+        <li><i>1</i> Cargás el código que te dimos.</li>
         <li><i>2</i> Cargás el código que te dimos.</li>
       </ol>
       <div style="margin-top:1.6rem">
@@ -614,8 +614,10 @@ async function arrancar(){
   if (!session){
     const { data, error } = await sb.auth.signInAnonymously();
     if (error || !data?.session){
-      console.warn('sin sesión anónima:', error && error.message);
-      $('tError').textContent = 'No pudimos abrir tu sesión. Recargá la página y probá de nuevo.';
+      const detalle = (error && (error.message || error.error_description)) || 'sin detalle';
+      console.warn('sin sesión anónima:', detalle, error);
+      $('tError').innerHTML = 'No pudimos abrir tu sesión.<br><span style="opacity:.75">'
+        + String(detalle).replace(/[<>]/g, '') + '</span>';
       $('tError').classList.remove('oculto');
       portada('vTicket');
       return;
@@ -791,7 +793,7 @@ async function canjearAhora(cod, callado){
   const motivos = {
     invalido:  'Ese código no existe o ya no está activo. Revisá que esté igual al que te pasamos.',
     usado:     'Ese código ya lo usó otra persona. Escribinos y te damos uno nuevo.',
-    sin_sesion:'Se cerró la sesión. Volvé a entrar con Google.'
+    sin_sesion:'Se cortó la sesión. Recargá la página y volvé a cargar el código.'
   };
   olvidarTicket();
   err.textContent = motivos[data?.motivo] || 'No pudimos validar ese código.';
@@ -954,7 +956,7 @@ $('bGenerar').addEventListener('click', async () => {
     if (j.nivel !== 'privado') {
       // No deberia pasar: si pasa, el acceso se perdio por algun lado.
       $('bPanelTitulo').textContent = 'Tu acceso no se reconoció';
-      $('bCuerpo').innerHTML = '<div class="sec"><p class="cuerpo">Volvé a entrar con Google para recuperar el acceso completo.</p></div>';
+      $('bCuerpo').innerHTML = '<div class="sec"><p class="cuerpo">Se cortó la sesión. Recargá la página y volvé a cargar tu código.</p></div>';
       track('app_brief_sin_acceso', {});
       return;
     }
