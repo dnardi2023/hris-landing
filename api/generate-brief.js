@@ -163,6 +163,63 @@ const VERTICALES = `
   Descalifica: Vende metodos infalibles de insercion. Nunca trabajo en relacion de dependencia pero asesora sobre ella.
 `;
 
+
+// Version corta, para el nivel abierto: ahi solo hay que elegir tres
+// arquetipos, no hay que verificar a nadie. Menos entrada, menos espera.
+const VERTICALES_CORTO = `
+[energia_no_convencional] Campo y yacimiento no convencional — Oil & gas, servicios especiales, Vaca Muerta
+  Publico: Tecnicos y operarios de 20 a 35 con secundario tecnico o terciario, que evaluan irse a la cuenca; y estudiantes de escuelas tecnicas de Neuquen, Rio Negro y La Pampa.
+  Tono: Directo, sin epica. Habla de turnos, distancias, frio y plata con la misma naturalidad.  |  Tecnicismo: alto
+[mantenimiento_industrial] Mantenimiento y oficio industrial — Industria, plantas, mantenimiento, metalurgica
+  Publico: Jovenes de escuela tecnica, mecanicos, electricistas industriales y operarios calificados que buscan donde estar mejor.
+  Tono: Didactico sobre la maquina. Muestra el problema y como lo resolvio, no el resultado.  |  Tecnicismo: alto
+[automotriz] Taller y posventa automotriz — Concesionarias, talleres, posventa, autopartes
+  Publico: Mecanicos jovenes, estudiantes de tecnicaturas automotrices y aspirantes a asesor de servicio.
+  Tono: De taller: diagnostico en voz alta, humor seco, cero solemnidad.  |  Tecnicismo: alto
+[salud_asistencial] Enfermeria y cuidado asistencial — Clinicas, sanatorios, geriatricos, salud domiciliaria
+  Publico: Estudiantes de enfermeria y tecnicaturas de la salud, auxiliares que evaluan licenciarse, y profesionales que piensan en irse del sistema.
+  Tono: Sereno y preciso. Cuenta el turno real, incluida la carga emocional, sin dramatizar.  |  Tecnicismo: alto
+[logistica] Logistica, deposito y ultima milla — Operadores logisticos, e-commerce, distribucion, transporte
+  Publico: Jovenes de 18 a 30 en su primer empleo formal, repartidores que quieren pasar a relacion de dependencia, operarios de deposito.
+  Tono: Ritmo de jornada. Cuenta el dia por tramos y con numeros propios.  |  Tecnicismo: medio
+[construccion] Obra y oficios de la construccion — Constructoras, desarrolladoras, instaladoras
+  Publico: Jovenes que entran a la obra, estudiantes de maestro mayor, oficiales que quieren pasar a capataz.
+  Tono: A pie de obra, con el casco puesto. Explica el porque del procedimiento.  |  Tecnicismo: alto
+[agro] Agro y agroindustria — Produccion agropecuaria, agroindustria, maquinaria, acopio
+  Publico: Jovenes de pueblos del interior, estudiantes de agronomia y tecnicaturas agropecuarias, hijos de productores que evaluan quedarse o irse.
+  Tono: De campo, estacional, con el calendario productivo como estructura.  |  Tecnicismo: alto
+[gastronomia] Cocina y salon — Restaurantes, hoteleria, cadenas gastronomicas, catering
+  Publico: Cocineros jovenes, estudiantes de gastronomia, personal de salon que busca crecer a encargado.
+  Tono: De servicio: el ritmo de la cocina en hora pico, sin estetizar.  |  Tecnicismo: medio
+[retail_sucursal] Retail, comercio y gestion de local — Cadenas, franquicias, supermercados, comercio minorista
+  Publico: Gen Z en su primer empleo formal y jovenes que pasan de vendedor a encargado.
+  Tono: Cercano y concreto. El mostrador como escuela de gestion.  |  Tecnicismo: bajo
+[tecnologia] Sistemas y producto digital — Software, servicios de TI, areas de sistemas
+  Publico: Estudiantes de carreras de sistemas, egresados de bootcamps, perfiles junior buscando el primer puesto formal.
+  Tono: Tecnico pero accesible. Muestra codigo, decisiones y errores.  |  Tecnicismo: alto
+[farma_laboratorio] Industria farmaceutica y laboratorio — Laboratorios, biotecnologia, control de calidad, regulatorio
+  Publico: Estudiantes y jovenes profesionales de farmacia, bioquimica, biotecnologia y quimica.
+  Tono: Riguroso y ordenado. El procedimiento como protagonista.  |  Tecnicismo: alto
+[alimentos] Industria alimenticia — Plantas de alimentos y bebidas, frigorificos, lacteos
+  Publico: Operarios jovenes, tecnicos en alimentos, estudiantes de bromatologia e ingenieria en alimentos.
+  Tono: De planta: linea, turno y control.  |  Tecnicismo: medio
+[contacto_cliente] Atencion al cliente y contact center — Contact centers, servicios compartidos, atencion telefonica y digital
+  Publico: Jovenes de 18 a 28 en su primer empleo, muchos estudiando en paralelo.
+  Tono: Honesto sobre la carga emocional del puesto. Humor como herramienta.  |  Tecnicismo: bajo
+[mineria] Mineria y gran obra remota — Mineria, proyectos remotos, campamentos
+  Publico: Tecnicos y operarios dispuestos a trabajar por regimen, en San Juan, Catamarca, Santa Cruz y Jujuy.
+  Tono: Sobrio. El campamento y el regimen contados sin adorno.  |  Tecnicismo: alto
+[seguros_financiero] Seguros y servicios financieros — Aseguradoras, productores, bancos, fintech
+  Publico: Jovenes profesionales de administracion y comercializacion, aspirantes a productor asesor.
+  Tono: Claro y pedagogico. Traduce lo que suena complicado.  |  Tecnicismo: medio
+[educacion] Educacion y formacion profesional — Instituciones educativas, centros de formacion, areas de capacitacion
+  Publico: Estudiantes de profesorado, docentes jovenes, formadores tecnicos.
+  Tono: De aula real, con sus limitaciones a la vista.  |  Tecnicismo: medio
+[primer_empleo] Primer empleo y mundo administrativo — Transversal: administracion, back office, analista junior, pasantias
+  Publico: Gen Z sin experiencia formal, recien recibidos, quienes buscan su primer trabajo en blanco.
+  Tono: Par a par. Cuenta el proceso completo, incluidos los rechazos.  |  Tecnicismo: bajo
+`;
+
 const IDS_VERTICALES = ["energia_no_convencional", "mantenimiento_industrial", "automotriz", "salud_asistencial", "logistica", "construccion", "agro", "gastronomia", "retail_sucursal", "tecnologia", "farma_laboratorio", "alimentos", "contacto_cliente", "mineria", "seguros_financiero", "educacion", "primer_empleo"];
 
 // Resumen de la rubrica de idoneidad. Fuente: rubrica.json.
@@ -241,12 +298,49 @@ Que quieren comunicar del rol y de la cultura: ${culture}
 ${context ? 'Contexto o desafio adicional: ' + context : ''}
 
 Nuestras verticales curadas:
-${VERTICALES}
+${VERTICALES_CORTO}
 
 Con que verificamos que una voz es idonea:
 ${RUBRICA}
 
 Tu tarea tiene tres partes.
+
+
+COMO SE HACE EL MATCH. Esto es lo que nos diferencia; leelo dos veces.
+
+No buscamos a alguien que HAYA TENIDO el puesto. Buscamos a alguien que YA LE
+HABLE a la gente que podria ocuparlo.
+
+El error que arruina un brief: si la busqueda es "encargado de sucursal de una
+heladeria", proponer "un ex encargado de sucursal que cuenta su dia". Esa voz
+casi no existe como creador, y si existiera su audiencia serian otros ex
+encargados, no candidatos. El oficio del creador NO tiene que espejar el puesto.
+
+El match sale de cruzar CUATRO ejes. Los cuatro, no uno:
+
+1. LA AUDIENCIA — quien lo escucha, no quien es el. Edad, momento de carrera,
+   si ya esta en el oficio o quiere entrar. Este eje manda sobre los otros tres:
+   si entre quienes lo siguen no estan los candidatos, no sirve por mas experto
+   que sea.
+2. EL TERRITORIO — donde vive esa audiencia. Una busqueda en Neuquen no se
+   resuelve con una voz que convoca en el conurbano bonaerense. Si la busqueda
+   no dice la zona, decilo como condicion a confirmar.
+3. LA AUTORIDAD — sobre que tema tiene credibilidad ganada y con que la
+   demuestra: muestra el procedimiento real, tiene matricula, anios en el rubro,
+   contesta preguntas tecnicas en los comentarios.
+4. EL VINCULO — que tipo de relacion tiene con quien lo sigue: le ensenia, lo
+   entretiene, lo representa, le aconseja la carrera. De ahi depende si puede
+   recomendar un trabajo sin que suene a publicidad paga.
+
+La voz elegida puede venir de un oficio vecino, o no ser del oficio en absoluto,
+si la audiencia es la correcta. Alguien que ensenia a moverse en el primer
+empleo le habla a los mismos veinteaneros que podrian ser encargados de
+sucursal, y no fue encargado de sucursal en su vida. Esa es exactamente la
+clase de match que buscamos.
+
+La vertical sirve para saber DONDE buscar la voz, no para copiar el puesto.
+
+Tu tarea.
 
 1. REESCRIBIR EL BRIEF. Tomá lo que escribieron y devolveles la version afilada: que es lo que en realidad necesitan comunicar, dicho mejor de lo que ellos lo dijeron. Esta es la prueba de que los entendimos. Si lo que escribieron es vago, nombrá con precision lo que esta en juego detras.
 
@@ -259,7 +353,7 @@ RESPONDE SOLO EN JSON VALIDO, sin texto previo, sin markdown, sin backticks:
 {
   "briefReformulado": {
     "titular": "una frase que nombre el verdadero desafio de comunicacion de esta busqueda",
-    "cuerpo": "2 o 3 frases: que necesitan comunicar realmente, por que su mensaje actual no esta llegando, y que tendria que cambiar. Lenguaje de RRHH, cero marketing."
+    "cuerpo": "2 frases: que necesitan comunicar realmente y por que su mensaje actual no esta llegando. Lenguaje de RRHH, cero marketing."
   },
   "perfilesCompatibles": [
     {
@@ -276,9 +370,17 @@ RESPONDE SOLO EN JSON VALIDO, sin texto previo, sin markdown, sin backticks:
 Reglas que no se negocian:
 - PROHIBIDO escribir nombres propios de personas, arrobas, handles o cantidades de seguidores. Ni inventados ni reales. Hablamos de ARQUETIPOS de voz, no de personas. Si se te escapa un nombre, la respuesta es invalida.
 - Los tres arquetipos tienen que salir de TRES verticales distintas, y ser realmente distintos entre si, no el mismo dicho de tres maneras.
+- Ningun arquetipo puede ser el puesto buscado con otro nombre. Se elige por
+  AUDIENCIA, no por oficio espejado.
 - Si la busqueda cae en una vertical con CUIDADO marcado, tenelo presente al describir la voz.
 - Nada de lenguaje de marketing (impresiones, CPM, alcance, engagement). Los indicadores de la casa son: calidad del flujo de candidatos, conversion de interes a postulacion, percepcion de marca empleadora, costo por contratacion, tiempo de cobertura.
-- Espaniol rioplatense neutro, voseo.
+- Espaniol rioplatense profesional, con voseo. PROHIBIDA la jerga para nombrar
+  personas: nunca "los pibes", "los chicos", "los chabones", "la gente joven" como
+  bloque, ni ningun diminutivo. Se los nombra por su rol o su momento de carrera:
+  "quienes buscan su primer empleo", "tecnicos de 20 a 30", "el candidato".
+  Quien lee esto es un gerente de Recursos Humanos, y de quien se habla es del
+  talento al que queremos dignificar: hablar de ellos con condescendencia arruina
+  el argumento entero.
 - Cada campo de texto, maximo 3 frases.
 - Ningun texto fuera del JSON.`;
 }
@@ -321,12 +423,15 @@ RESPONDE SOLO EN JSON VALIDO, sin texto previo, sin markdown, sin backticks:
   "criterios": ["criterio 1", "criterio 2", "criterio 3"],
   "perfilElegido": {
     "estado": "en_red | a_curar",
-    "arquetipo": "el tipo de voz elegido, 2 a 4 palabras",
+    "arquetipo": "el tipo de voz elegido, 2 a 4 palabras. NO es el puesto que se busca.",
     "plataforma": "donde vive esa comunidad",
     "alcance": "banda de alcance, por ejemplo 'entre 25.000 y 60.000 seguidores'. Nunca un numero exacto.",
-    "audiencia": "composicion de la audiencia en una o dos frases: quienes son, en que momento de su carrera estan",
-    "tono": "como habla y por que eso genera confianza, en una frase",
-    "porQueEste": "2 o 3 frases explicando por que ESTE perfil y no los otros dos. Tiene que ser una decision argumentada, no un elogio.",
+    "audiencia": "EJE 1. Quienes lo siguen: edad, ocupacion, si ya estan en el oficio o quieren entrar. Maximo 2 frases.",
+    "territorio": "EJE 2. Donde se concentra esa audiencia. Si la busqueda no aclara la zona, escribilo como condicion a confirmar. Una frase.",
+    "autoridad": "EJE 3. Sobre que tiene credibilidad ganada y con que la demuestra. Una frase.",
+    "vinculo": "EJE 4. Que relacion tiene con quien lo sigue (le ensenia, lo representa, lo aconseja) y por que eso le permite recomendar un trabajo sin sonar a publicidad. Una frase.",
+    "tono": "como habla, en una frase",
+    "porQueEste": "2 frases explicando por que ESTE perfil y no los otros dos, apoyandote en los ejes. Decision argumentada, no elogio.",
     "comoLoCuramos": ["3 verificaciones CONCRETAS que haríamos sobre un candidato a esta voz, sacadas de las senales de idoneidad de su vertical. Nada generico: si la vertical pide matricula, decilo; si pide mostrar el procedimiento completo, decilo."],
     "aTenerEnCuenta": "una advertencia honesta: que limite tiene esta eleccion o que habria que cuidar al ejecutarla"
   },
@@ -334,8 +439,8 @@ RESPONDE SOLO EN JSON VALIDO, sin texto previo, sin markdown, sin backticks:
     {
       "formato": "uno de los cuatro formatos de la casa, con su nombre exacto",
       "titulo": "titulo concreto de ESTA pieza para ESTA busqueda",
-      "que": "que se ve y que se cuenta, en una o dos frases",
-      "gancho": "la frase de apertura textual, en la voz del creador",
+      "que": "que se ve y que se cuenta, en una frase",
+      "gancho": "la frase de apertura textual, en la voz del creador. Puede ser coloquial y hablar de vos, pero sin jerga para nombrar a las personas",
       "porQue": "que objeción del candidato desarma esta pieza"
     },
     { "formato": "...", "titulo": "...", "que": "...", "gancho": "...", "porQue": "..." },
@@ -351,15 +456,29 @@ RESPONDE SOLO EN JSON VALIDO, sin texto previo, sin markdown, sin backticks:
 }
 
 Reglas que no se negocian:
+- ESCRIBI CORTO. Respetá el limite de frases de cada campo. Un brief que tarda
+  un minuto en aparecer no lo lee nadie: la precision vale mas que el volumen.
 - PROHIBIDO escribir nombres propios de personas, arrobas, handles o cantidades exactas de seguidores, aca tampoco. Trabajamos con el PERFIL; la persona se presenta cuando se firma. Si se te escapa un nombre, la respuesta es invalida.
 - "alcance" va siempre como banda, nunca como cifra cerrada. No inventamos precision que no tenemos.
+- El arquetipo NO puede ser el puesto buscado con otro nombre. Si la busqueda
+  dice "encargado de sucursal", el arquetipo no es "ex encargado de sucursal"
+  ni "encargado que cuenta su dia". Si lo que escribiste se parece al puesto,
+  esta mal: volve a los cuatro ejes y elegi por audiencia.
+- Los cuatro ejes se completan siempre, aunque alguno quede como condicion a
+  confirmar. Un eje vacio es un match sin fundamentar.
 - El perfil elegido tiene que salir de UNA de las verticales. Si ninguna cubre bien esta busqueda, poné estado "a_curar" y describí la vertical nueva que habria que abrir y con que criterios. Es una respuesta legitima y honesta, no un fracaso.
 - "comoLoCuramos" sale de las senales de idoneidad de la vertical elegida, no de generalidades. Es la respuesta a "¿y como se que no es cualquiera?".
 - Si la vertical tiene CUIDADO marcado (campo regulado, menores), eso va si o si en "aTenerEnCuenta".
 - Las tres piezas tienen que usar formatos DISTINTOS de los cuatro de la casa, y ser especificas de esta busqueda. Nada que sirva igual para cualquier empresa.
 - El campo "aTenerEnCuenta" no es un adorno: escribí ahi la objecion real que le haria un director de RRHH escéptico.
 - Nada de lenguaje de marketing (impresiones, CPM, alcance publicitario, engagement). Indicadores de la casa: calidad del flujo de candidatos, conversion de interes a postulacion, percepcion de marca empleadora, costo por contratacion, tiempo de cobertura.
-- Espaniol rioplatense neutro, voseo.
+- Espaniol rioplatense profesional, con voseo. PROHIBIDA la jerga para nombrar
+  personas: nunca "los pibes", "los chicos", "los chabones", "la gente joven" como
+  bloque, ni ningun diminutivo. Se los nombra por su rol o su momento de carrera:
+  "quienes buscan su primer empleo", "tecnicos de 20 a 30", "el candidato".
+  Quien lee esto es un gerente de Recursos Humanos, y de quien se habla es del
+  talento al que queremos dignificar: hablar de ellos con condescendencia arruina
+  el argumento entero.
 - Cada campo de texto, maximo 3 frases. El JSON tiene que cerrar correctamente.
 - Ningun texto fuera del JSON.`;
 }
@@ -452,7 +571,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
-        max_tokens: nivel === 'privado' ? 4000 : 2000,
+        max_tokens: nivel === 'privado' ? 2600 : 1200,
         messages: [{ role: 'user', content: prompt }]
       })
     });
