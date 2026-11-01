@@ -59,8 +59,9 @@
            text-transform:uppercase;color:var(--ink-dim);margin-bottom:1.4rem}
   .eyebrow .rule{width:34px;height:1px;background:var(--line-strong)}
   h1{font-family:var(--sans);font-weight:600;font-size:clamp(1.9rem,6vw,3rem);
-     line-height:1.03;letter-spacing:-.03em;max-width:16ch}
-  h1 em{font-style:normal;background:var(--lime);padding:0 .1em}
+     line-height:1.16;letter-spacing:-.03em;max-width:16ch}
+  h1 em{font-style:normal;background:var(--lime);padding:.05em .1em .03em;
+        box-decoration-break:clone;-webkit-box-decoration-break:clone}
   .lead{margin-top:1.2rem;color:var(--ink-dim);font-size:1.02rem;line-height:1.6;max-width:50ch}
 
   .caja{margin-top:clamp(2rem,5vw,3rem);background:var(--bg-1);border:1px solid var(--line);
@@ -255,8 +256,10 @@
 
   /* ===== portada de la app ===== */
   .hero-frase{font-family:var(--sans);font-weight:900;letter-spacing:-.035em;
-              line-height:.98;font-size:clamp(2.6rem,11vw,4.1rem);margin:.2rem 0 0}
-  .hero-frase em{font-style:normal;color:var(--ink);background:var(--lime);padding:0 .09em}
+              line-height:1.34;font-size:clamp(2.6rem,11vw,4.1rem);margin:.3rem 0 0}
+  .hero-frase em{font-style:normal;color:var(--ink);background:var(--lime);
+                 padding:.02em .1em .05em;box-decoration-break:clone;
+                 -webkit-box-decoration-break:clone}
   .hero-sub{font-family:var(--ui);font-size:1.02rem;line-height:1.6;color:var(--ink-dim);
             margin:1.1rem 0 0;max-width:34ch}
   .cta-caja{margin:2rem 0 .4rem}
@@ -390,7 +393,7 @@
       </div>
     </div>
 
-    <p class="legal" style="margin-top:2.4rem;opacity:.55;font-size:.72rem">Versi&oacute;n <b id="sello">v7 · 01/11 16:16</b></p>
+    <p class="legal" style="margin-top:2.4rem;opacity:.55;font-size:.72rem">Versi&oacute;n <b id="sello">v9 · 01/11 16:28</b></p>
     <p class="legal" style="margin-top:.6rem">Con el golden ticket abr&iacute;s el <b>Brief Builder</b>: carg&aacute;s una b&uacute;squeda real y te devolvemos el perfil curado, las piezas que produc&iacute;riamos y el plan de los primeros 30 d&iacute;as.</p>
   </section>
 

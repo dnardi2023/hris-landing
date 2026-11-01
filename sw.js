@@ -18,7 +18,7 @@
  * Para publicar un cambio: subir el archivo nuevo y tocar VERSION abajo.
  * ------------------------------------------------------------------------- */
 
-const VERSION = 'v7';   // subila cada vez que cambie piloto.html
+const VERSION = 'v9';   // subila cada vez que cambie piloto.html
 const CACHE_SHELL = `heychar-shell-${VERSION}`;
 const CACHE_FUENTES = `heychar-fuentes-${VERSION}`;
 
