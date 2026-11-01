@@ -390,7 +390,7 @@
       </div>
     </div>
 
-    <p class="legal" style="margin-top:2.4rem;opacity:.55;font-size:.72rem">Versi&oacute;n <b id="sello">v4 · 01/11 13:42</b></p>
+    <p class="legal" style="margin-top:2.4rem;opacity:.55;font-size:.72rem">Versi&oacute;n <b id="sello">v5 · 01/11 15:25</b></p>
     <p class="legal" style="margin-top:.6rem">Con el golden ticket abr&iacute;s el <b>Brief Builder</b>: carg&aacute;s una b&uacute;squeda real y te devolvemos el perfil curado, las piezas que produc&iacute;riamos y el plan de los primeros 30 d&iacute;as.</p>
   </section>
 
@@ -898,7 +898,6 @@ function pararPasos(){ if (relojPasos) { clearInterval(relojPasos); relojPasos =
 
 function dibujarBrief(b) {
   const e = b.perfilElegido || {};
-  const aCurar = e.estado === 'a_curar';
   const otros = (b.perfilesCompatibles || []).map(x => x.arquetipo)
     .filter(a => a && a !== e.arquetipo).slice(0, 2).join(' · ');
   const r = b.briefReformulado || {};
@@ -927,26 +926,24 @@ function dibujarBrief(b) {
       <p class="tambien">El creador se elige por esta persona, no por el puesto.</p>
     </div>` : '') +
     `<div class="sec">
-      <h5>El perfil que elegimos</h5>
+      <h5>El perfil que seleccionamos</h5>
       <div class="pfila">
         <div class="rombo">&#9670;</div>
         <div style="flex:1">
-          <b>${esc(e.arquetipo)}${aCurar ? ' · a curar' : ''}</b>
+          <b>${esc(e.arquetipo)}</b>
           <div class="aud">${esc([e.plataforma, e.alcance].filter(Boolean).join(' · '))}</div>
-          <p class="pq">${esc(e.audiencia)}</p>
         </div>
       </div>
       <div class="ejes">
-        ${[['Audiencia', e.audiencia], ['Territorio', e.territorio],
-           ['Autoridad', e.autoridad], ['Vínculo', e.vinculo]]
-          .filter(x => x[1]).slice(1)
+        ${[['A quién llega', e.aQuienLlega], ['Territorio', e.territorio],
+           ['Qué transmite', e.queTransmite], ['Tono', e.tono]]
+          .filter(x => x[1])
           .map(x => `<div><b>${x[0]}</b><p>${esc(x[1])}</p></div>`).join('')}
-        ${e.tono ? `<div><b>Tono</b><p>${esc(e.tono)}</p></div>` : ''}
       </div>
       <p class="pq">${esc(e.porQueEste)}</p>
-      ${(e.comoLoCuramos || []).length ? `<div class="curamos"><b>Cómo verificamos esta voz</b><ul>${
+      ${(e.comoLoCuramos || []).length ? `<div class="curamos"><b>Cómo verificamos este perfil</b><ul>${
         (e.comoLoCuramos || []).map(c => `<li>${esc(c)}</li>`).join('')}</ul></div>` : ''}
-      ${e.aTenerEnCuenta ? `<div class="objecion"><b>A tener en cuenta</b><p>${esc(e.aTenerEnCuenta)}</p></div>` : ''}
+      ${e.queCuidamos ? `<div class="objecion"><b>Qué cuidamos</b><p>${esc(e.queCuidamos)}</p></div>` : ''}
       ${otros ? `<p class="tambien">También evaluamos: ${esc(otros)}.</p>` : ''}
     </div>` +
     `<div class="sec"><h5>Las piezas</h5>${piezas}</div>` +
