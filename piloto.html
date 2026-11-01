@@ -390,7 +390,7 @@
       </div>
     </div>
 
-    <p class="legal" style="margin-top:2.4rem;opacity:.55;font-size:.72rem">Versi&oacute;n <b id="sello">v6 · 01/11 16:05</b></p>
+    <p class="legal" style="margin-top:2.4rem;opacity:.55;font-size:.72rem">Versi&oacute;n <b id="sello">v7 · 01/11 16:16</b></p>
     <p class="legal" style="margin-top:.6rem">Con el golden ticket abr&iacute;s el <b>Brief Builder</b>: carg&aacute;s una b&uacute;squeda real y te devolvemos el perfil curado, las piezas que produc&iacute;riamos y el plan de los primeros 30 d&iacute;as.</p>
   </section>
 
@@ -447,7 +447,7 @@
       <div class="manual" id="manual">
         <label for="codigo" style="margin-top:1.2rem">Tu golden ticket</label>
         <input type="text" id="codigo" placeholder="HEYCHAR-000-XXXX" autocomplete="off"
-               autocapitalize="characters" spellcheck="false" inputmode="text"
+               autocapitalize="off" spellcheck="false" inputmode="text"
                autocorrect="off" data-gramm="false">
         <div style="margin-top:1rem">
           <button class="btn btn-lima" id="btnCanjear" type="button">Activar mi acceso</button>
@@ -702,16 +702,6 @@ $('btnCta').addEventListener('click', () => {
 
 /* Los datos de contacto. Se validan aca y tambien en la base: un mail mal
    escrito es un lead que no vuelve. */
-/* Se acomoda mientras escribe, asi nadie pelea con el autocorrector. */
-$('codigo').addEventListener('input', (e) => {
-  const limpio = normalizarCodigo(e.target.value);
-  if (limpio !== e.target.value) {
-    const alFinal = e.target.selectionStart === e.target.value.length;
-    e.target.value = limpio;
-    if (alFinal) e.target.setSelectionRange(limpio.length, limpio.length);
-  }
-});
-
 $('btnDatos').addEventListener('click', async () => {
   const err = $('dError');
   err.classList.add('oculto');
@@ -786,10 +776,12 @@ $('btnSalir').addEventListener('click', async () => {
    dos palabras y mete un espacio. Tambien pasa que alguien copia el codigo
    con un guion raro o en minuscula. Se limpia todo y se rearma la forma
    canonica antes de preguntarle nada a la base. */
+/* El campo NO se toca mientras la persona escribe: cualquier reformateo en
+   vivo pelea con el teclado del telefono, sobre todo en iPhone. Se escribe
+   libre —con guiones, con espacios, en minuscula— y se limpia aca, una sola
+   vez, justo antes de preguntarle a la base. */
 function normalizarCodigo(txt){
   const crudo = String(txt || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
-  /* Los guiones se ponen solos a medida que escribe, como en un numero de
-     tarjeta. Antes los borraba en cada tecla y era imposible tipear. */
   let out = crudo.slice(0, 7);
   if (crudo.length > 7)  out += '-' + crudo.slice(7, 10);
   if (crudo.length > 10) out += '-' + crudo.slice(10, 14);
@@ -818,8 +810,7 @@ async function asegurarSesion(cajaError){
 async function canjearAhora(cod, callado){
   const err = $('tError');
   err.classList.add('oculto');
-  cod = normalizarCodigo(cod);
-  if (cod && $('codigo')) $('codigo').value = cod;
+  cod = normalizarCodigo(cod);   // se limpia lo que viaja, no lo que se ve
   if (!cod){ err.textContent = 'Escribí el código que te dimos.'; err.classList.remove('oculto'); return false; }
 
   $('btnCanjear').disabled = true;
