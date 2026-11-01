@@ -379,7 +379,7 @@
         </details>
         <details>
           <summary><span class="num">02</span>Abono mensual<span class="mas"></span></summary>
-          <div class="cont"><p>Para sostener la comunicaci&oacute;n en el tiempo: creadores de nicho y contenido producido mes a mes, con curadur&iacute;a y reporte.</p><span class="precio">USD 1.800 / mes</span></div>
+          <div class="cont"><p>Para sostener la comunicaci&oacute;n en el tiempo: creadores de nicho y contenido producido mes a mes, con curadur&iacute;a y reporte.</p><span class="precio">USD 2.200 / mes</span></div>
         </details>
         <details>
           <summary><span class="num">03</span>Programa anual<span class="mas"></span></summary>
@@ -1124,6 +1124,30 @@ const esSamsung = () => /SamsungBrowser/i.test(navigator.userAgent);
    la barra del navegador y sin pantalla completa. Apple no deja otra cosa. */
 const esSafariIOS = () => esIOS() && !/CriOS|FxiOS|EdgiOS|OPiOS|YaBrowser/i.test(navigator.userAgent);
 
+const esAndroid = () => /Android/i.test(navigator.userAgent);
+
+/* Cuando el QR se escanea con la camara del telefono, Android abre la pagina
+   en un navegador embebido: una pestana prestada, sin menu propio. Ahi no
+   existe "Instalar aplicacion" y el navegador tampoco dispara el aviso de
+   instalacion, asi que la instruccion de buscar el menu no lleva a ninguna
+   parte. A esa gente hay que sacarla a Chrome antes de explicarle nada. */
+const esEmbebido = () => esAndroid() && (
+  / wv\)/i.test(navigator.userAgent) ||
+  /Instagram|FBAN|FBAV|FB_IAB|Line\/|TikTok|Twitter|Snapchat|Pinterest|GSA\//i.test(navigator.userAgent)
+);
+
+/* Un enlace intent:// abre Chrome de verdad desde un navegador embebido.
+   Si el telefono no lo entiende, queda la direccion copiada como salida. */
+function abrirEnChrome(){
+  const dir = location.origin + '/piloto.html';
+  const limpia = dir.replace(/^https?:\/\//, '');
+  /* browser_fallback_url: si el telefono no tiene Chrome, Android abre esa
+     direccion en el navegador que tenga en vez de quedarse en un error. */
+  location.href = 'intent://' + limpia + '#Intent;scheme=https;' +
+                  'package=com.android.chrome;' +
+                  'S.browser_fallback_url=' + encodeURIComponent(dir) + ';end';
+}
+
 function pintarBarra(){
   const barra = $('instalar');
   if (!barra) return;
@@ -1156,7 +1180,7 @@ function pintarBarra(){
       pie.innerHTML = 'En iPhone solo Safari instala la app de verdad. ' +
                       'Copiá esta dirección y abrila en <b>Safari</b>.';
       boton.textContent = 'Copiar la dirección';
-      boton.style.display = 'inline-flex';   // explicito: el estilo .ios lo esconde
+      boton.style.display = 'block';          // explicito: el estilo .ios lo esconde
       return;
     }
     titulo.textContent = 'Dejala en tu pantalla de inicio';
@@ -1166,10 +1190,31 @@ function pintarBarra(){
     boton.style.display = 'none';
     return;
   }
-  // Android sin aviso, o escritorio
+  // Android dentro de un navegador embebido: primero sacarlo a Chrome
+  if (esEmbebido()) {
+    barra.classList.remove('ios');
+    titulo.textContent = 'Abrila en Chrome para instalarla';
+    pie.innerHTML = 'Escaneaste con la cámara, así que esto se abrió en una ' +
+                    'pestaña prestada y desde acá no se puede instalar. ' +
+                    'Un toque y seguís en <b>Chrome</b>.';
+    boton.textContent = 'Abrir en Chrome';
+    boton.style.display = 'block';
+    return;
+  }
+
+  // Android con menú propio, o escritorio
   barra.classList.remove('ios');
+  if (esAndroid()) {
+    barra.classList.add('ios');          // la lista de pasos usa ese estilo
+    titulo.textContent = 'Dejala en tu pantalla de inicio';
+    pie.innerHTML = '1. Tocá <b>⋮</b> arriba a la derecha.<br>' +
+                    '2. Elegí <b>Agregar a la pantalla principal</b>.<br>' +
+                    '3. Confirmá <b>Instalar</b>.';
+    boton.style.display = 'none';
+    return;
+  }
   titulo.textContent = 'Dejala en tu pantalla de inicio';
-  pie.innerHTML = 'Abrí el menú <b>⋮</b> del navegador y elegí ' +
+  pie.innerHTML = 'Abrí el menú del navegador y elegí ' +
                   '<b>Instalar aplicación</b> o <b>Agregar a la pantalla principal</b>.';
   boton.style.display = 'none';
 }
@@ -1207,6 +1252,7 @@ function ofrecerInstalar() {
 
   $('instalarNo').addEventListener('click', () => { cerrar(true); track('app_instalar_rechazada', {}); });
   $('instalarSi').addEventListener('click', async () => {
+    if (!promptApp && esEmbebido()) { abrirEnChrome(); track('app_embebido_a_chrome', {}); return; }
     if (esSamsung() || (esIOS() && !esSafariIOS())) {
       const dir = location.origin + '/piloto.html';
       try {
@@ -1230,6 +1276,11 @@ function ofrecerInstalar() {
 
   pintarBarra();
   barra.classList.add('ver');
+  /* Chrome a veces tarda unos segundos en decidir que la app es instalable.
+     Si el aviso llega después, la barra se vuelve a pintar con el botón real. */
+  [1200, 3000, 6000].forEach(ms => setTimeout(() => {
+    if (promptApp && barra.classList.contains('ver')) pintarBarra();
+  }, ms));
   track('app_instalar_ofrecida', { via: promptApp ? 'navegador' : (esIOS() ? 'ios' : 'menu') });
 }
 
