@@ -390,7 +390,7 @@
       </div>
     </div>
 
-    <p class="legal" style="margin-top:2.4rem;opacity:.55;font-size:.72rem">Versi&oacute;n <b id="sello">v5 · 01/11 15:25</b></p>
+    <p class="legal" style="margin-top:2.4rem;opacity:.55;font-size:.72rem">Versi&oacute;n <b id="sello">v6 · 01/11 16:05</b></p>
     <p class="legal" style="margin-top:.6rem">Con el golden ticket abr&iacute;s el <b>Brief Builder</b>: carg&aacute;s una b&uacute;squeda real y te devolvemos el perfil curado, las piezas que produc&iacute;riamos y el plan de los primeros 30 d&iacute;as.</p>
   </section>
 
@@ -788,8 +788,12 @@ $('btnSalir').addEventListener('click', async () => {
    canonica antes de preguntarle nada a la base. */
 function normalizarCodigo(txt){
   const crudo = String(txt || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
-  const m = crudo.match(/^HEYCHAR(\d{3})([A-Z0-9]{4})$/);
-  return m ? `HEYCHAR-${m[1]}-${m[2]}` : crudo;
+  /* Los guiones se ponen solos a medida que escribe, como en un numero de
+     tarjeta. Antes los borraba en cada tecla y era imposible tipear. */
+  let out = crudo.slice(0, 7);
+  if (crudo.length > 7)  out += '-' + crudo.slice(7, 10);
+  if (crudo.length > 10) out += '-' + crudo.slice(10, 14);
+  return out;
 }
 
 async function asegurarSesion(cajaError){
@@ -908,7 +912,6 @@ function dibujarBrief(b) {
       <p class="pq">${esc(z.que)}</p>
       <p class="pq"><b>Desarma:</b> ${esc(z.porQue)}</p>
     </div>`).join('');
-  const tl = b.pilotTimeline || {};
 
   $('bCuerpo').innerHTML =
     `<div class="sec">
@@ -935,7 +938,8 @@ function dibujarBrief(b) {
         </div>
       </div>
       <div class="ejes">
-        ${[['A quién llega', e.aQuienLlega], ['Territorio', e.territorio],
+        ${[['Industria', e.industria], ['A quién llega', e.aQuienLlega],
+           ['Territorio', e.territorio], ['Qué lo distingue', e.rasgo],
            ['Qué transmite', e.queTransmite], ['Tono', e.tono]]
           .filter(x => x[1])
           .map(x => `<div><b>${x[0]}</b><p>${esc(x[1])}</p></div>`).join('')}
@@ -950,10 +954,10 @@ function dibujarBrief(b) {
     `<div class="sec"><h5>Indicadores de talento</h5>
       <div class="tags">${(b.talentKPIs || []).map(k => `<span>${esc(k)}</span>`).join('')}</div></div>` +
     `<div class="sec"><h5>Piloto · 30 días</h5><div class="plan">
-      <div class="sem"><b>Semana 1</b><p>${esc(tl.week1)}</p></div>
-      <div class="sem"><b>Semana 2</b><p>${esc(tl.week2)}</p></div>
-      <div class="sem"><b>Semana 3</b><p>${esc(tl.week3)}</p></div>
-      <div class="sem"><b>Semana 4</b><p>${esc(tl.week4)}</p></div>
+      <div class="sem"><b>Semana 1</b><p>Workshop de brief. Traducimos la cultura real a hipótesis de contenido.</p></div>
+      <div class="sem"><b>Semana 2</b><p>Curaduría. Te proponemos el creador y aprobás el match antes de producir.</p></div>
+      <div class="sem"><b>Semana 3</b><p>Producción de las piezas, en el lenguaje del canal.</p></div>
+      <div class="sem"><b>Semana 4</b><p>Reporte: candidatos calificados y costo por candidato calificado.</p></div>
     </div></div>`;
 }
 
