@@ -293,6 +293,14 @@
   .volver:hover{color:var(--ink)}
   .volver svg{width:.95rem;height:.95rem;flex:none}
 
+  /* los cuatro ejes del match */
+  .ejes{margin-top:1rem;display:grid;gap:.75rem}
+  .ejes > div{display:grid;grid-template-columns:5.6rem 1fr;gap:.8rem;align-items:baseline}
+  .ejes b{font-family:var(--ui);font-size:.68rem;font-weight:600;letter-spacing:.1em;
+          text-transform:uppercase;color:var(--ink-faint)}
+  .ejes p{margin:0;font-size:.9rem;line-height:1.55;color:var(--ink-dim)}
+  @media (max-width:420px){ .ejes > div{grid-template-columns:1fr;gap:.15rem} }
+
 </style>
 </head>
 <body>
@@ -766,8 +774,14 @@ function dibujarBrief(b) {
           <b>${esc(e.arquetipo)}${aCurar ? ' · a curar' : ''}</b>
           <div class="aud">${esc([e.plataforma, e.alcance].filter(Boolean).join(' · '))}</div>
           <p class="pq">${esc(e.audiencia)}</p>
-          <p class="pq">${esc(e.tono)}</p>
         </div>
+      </div>
+      <div class="ejes">
+        ${[['Audiencia', e.audiencia], ['Territorio', e.territorio],
+           ['Autoridad', e.autoridad], ['Vínculo', e.vinculo]]
+          .filter(x => x[1]).slice(1)
+          .map(x => `<div><b>${x[0]}</b><p>${esc(x[1])}</p></div>`).join('')}
+        ${e.tono ? `<div><b>Tono</b><p>${esc(e.tono)}</p></div>` : ''}
       </div>
       <p class="pq">${esc(e.porQueEste)}</p>
       ${(e.comoLoCuramos || []).length ? `<div class="curamos"><b>Cómo verificamos esta voz</b><ul>${
