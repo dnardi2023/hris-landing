@@ -340,6 +340,26 @@ clase de match que buscamos.
 
 La vertical sirve para saber DONDE buscar la voz, no para copiar el puesto.
 
+COMO SE LE PRESENTA EL PERFIL AL CLIENTE. Este documento lo lee una gerenta
+de RRHH que esta evaluando si contratarnos.
+
+- El perfil se presenta como una SELECCION hecha por nosotras, con criterio y
+  con fundamento. El tono es el de quien ya hizo el trabajo de curaduria.
+- Las tres preguntas que el cliente necesita que le respondan, en este orden:
+  quien es esta voz, a que publico llega, y que le transmite a ese publico.
+- "comoLoCuramos" es nuestro diferencial, no un tramite: ahi se ve que no
+  proponemos a cualquiera. Escribilo con precision.
+- PROHIBIDO escribir que el perfil no existe, que no lo tenemos, que habria
+  que salir a buscarlo, que no esta en nuestra red o cualquier variante.
+  Nunca. Eso es informacion interna y no va en un documento del cliente.
+- "queCuidamos" es una condicion de ejecucion que asumimos NOSOTRAS, no una
+  advertencia sobre nuestras limitaciones. Es lo que hacemos para que salga
+  bien, dicho en primera persona del plural.
+- El perfil tiene que ser un creador real posible en la Argentina de hoy:
+  alguien que produce contenido y tiene audiencia propia, o un profesional
+  idoneo del tema al que convocamos para comunicar una pieza. Las dos cosas
+  valen. Lo que no vale es inventar una figura que no existe.
+
 EJEMPLO RESUELTO. Estudialo antes de responder.
 
 Busqueda: "Encargado de sucursal — heladeria, Neuquen".
@@ -385,6 +405,13 @@ Tu tarea.
 
    Este paso es obligatorio y es el que ordena el resto. El creador NO sale
    del puesto: sale de la dieta de contenido de este candidato.
+
+   NO INVENTES HECHOS que la busqueda no dijo. Si solo te dieron el puesto y
+   la ciudad, no supongas que hay que relocalizar gente, que el puesto es
+   nuevo, que hay rotacion, que la empresa es grande ni nada parecido.
+   Describi a quien podria ocupar ese puesto en esa zona y nada mas. Si
+   necesitas un dato que no esta, escribilo como condicion a confirmar en vez
+   de darlo por cierto.
 
 3. TRES PERFILES COMPATIBLES. Preguntate: quien le habla HOY a la persona que describiste en el punto 2. Recien ahi elegi las TRES verticales donde vive esa voz y convertí cada una en un arquetipo de voz concreto para ESTE caso. Ordenalos del mas al menos afin. El arquetipo no es el nombre de la vertical: es como se llamaria esa voz puesta a comunicar esta busqueda en particular.
 
@@ -476,18 +503,16 @@ RESPONDE SOLO EN JSON VALIDO, sin texto previo, sin markdown, sin backticks:
   ],
   "criterios": ["criterio 1", "criterio 2", "criterio 3"],
   "perfilElegido": {
-    "estado": "en_red | a_curar",
-    "arquetipo": "el tipo de voz elegido, 2 a 4 palabras. NO es el puesto que se busca.",
-    "plataforma": "donde vive esa comunidad",
+    "arquetipo": "el perfil de creador seleccionado, 2 a 4 palabras. Describe a la PERSONA QUE COMUNICA, no al puesto que se busca.",
+    "plataforma": "donde publica y donde esta su comunidad",
     "alcance": "banda de alcance, por ejemplo 'entre 25.000 y 60.000 seguidores'. Nunca un numero exacto.",
-    "audiencia": "EJE 1. Quienes lo siguen: edad, ocupacion, si ya estan en el oficio o quieren entrar. Maximo 2 frases.",
-    "territorio": "EJE 2. Donde se concentra esa audiencia. Si la busqueda no aclara la zona, escribilo como condicion a confirmar. Una frase.",
-    "autoridad": "EJE 3. Sobre que tiene credibilidad ganada y con que la demuestra. Una frase.",
-    "vinculo": "EJE 4. Que relacion tiene con quien lo sigue (le ensenia, lo representa, lo aconseja) y por que eso le permite recomendar un trabajo sin sonar a publicidad. Una frase.",
+    "aQuienLlega": "A QUE PUBLICO ALCANZA. Quienes lo siguen: edad, ocupacion, momento de carrera. Maximo 2 frases. Este publico tiene que ser el mismo candidato del punto 2.",
+    "territorio": "Donde se concentra esa audiencia. Si la busqueda no aclara la zona, escribilo como condicion a confirmar. Una frase.",
+    "queTransmite": "QUE LE TRANSMITE A SU AUDIENCIA y por que le creen: de que habla con autoridad, como lo demuestra, que tipo de relacion tiene con quien lo sigue. 2 frases.",
     "tono": "como habla, en una frase",
-    "porQueEste": "2 frases explicando por que ESTE perfil y no los otros dos, apoyandote en los ejes. Decision argumentada, no elogio.",
-    "comoLoCuramos": ["3 verificaciones CONCRETAS que haríamos sobre un candidato a esta voz, sacadas de las senales de idoneidad de su vertical. Nada generico: si la vertical pide matricula, decilo; si pide mostrar el procedimiento completo, decilo."],
-    "aTenerEnCuenta": "una advertencia honesta: que limite tiene esta eleccion o que habria que cuidar al ejecutarla"
+    "porQueEste": "2 frases dirigidas al cliente explicando por que este perfil es el indicado para SU busqueda. Argumento, no elogio.",
+    "comoLoCuramos": ["3 verificaciones CONCRETAS que hacemos sobre este perfil antes de proponerlo, sacadas de las senales de idoneidad de su vertical. Nada generico: si la vertical pide matricula, decilo; si pide mostrar el procedimiento completo, decilo."],
+    "queCuidamos": "UNA condicion de ejecucion que vamos a cuidar para que la pieza funcione: algo que hacemos nosotras, no un limite de lo que podemos. Por ejemplo exclusividad de rubro, que la pieza muestre tarea real y no testimonial actuado, o que el guion lo apruebe el area antes de grabar. Una frase, en primera persona del plural."
   },
   "piezas": [
     {
@@ -514,6 +539,10 @@ Reglas que no se negocian:
   un minuto en aparecer no lo lee nadie: la precision vale mas que el volumen.
 - PROHIBIDO escribir nombres propios de personas, arrobas, handles o cantidades exactas de seguidores, aca tampoco. Trabajamos con el PERFIL; la persona se presenta cuando se firma. Si se te escapa un nombre, la respuesta es invalida.
 - "alcance" va siempre como banda, nunca como cifra cerrada. No inventamos precision que no tenemos.
+- NO agregues circunstancias que el cliente no escribio: ni relocalizacion,
+  ni urgencia, ni rotacion, ni tamanio de empresa, ni que el puesto es nuevo.
+  Lo que no esta en la busqueda, o no se menciona, o va como condicion a
+  confirmar. Inventar contexto es la forma mas rapida de perder al cliente.
 - La audiencia del creador y el candidato del punto 2 tienen que ser LA MISMA
   gente. Si no se superponen, el match esta mal hecho, por bueno que suene.
 - El arquetipo NO PUEDE CONTENER las palabras del puesto buscado. Si la
@@ -526,11 +555,11 @@ Reglas que no se negocian:
   esta mal: volve a los cuatro ejes y elegi por audiencia.
 - Los cuatro ejes se completan siempre, aunque alguno quede como condicion a
   confirmar. Un eje vacio es un match sin fundamentar.
-- El perfil elegido tiene que salir de UNA de las verticales. Si ninguna cubre bien esta busqueda, poné estado "a_curar" y describí la vertical nueva que habria que abrir y con que criterios. Es una respuesta legitima y honesta, no un fracaso.
+- El perfil elegido tiene que salir de UNA de las verticales. Si ninguna cubre bien esta busqueda, elegi igual la mas cercana y ajusta el arquetipo a esta busqueda: el cliente necesita un perfil concreto, no una explicacion de nuestra taxonomia.
 - "comoLoCuramos" sale de las senales de idoneidad de la vertical elegida, no de generalidades. Es la respuesta a "¿y como se que no es cualquiera?".
-- Si la vertical tiene CUIDADO marcado (campo regulado, menores), eso va si o si en "aTenerEnCuenta".
+- Si la vertical tiene CUIDADO marcado (campo regulado, menores), eso va si o si en "queCuidamos", dicho como lo que verificamos nosotras.
 - Las tres piezas tienen que usar formatos DISTINTOS de los cuatro de la casa, y ser especificas de esta busqueda. Nada que sirva igual para cualquier empresa.
-- El campo "aTenerEnCuenta" no es un adorno: escribí ahi la objecion real que le haria un director de RRHH escéptico.
+- El campo "queCuidamos" no es un adorno ni un descargo: es el recaudo concreto que tomamos para que la pieza funcione. Se lee como oficio, no como aviso legal.
 - Nada de lenguaje de marketing (impresiones, CPM, alcance publicitario, engagement). Indicadores de la casa: calidad del flujo de candidatos, conversion de interes a postulacion, percepcion de marca empleadora, costo por contratacion, tiempo de cobertura.
 - Espaniol rioplatense profesional, con voseo. PROHIBIDA la jerga para nombrar
   personas: nunca "los pibes", "los chicos", "los chabones", "la gente joven" como
@@ -631,7 +660,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
-        max_tokens: nivel === 'privado' ? 2600 : 1200,
+        max_tokens: nivel === 'privado' ? 4000 : 1800,
         messages: [{ role: 'user', content: prompt }]
       })
     });
@@ -658,8 +687,9 @@ export default async function handler(req, res) {
       return res.status(502).json({
         success: false,
         error: data.stop_reason === 'max_tokens'
-          ? 'La respuesta quedo incompleta. Probá de nuevo con una descripcion mas breve.'
-          : 'La respuesta del modelo no fue un JSON valido'
+          ? 'La respuesta quedó incompleta (se cortó por largo). Probá de nuevo.'
+          : 'La respuesta no vino en el formato esperado. Probá de nuevo.',
+        detalle: data.stop_reason || 'sin_stop_reason'
       });
     }
 
